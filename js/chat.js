@@ -218,6 +218,7 @@ div.addEventListener("contextmenu", (e) => {
     messageMenu.style.display = "block";
     messageMenu.style.left = e.pageX + "px";
     messageMenu.style.top = e.pageY + "px";
+    messageMenu.style.zIndex = "9999";
 
 });
 
@@ -381,8 +382,12 @@ searchInput.addEventListener("input", () => {
 
 });
 
-document.addEventListener("click", () => {
-    messageMenu.style.display = "none";
+document.addEventListener("click", (e) => {
+
+    if (!messageMenu.contains(e.target)) {
+        messageMenu.style.display = "none";
+    }
+
 });
 
 const deleteBtn = document.getElementById("deleteMsg");
