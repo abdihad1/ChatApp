@@ -40,7 +40,7 @@ body{
 }
 
 .chat{
-    width:70%;
+    flex:1;
     display:flex;
     flex-direction:column;
     background:#0b141a;
@@ -117,8 +117,20 @@ body{
 }
 
 #sendBtn{
-    margin-left:10px;
-    padding:10px 20px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:22px;
+    background:#00a884;
+    color:white;
+    transition:all .2s ease;
+}
+
+#sendBtn:hover{
+    transform:scale(1.08);
+    background:#008f72;
 }
 
 #logoutBtn{
@@ -138,6 +150,8 @@ body{
     flex-direction: column;
 
     background: #efeae2;
+
+    scroll-behavior:smooth;
 }
 
 .me {
@@ -423,9 +437,60 @@ body{
 }
 
 #searchMessage{
-    padding:8px;
-    border-radius:20px;
-    border:1px solid #ccc;
-    width:220px;
-    margin-right:10px;
+    padding:10px 15px;
+    border-radius:25px;
+    border:none;
+    outline:none;
+    width:240px;
+    background:#f0f2f5;
+    transition:.2s;
+}
+
+#searchMessage:focus{
+    box-shadow:0 0 0 2px #25D366;
+}
+
+.dark #searchMessage{
+    background:#2a3942;
+    color:white;
+}
+
+.reply-btn,
+.react-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    margin-top: 6px;
+    opacity: .7;
+    transition: all .2s ease;
+}
+
+.reply-btn:hover,
+.react-btn:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.me .reply-btn,
+.me .react-btn {
+    float: right;
+}
+
+.other .reply-btn,
+.other .react-btn {
+    float: right;
+}
+
+.message-time{
+    display:block;
+    text-align:right;
+    font-size:11px;
+    color:#667781;
+    margin-top:6px;
+}
+
+.dark .message-time{
+    color:#aebac1;
 }

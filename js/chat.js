@@ -195,7 +195,7 @@ div.innerHTML = `
 
     ${data.edited ? "<small>(edited)</small>" : ""}
     <br>
-    <small style="color:gray;">
+    <small class="message-time">
         ${time} ${tick}
     </small>
 `;
