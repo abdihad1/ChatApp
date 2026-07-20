@@ -421,3 +421,11 @@ body{
     font-size: 14px;
     border-radius: 6px;
 }
+
+#searchMessage{
+    padding:8px;
+    border-radius:20px;
+    border:1px solid #ccc;
+    width:220px;
+    margin-right:10px;
+}
