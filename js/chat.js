@@ -185,6 +185,13 @@ div.innerHTML = `
     ` : ""}
 
     ${data.text}
+
+    ${data.reaction ? `
+    <div style="margin-top:5px;font-size:20px;">
+        ${data.reaction}
+    </div>
+` : ""}
+
     ${data.edited ? "<small>(edited)</small>" : ""}
     <br>
     <small style="color:gray;">
@@ -193,6 +200,29 @@ div.innerHTML = `
 `;
 
             messagesDiv.appendChild(div);
+
+const reactBtn = document.createElement("button");
+reactBtn.textContent = "😊";
+reactBtn.className = "react-btn";
+
+reactBtn.onclick = async () => {
+
+    const emoji = prompt(
+        "React with:\n👍 ❤️ 😂 😮 😢 🙏"
+    );
+
+    if (!emoji) return;
+
+    await updateDoc(
+        doc(db, "chats", chatId, "messages", messageId),
+        {
+            reaction: emoji
+        }
+    );
+
+};
+
+div.appendChild(reactBtn);
 
 const replyBtn = document.createElement("button");
 replyBtn.textContent = "↩";
