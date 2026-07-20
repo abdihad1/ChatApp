@@ -180,6 +180,17 @@ ${data.edited ? "<small>(edited)</small>" : ""}
 `;
             messagesDiv.appendChild(div);
 
+           const replyBtn = document.createElement("button");
+replyBtn.textContent = "↩";
+replyBtn.className = "reply-btn";
+
+replyBtn.onclick = () => {
+    console.log("Reply:", data.text);
+};
+
+div.appendChild(replyBtn);
+
+
            if (data.uid === auth.currentUser.uid) {
 div.addEventListener("click", async () => {
 

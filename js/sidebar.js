@@ -1,7 +1,6 @@
 import { auth } from "./firebase.js";
 import { getAllUsers } from "./users.js";
 import { setCurrentChat } from "./currentChat.js";
-import { openGroupChat } from "./groupChat.js";
 
 import {
     collection,
