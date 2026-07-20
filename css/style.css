@@ -494,3 +494,42 @@ body{
 .dark .message-time{
     color:#aebac1;
 }
+
+#messageMenu{
+    display:none;
+    position:fixed;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);
+    overflow:hidden;
+    z-index:9999;
+    min-width:170px;
+}
+
+#messageMenu button{
+    display:block;
+    width:100%;
+    padding:12px;
+    border:none;
+    background:white;
+    text-align:left;
+    cursor:pointer;
+    font-size:15px;
+}
+
+#messageMenu button:hover{
+    background:#f0f2f5;
+}
+
+.dark #messageMenu{
+    background:#202c33;
+}
+
+.dark #messageMenu button{
+    background:#202c33;
+    color:white;
+}
+
+.dark #messageMenu button:hover{
+    background:#2a3942;
+}

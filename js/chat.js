@@ -24,6 +24,7 @@ setOnlineStatus(true);
 const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");
 const searchInput = document.getElementById("searchMessage");
+const messageMenu = document.getElementById("messageMenu");
 let typingTimeout;
 
 messageInput.addEventListener("input", async () => {
@@ -71,6 +72,8 @@ const messagesDiv = document.getElementById("messages");
 
 let unsubscribe = null;
 let replyingTo = null;
+let selectedMessageId = null;
+let selectedMessageText = null;
 
 // Create the same chat ID for both users
 function getChatId(uid1, uid2) {
@@ -202,77 +205,19 @@ div.innerHTML = `
 
             messagesDiv.appendChild(div);
 
-const reactBtn = document.createElement("button");
-reactBtn.textContent = "😊";
-reactBtn.className = "react-btn";
 
-reactBtn.onclick = async () => {
+if (data.uid === auth.currentUser.uid) {
 
-    const emoji = prompt(
-        "React with:\n👍 ❤️ 😂 😮 😢 🙏"
-    );
+div.addEventListener("contextmenu", (e) => {
 
-    if (!emoji) return;
+    e.preventDefault();
 
-    await updateDoc(
-        doc(db, "chats", chatId, "messages", messageId),
-        {
-            reaction: emoji
-        }
-    );
+    selectedMessageId = messageId;
+    selectedMessageText = data.text;
 
-};
-
-div.appendChild(reactBtn);
-
-const replyBtn = document.createElement("button");
-replyBtn.textContent = "↩";
-replyBtn.className = "reply-btn";
-
-replyBtn.onclick = () => {
-    replyingTo = data.text;
-    messageInput.focus();
-    messageInput.placeholder = "Replying to: " + data.text;
-};
-
-div.appendChild(replyBtn);
-
-
-           if (data.uid === auth.currentUser.uid) {
-div.addEventListener("click", async () => {
-
-    if (data.uid !== auth.currentUser.uid) return;
-
-    const action = prompt(
-        "Type:\nedit = Edit message\ndelete = Delete message"
-    );
-
-    if (!action) return;
-
-    if (action.toLowerCase() === "delete") {
-
-        await deleteDoc(
-            doc(db, "chats", chatId, "messages", messageId)
-        );
-
-        return;
-    }
-
-    if (action.toLowerCase() === "edit") {
-
-        const newText = prompt("Edit message:", data.text);
-
-        if (!newText) return;
-
-        await updateDoc(
-            doc(db, "chats", chatId, "messages", messageId),
-            {
-                text: newText.trim(),
-                edited: true
-            }
-        );
-
-    }
+    messageMenu.style.display = "block";
+    messageMenu.style.left = e.pageX + "px";
+    messageMenu.style.top = e.pageY + "px";
 
 });
 
@@ -435,3 +380,97 @@ searchInput.addEventListener("input", () => {
     });
 
 });
+
+document.addEventListener("click", () => {
+    messageMenu.style.display = "none";
+});
+
+const deleteBtn = document.getElementById("deleteMsg");
+
+deleteBtn.onclick = async () => {
+
+    if (!selectedMessageId) return;
+
+    const otherUser = getCurrentChat();
+    const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
+
+    await deleteDoc(
+        doc(db, "chats", chatId, "messages", selectedMessageId)
+    );
+
+    messageMenu.style.display = "none";
+};
+
+const copyBtn = document.getElementById("copyMsg");
+
+copyBtn.onclick = async () => {
+
+    if (!selectedMessageText) return;
+
+    await navigator.clipboard.writeText(selectedMessageText);
+
+    messageMenu.style.display = "none";
+
+    alert("Message copied!");
+};
+
+const editBtn = document.getElementById("editMsg");
+
+editBtn.onclick = async () => {
+
+    if (!selectedMessageId) return;
+
+    const newText = prompt("Edit message:", selectedMessageText);
+
+    if (!newText) return;
+
+    const otherUser = getCurrentChat();
+    const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
+
+    await updateDoc(
+        doc(db, "chats", chatId, "messages", selectedMessageId),
+        {
+            text: newText.trim(),
+            edited: true
+        }
+    );
+
+    messageMenu.style.display = "none";
+};
+
+const replyMenuBtn = document.getElementById("replyMsg");
+
+replyMenuBtn.onclick = () => {
+
+    if (!selectedMessageText) return;
+
+    replyingTo = selectedMessageText;
+
+    messageInput.focus();
+    messageInput.placeholder = "Replying to: " + selectedMessageText;
+
+    messageMenu.style.display = "none";
+};
+
+const reactMenuBtn = document.getElementById("reactMsg");
+
+reactMenuBtn.onclick = async () => {
+
+    if (!selectedMessageId) return;
+
+    const emoji = prompt("React with:\n👍 ❤️ 😂 😮 😢 🙏");
+
+    if (!emoji) return;
+
+    const otherUser = getCurrentChat();
+    const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
+
+    await updateDoc(
+        doc(db, "chats", chatId, "messages", selectedMessageId),
+        {
+            reaction: emoji
+        }
+    );
+
+    messageMenu.style.display = "none";
+};
