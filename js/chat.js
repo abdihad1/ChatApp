@@ -69,6 +69,7 @@ messageInput.addEventListener("keypress", (e) => {
 const messagesDiv = document.getElementById("messages");
 
 let unsubscribe = null;
+let replyingTo = null;
 
 // Create the same chat ID for both users
 function getChatId(uid1, uid2) {
@@ -180,12 +181,14 @@ ${data.edited ? "<small>(edited)</small>" : ""}
 `;
             messagesDiv.appendChild(div);
 
-           const replyBtn = document.createElement("button");
+const replyBtn = document.createElement("button");
 replyBtn.textContent = "↩";
 replyBtn.className = "reply-btn";
 
 replyBtn.onclick = () => {
-    console.log("Reply:", data.text);
+    replyingTo = data.text;
+    messageInput.focus();
+    messageInput.placeholder = "Replying to: " + data.text;
 };
 
 div.appendChild(replyBtn);
@@ -261,6 +264,7 @@ await addDoc(
         uid: auth.currentUser.uid,
         name: auth.currentUser.displayName || auth.currentUser.email,
         text: text,
+        replyTo: replyingTo,
         createdAt: serverTimestamp(),
         delivered: true,
         read: false
@@ -299,6 +303,9 @@ await updateDoc(
 });
 
     messageInput.value = "";
+
+  replyingTo = null;
+messageInput.placeholder = "Type a message";
 
 };
 
