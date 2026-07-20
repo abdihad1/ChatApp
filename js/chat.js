@@ -172,13 +172,26 @@ const tick = data.read ? "✓✓" : "✓";
 
 div.innerHTML = `
     <b>${data.name}</b><br>
+
+    ${data.replyTo ? `
+        <div style="
+            border-left:3px solid #25D366;
+            padding-left:8px;
+            margin:5px 0;
+            color:gray;
+            font-size:14px;">
+            ↩ ${data.replyTo}
+        </div>
+    ` : ""}
+
     ${data.text}
-${data.edited ? "<small>(edited)</small>" : ""}
+    ${data.edited ? "<small>(edited)</small>" : ""}
     <br>
     <small style="color:gray;">
         ${time} ${tick}
     </small>
 `;
+
             messagesDiv.appendChild(div);
 
 const replyBtn = document.createElement("button");
