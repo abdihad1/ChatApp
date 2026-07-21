@@ -369,6 +369,10 @@ await addDoc(
 
 console.log(data.publicUrl);
 
+imageInput.value = "";
+
+};
+
    const callBtn = document.getElementById("callBtn");
 
 callBtn.onclick = async () => {
