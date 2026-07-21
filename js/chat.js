@@ -5,6 +5,8 @@ import { signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-aut
 import { setOnlineStatus } from "./users.js";
 import { showToast } from "./toast.js";
 import { initMessageSearch } from "./search.js";
+import { createMessageElement } from "./messageRenderer.js";
+import { supabase } from "./supabase.js";
 import {
     openMessageMenu,
     closeMessageMenu,
@@ -24,8 +26,7 @@ import {
     serverTimestamp,
     doc,
     updateDoc,
-    setDoc,
-    deleteDoc
+    setDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 protectPage();
@@ -36,10 +37,11 @@ const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");
 const searchInput = document.getElementById("searchMessage");
 const messageMenu = document.getElementById("messageMenu");
-const toast = document.getElementById("toast");
 const confirmModal = document.getElementById("confirmModal");
 const confirmDeleteBtn = document.getElementById("confirmDelete");
 const cancelDeleteBtn = document.getElementById("cancelDelete");
+const imageBtn = document.getElementById("imageBtn");
+const imageInput = document.getElementById("imageInput");
 let typingTimeout;
 
 messageInput.addEventListener("input", async () => {
@@ -169,54 +171,13 @@ onSnapshot(chatRef, (snap) => {
             const data = messageDoc.data();
             const messageId = messageDoc.id;
 
-            const div = document.createElement("div");
-
-      if (data.uid === auth.currentUser.uid) {
-    div.className = "me";
-} else {
-    div.className = "other";
-}
+const div = createMessageElement({
+    ...data,
+    currentUserId: auth.currentUser.uid
+});
 
             div.style.padding = "8px";
             div.style.margin = "5px";
-
-            const time = data.createdAt
-    ? new Date(data.createdAt.seconds * 1000).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit"
-      })
-    : "";
-
-const tick = data.read ? "✓✓" : "✓";
-
-div.innerHTML = `
-    <b>${data.name}</b><br>
-
-    ${data.replyTo ? `
-        <div style="
-            border-left:3px solid #25D366;
-            padding-left:8px;
-            margin:5px 0;
-            color:gray;
-            font-size:14px;">
-            ↩ ${data.replyTo}
-        </div>
-    ` : ""}
-
-    ${data.text}
-
-    ${data.reaction ? `
-    <div style="margin-top:5px;font-size:20px;">
-        ${data.reaction}
-    </div>
-` : ""}
-
-    ${data.edited ? "<small>(edited)</small>" : ""}
-    <br>
-    <small class="message-time">
-        ${time} ${tick}
-    </small>
-`;
 
             messagesDiv.appendChild(div);
 
@@ -352,6 +313,20 @@ emojiBtn.onclick = () => {
 
 };
 
+imageBtn.onclick = () => {
+    imageInput.click();
+};
+
+imageInput.onchange = async () => {
+
+    const file = imageInput.files[0];
+
+    if (!file) return;
+
+    console.log(file);
+
+};
+
    const callBtn = document.getElementById("callBtn");
 
 callBtn.onclick = async () => {
@@ -461,7 +436,7 @@ replyMenuBtn.onclick = () => {
 
     closeMessageMenu(messageMenu);
 
-};s
+};
 
 const reactMenuBtn = document.getElementById("reactMsg");
 

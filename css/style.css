@@ -596,3 +596,22 @@ body{
     background:#202c33;
     color:white;
 }
+
+#imageBtn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:22px;
+    background:transparent;
+    transition:.2s;
+}
+
+#imageBtn:hover{
+    background:#e9edef;
+}
+
+.dark #imageBtn{
+    color:white;
+}
