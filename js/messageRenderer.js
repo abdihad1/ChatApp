@@ -31,7 +31,17 @@ export function createMessageElement(data) {
             </div>
         ` : ""}
 
-        ${data.text}
+${data.image
+    ? `
+        <a href="${data.image}" target="_blank">
+            <img
+                src="${data.image}"
+                class="chat-image"
+                alt="Shared image">
+        </a>
+      `
+    : data.text
+}
 
         ${data.reaction ? `
             <div style="margin-top:5px;font-size:20px;">

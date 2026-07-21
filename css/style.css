@@ -615,3 +615,16 @@ body{
 .dark #imageBtn{
     color:white;
 }
+
+.chat-image {
+    max-width: 250px;
+    max-height: 300px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    display: block;
+}
+
+.chat-image:hover {
+    opacity: 0.9;
+}

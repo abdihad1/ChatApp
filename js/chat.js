@@ -323,9 +323,51 @@ imageInput.onchange = async () => {
 
     if (!file) return;
 
-    console.log(file);
+    const fileName = `${Date.now()}-${file.name}`;
 
-};
+const { error } = await supabase.storage
+    .from("chat-images")
+    .upload(fileName, file);
+
+if (error) {
+
+    console.error(error);
+    alert("Image upload failed!");
+
+    return;
+
+}
+
+const { data } = supabase.storage
+    .from("chat-images")
+    .getPublicUrl(fileName);
+
+const otherUser = getCurrentChat();
+
+if (!otherUser) {
+    alert("Select a user first.");
+    return;
+}
+
+const chatId = getChatId(
+    auth.currentUser.uid,
+    otherUser.uid
+);
+
+await addDoc(
+    collection(db, "chats", chatId, "messages"),
+    {
+        uid: auth.currentUser.uid,
+        name: auth.currentUser.displayName || auth.currentUser.email,
+        image: data.publicUrl,
+        text: "",
+        createdAt: serverTimestamp(),
+        delivered: true,
+        read: false
+    }
+);
+
+console.log(data.publicUrl);
 
    const callBtn = document.getElementById("callBtn");
 
