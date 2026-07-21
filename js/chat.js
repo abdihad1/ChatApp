@@ -3,6 +3,17 @@ import { auth, db } from "./firebase.js";
 import { getCurrentChat } from "./currentChat.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import { setOnlineStatus } from "./users.js";
+import { showToast } from "./toast.js";
+import { initMessageSearch } from "./search.js";
+import {
+    openMessageMenu,
+    closeMessageMenu,
+    copyMessage,
+    replyToMessage,
+    editMessage,
+    deleteMessage,
+    reactToMessage
+} from "./messageMenu.js";
 
 import {
     collection,
@@ -219,10 +230,7 @@ div.addEventListener("contextmenu", (e) => {
     selectedMessageId = messageId;
     selectedMessageText = data.text;
 
-    messageMenu.style.display = "block";
-    messageMenu.style.left = e.pageX + "px";
-    messageMenu.style.top = e.pageY + "px";
-    messageMenu.style.zIndex = "9999";
+    openMessageMenu(messageMenu, e.pageX, e.pageY);
 
 });
 
@@ -368,28 +376,12 @@ callBtn.onclick = async () => {
 
 };  
 
-searchInput.addEventListener("input", () => {
-
-    const search = searchInput.value.toLowerCase();
-
-    const messages = messagesDiv.querySelectorAll("div");
-
-    messages.forEach((msg) => {
-
-        if (msg.textContent.toLowerCase().includes(search)) {
-            msg.style.display = "";
-        } else {
-            msg.style.display = "none";
-        }
-
-    });
-
-});
+initMessageSearch(searchInput, messagesDiv);
 
 document.addEventListener("click", (e) => {
 
     if (!messageMenu.contains(e.target)) {
-        messageMenu.style.display = "none";
+        closeMessageMenu(messageMenu);
     }
 
 });
@@ -401,7 +393,7 @@ deleteBtn.onclick = () => {
     if (!selectedMessageId) return;
 
     confirmModal.style.display = "flex";
-    messageMenu.style.display = "none";
+    closeMessageMenu(messageMenu);
 
 };
 
@@ -410,9 +402,11 @@ confirmDeleteBtn.onclick = async () => {
     const otherUser = getCurrentChat();
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 
-    await deleteDoc(
-        doc(db, "chats", chatId, "messages", selectedMessageId)
-    );
+    await deleteMessage(
+    db,
+    chatId,
+    selectedMessageId
+);
 
     confirmModal.style.display = "none";
 
@@ -430,13 +424,10 @@ const copyBtn = document.getElementById("copyMsg");
 
 copyBtn.onclick = async () => {
 
-    if (!selectedMessageText) return;
+    await copyMessage(selectedMessageText, showToast);
 
-    await navigator.clipboard.writeText(selectedMessageText);
+    closeMessageMenu(messageMenu);
 
-    messageMenu.style.display = "none";
-
-    showToast("✅ Message copied");
 };
 
 const editBtn = document.getElementById("editMsg");
@@ -445,37 +436,32 @@ editBtn.onclick = async () => {
 
     if (!selectedMessageId) return;
 
-    const newText = prompt("Edit message:", selectedMessageText);
-
-    if (!newText) return;
-
     const otherUser = getCurrentChat();
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 
-    await updateDoc(
-        doc(db, "chats", chatId, "messages", selectedMessageId),
-        {
-            text: newText.trim(),
-            edited: true
-        }
+    await editMessage(
+        db,
+        chatId,
+        selectedMessageId,
+        selectedMessageText
     );
 
-    messageMenu.style.display = "none";
+    closeMessageMenu(messageMenu);
+
 };
 
 const replyMenuBtn = document.getElementById("replyMsg");
 
 replyMenuBtn.onclick = () => {
 
-    if (!selectedMessageText) return;
+    replyingTo = replyToMessage(
+        selectedMessageText,
+        messageInput
+    );
 
-    replyingTo = selectedMessageText;
+    closeMessageMenu(messageMenu);
 
-    messageInput.focus();
-    messageInput.placeholder = "Replying to: " + selectedMessageText;
-
-    messageMenu.style.display = "none";
-};
+};s
 
 const reactMenuBtn = document.getElementById("reactMsg");
 
@@ -483,30 +469,15 @@ reactMenuBtn.onclick = async () => {
 
     if (!selectedMessageId) return;
 
-    const emoji = prompt("React with:\n👍 ❤️ 😂 😮 😢 🙏");
-
-    if (!emoji) return;
-
     const otherUser = getCurrentChat();
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 
-    await updateDoc(
-        doc(db, "chats", chatId, "messages", selectedMessageId),
-        {
-            reaction: emoji
-        }
+    await reactToMessage(
+        db,
+        chatId,
+        selectedMessageId
     );
 
-    messageMenu.style.display = "none";
+    closeMessageMenu(messageMenu);
+
 };
-
-function showToast(message){
-
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2000);
-
-}
