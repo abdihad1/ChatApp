@@ -25,6 +25,10 @@ const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");
 const searchInput = document.getElementById("searchMessage");
 const messageMenu = document.getElementById("messageMenu");
+const toast = document.getElementById("toast");
+const confirmModal = document.getElementById("confirmModal");
+const confirmDeleteBtn = document.getElementById("confirmDelete");
+const cancelDeleteBtn = document.getElementById("cancelDelete");
 let typingTimeout;
 
 messageInput.addEventListener("input", async () => {
@@ -392,9 +396,16 @@ document.addEventListener("click", (e) => {
 
 const deleteBtn = document.getElementById("deleteMsg");
 
-deleteBtn.onclick = async () => {
+deleteBtn.onclick = () => {
 
     if (!selectedMessageId) return;
+
+    confirmModal.style.display = "flex";
+    messageMenu.style.display = "none";
+
+};
+
+confirmDeleteBtn.onclick = async () => {
 
     const otherUser = getCurrentChat();
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
@@ -403,7 +414,16 @@ deleteBtn.onclick = async () => {
         doc(db, "chats", chatId, "messages", selectedMessageId)
     );
 
-    messageMenu.style.display = "none";
+    confirmModal.style.display = "none";
+
+    showToast("🗑️ Message deleted");
+
+};
+
+cancelDeleteBtn.onclick = () => {
+
+    confirmModal.style.display = "none";
+
 };
 
 const copyBtn = document.getElementById("copyMsg");
@@ -416,7 +436,7 @@ copyBtn.onclick = async () => {
 
     messageMenu.style.display = "none";
 
-    alert("Message copied!");
+    showToast("✅ Message copied");
 };
 
 const editBtn = document.getElementById("editMsg");
@@ -479,3 +499,14 @@ reactMenuBtn.onclick = async () => {
 
     messageMenu.style.display = "none";
 };
+
+function showToast(message){
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+
+}
