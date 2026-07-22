@@ -8,6 +8,10 @@ import { initMessageSearch } from "./search.js";
 import { createMessageElement } from "./messageRenderer.js";
 import { supabase } from "./supabase.js";
 import {
+    startRecording,
+    stopRecording
+} from "./voice.js";
+import {
     openMessageMenu,
     closeMessageMenu,
     copyMessage,
@@ -42,6 +46,7 @@ const confirmDeleteBtn = document.getElementById("confirmDelete");
 const cancelDeleteBtn = document.getElementById("cancelDelete");
 const imageBtn = document.getElementById("imageBtn");
 const imageInput = document.getElementById("imageInput");
+const voiceBtn = document.getElementById("voiceBtn");
 let typingTimeout;
 
 messageInput.addEventListener("input", async () => {
@@ -500,5 +505,31 @@ reactMenuBtn.onclick = async () => {
     );
 
     closeMessageMenu(messageMenu);
+
+};
+
+let recording = false;
+
+voiceBtn.onclick = async () => {
+
+    if (!recording) {
+
+        await startRecording();
+
+        recording = true;
+
+        voiceBtn.textContent = "⏹️";
+
+        return;
+
+    }
+
+    const audioBlob = await stopRecording();
+
+    recording = false;
+
+    voiceBtn.textContent = "🎤";
+
+    console.log(audioBlob);
 
 };
