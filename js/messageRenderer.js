@@ -31,16 +31,24 @@ export function createMessageElement(data) {
             </div>
         ` : ""}
 
-${data.image
-    ? `
-        <a href="${data.image}" target="_blank">
-            <img
-                src="${data.image}"
-                class="chat-image"
-                alt="Shared image">
-        </a>
-      `
-    : data.text
+${
+    data.image
+        ? `
+            <a href="${data.image}" target="_blank">
+                <img
+                    src="${data.image}"
+                    class="chat-image"
+                    alt="Shared image">
+            </a>
+        `
+        : data.voice
+            ? `
+                <audio controls class="voice-message">
+                    <source src="${data.voice}" type="audio/webm">
+                    Your browser does not support audio.
+                </audio>
+            `
+            : data.text
 }
 
         ${data.reaction ? `

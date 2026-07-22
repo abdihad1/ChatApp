@@ -7,6 +7,7 @@ import { showToast } from "./toast.js";
 import { initMessageSearch } from "./search.js";
 import { createMessageElement } from "./messageRenderer.js";
 import { supabase } from "./supabase.js";
+import { uploadVoice } from "./voiceUpload.js";
 import {
     startRecording,
     stopRecording
@@ -524,12 +525,37 @@ voiceBtn.onclick = async () => {
 
     }
 
-    const audioBlob = await stopRecording();
+const voiceUrl = await uploadVoice(audioBlob);
 
-    recording = false;
+const otherUser = getCurrentChat();
 
-    voiceBtn.textContent = "🎤";
+if (!otherUser) {
+    alert("Select a user first.");
+    return;
+}
 
-    console.log(audioBlob);
+const chatId = getChatId(
+    auth.currentUser.uid,
+    otherUser.uid
+);
+
+await addDoc(
+    collection(db, "chats", chatId, "messages"),
+    {
+        uid: auth.currentUser.uid,
+        name: auth.currentUser.displayName || auth.currentUser.email,
+        voice: voiceUrl,
+        text: "",
+        createdAt: serverTimestamp(),
+        delivered: true,
+        read: false
+    }
+);
+
+showToast("🎤 Voice message sent");
+
+console.log(voiceUrl);
+
+alert("✅ Voice uploaded!");
 
 };

@@ -628,3 +628,8 @@ body{
 .chat-image:hover {
     opacity: 0.9;
 }
+
+.voice-message {
+    width: 260px;
+    margin-top: 8px;
+}
