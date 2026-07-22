@@ -7,7 +7,9 @@ export async function startRecording() {
         audio: true
     });
 
-    mediaRecorder = new MediaRecorder(stream);
+mediaRecorder = new MediaRecorder(stream, {
+    audioBitsPerSecond: 128000
+});
 
     audioChunks = [];
 

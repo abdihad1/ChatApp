@@ -386,8 +386,12 @@ callBtn.onclick = async () => {
     try {
 
         const stream = await navigator.mediaDevices.getUserMedia({
-            audio: true
-        });
+    audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true
+    }
+});
 
         alert("🎤 Microphone access granted!");
 
