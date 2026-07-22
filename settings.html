@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Chativo • Settings</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/settings.css">
+
+</head>
+
+<body>
+
+<div class="settings-page">
+
+    <h1>Profile Settings</h1>
+
+    <div class="profile-card">
+
+        <img
+            id="profilePreview"
+            src="https://placehold.co/150x150"
+            class="profile-photo">
+
+        <br><br>
+
+        <input
+            type="file"
+            id="profileImage"
+            accept="image/*">
+
+        <br><br>
+
+        <input
+            id="displayName"
+            placeholder="Display name">
+
+        <br><br>
+
+        <textarea
+            id="bio"
+            placeholder="About yourself"></textarea>
+
+        <br><br>
+
+        <input
+            id="email"
+            disabled>
+
+        <br><br>
+
+        <button id="saveProfile">
+
+            Save Changes
+
+        </button>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/settings.js"></script>
+
+</body>
+
+</html>

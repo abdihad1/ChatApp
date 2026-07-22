@@ -168,3 +168,11 @@ document.getElementById("chatStatus").textContent =
     });
 
 }
+
+document
+.getElementById("settingsBtn")
+.onclick = () => {
+
+    window.location.href = "settings.html";
+
+};
