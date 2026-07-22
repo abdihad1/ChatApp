@@ -9,6 +9,8 @@ import { createMessageElement } from "./messageRenderer.js";
 import { supabase } from "./supabase.js";
 import { uploadVoice } from "./voiceUpload.js";
 import { registerNotifications } from "./notifications.js";
+import { uploadImage } from "./imageUpload.js";
+import { handleVoiceRecording } from "./voiceMessage.js";
 import {
     startRecording,
     stopRecording
@@ -332,24 +334,7 @@ imageInput.onchange = async () => {
 
     if (!file) return;
 
-    const fileName = `${Date.now()}-${file.name}`;
-
-const { error } = await supabase.storage
-    .from("chat-images")
-    .upload(fileName, file);
-
-if (error) {
-
-    console.error(error);
-    alert("Image upload failed!");
-
-    return;
-
-}
-
-const { data } = supabase.storage
-    .from("chat-images")
-    .getPublicUrl(fileName);
+const imageUrl = await uploadImage(file);
 
 const otherUser = getCurrentChat();
 
@@ -368,7 +353,7 @@ await addDoc(
     {
         uid: auth.currentUser.uid,
         name: auth.currentUser.displayName || auth.currentUser.email,
-        image: data.publicUrl,
+        image: imageUrl,
         text: "",
         createdAt: serverTimestamp(),
         delivered: true,
@@ -516,35 +501,20 @@ reactMenuBtn.onclick = async () => {
 
 };
 
-let recording = false;
-
 voiceBtn.onclick = async () => {
 
-    if (!recording) {
+    const voiceUrl = await handleVoiceRecording(voiceBtn);
 
-        await startRecording();
-
-        recording = true;
-
-        voiceBtn.textContent = "⏹️";
-
-        return;
-
-    }
-
-    const audioBlob = await stopRecording();
-
-    recording = false;
-
-    voiceBtn.textContent = "🎤";
-
-    const voiceUrl = await uploadVoice(audioBlob);
+    if (!voiceUrl) return;
 
     const otherUser = getCurrentChat();
 
     if (!otherUser) {
+
         alert("Select a user first.");
+
         return;
+
     }
 
     const chatId = getChatId(
