@@ -1,0 +1,16 @@
+.settings-page {
+    padding: 40px;
+}
+
+.profile-card {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
