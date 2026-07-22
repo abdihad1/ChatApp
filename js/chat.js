@@ -34,7 +34,8 @@ import {
     serverTimestamp,
     doc,
     updateDoc,
-    setDoc
+    setDoc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 protectPage();
@@ -232,7 +233,7 @@ sendBtn.onclick = async () => {
 
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 
-await addDoc(
+const messageRef = await addDoc(
     collection(db, "chats", chatId, "messages"),
     {
         uid: auth.currentUser.uid,
@@ -244,6 +245,42 @@ await addDoc(
         read: false
     }
 );
+
+// Send push notification
+
+const recipientSnap = await getDoc(
+    doc(db, "users", otherUser.uid)
+);
+
+if (recipientSnap.exists()) {
+
+    const recipientData = recipientSnap.data();
+
+    if (recipientData.fcmToken) {
+
+        await fetch("/api/send-notification", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                token: recipientData.fcmToken,
+
+                title: auth.currentUser.displayName || "New message",
+
+                body: text
+
+            })
+
+        });
+
+    }
+
+}
 
 // Create / update chat information
 await updateDoc(
@@ -361,7 +398,7 @@ await addDoc(
     }
 );
 
-console.log(data.publicUrl);
+console.log(imageUrl);
 
 imageInput.value = "";
 
