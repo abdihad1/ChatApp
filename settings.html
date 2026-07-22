@@ -18,17 +18,28 @@
 
     <div class="profile-card">
 
-        <img
-            id="profilePreview"
-            src="https://placehold.co/150x150"
-            class="profile-photo">
+<div class="profile-photo-container">
 
-        <br><br>
+    <img
+        id="profilePreview"
+        src="https://placehold.co/150x150"
+        class="profile-photo">
 
-        <input
-            type="file"
-            id="profileImage"
-            accept="image/*">
+    <button
+        id="changePhotoBtn"
+        class="change-photo-btn">
+
+        📷
+
+    </button>
+
+</div>
+
+<input
+    type="file"
+    id="profileImage"
+    accept="image/*"
+    hidden>
 
         <br><br>
 
@@ -59,6 +70,8 @@
     </div>
 
 </div>
+
+<div id="toast"></div>
 
 <script type="module" src="js/settings.js"></script>
 

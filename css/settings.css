@@ -14,3 +14,66 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+#toast{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.profile-photo-container {
+
+    position: relative;
+
+    width: 150px;
+
+    margin: auto;
+
+}
+
+.change-photo-btn {
+
+    position: absolute;
+
+    bottom: 5px;
+
+    right: 5px;
+
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    background: #2196F3;
+
+    color: white;
+
+}
+
+.change-photo-btn:hover {
+
+    transform: scale(1.1);
+
+}
+
+.profile-photo {
+
+    width: 150px;
+
+    height: 150px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+}

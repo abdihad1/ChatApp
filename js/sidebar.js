@@ -4,7 +4,8 @@ import { setCurrentChat } from "./currentChat.js";
 
 import {
     collection,
-    getDocs
+    getDocs,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 import { db } from "./firebase.js";
@@ -95,13 +96,26 @@ if (date.toDateString() === now.toDateString()) {
 
 }
 
-async function loadUsers() {
+function loadUsers() {
 
-    allUsers = await getAllUsers();
+    onSnapshot(collection(db, "users"), (snapshot) => {
 
-   displayUsers(allUsers);
+        allUsers = [];
 
-await displayGroups();
+        snapshot.forEach((doc) => {
+
+            allUsers.push({
+                uid: doc.id,
+                ...doc.data()
+            });
+
+        });
+
+        displayUsers(allUsers);
+
+    });
+
+    displayGroups();
 
 }
 
