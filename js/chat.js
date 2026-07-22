@@ -525,37 +525,39 @@ voiceBtn.onclick = async () => {
 
     }
 
-const voiceUrl = await uploadVoice(audioBlob);
+    const audioBlob = await stopRecording();
 
-const otherUser = getCurrentChat();
+    recording = false;
 
-if (!otherUser) {
-    alert("Select a user first.");
-    return;
-}
+    voiceBtn.textContent = "🎤";
 
-const chatId = getChatId(
-    auth.currentUser.uid,
-    otherUser.uid
-);
+    const voiceUrl = await uploadVoice(audioBlob);
 
-await addDoc(
-    collection(db, "chats", chatId, "messages"),
-    {
-        uid: auth.currentUser.uid,
-        name: auth.currentUser.displayName || auth.currentUser.email,
-        voice: voiceUrl,
-        text: "",
-        createdAt: serverTimestamp(),
-        delivered: true,
-        read: false
+    const otherUser = getCurrentChat();
+
+    if (!otherUser) {
+        alert("Select a user first.");
+        return;
     }
-);
 
-showToast("🎤 Voice message sent");
+    const chatId = getChatId(
+        auth.currentUser.uid,
+        otherUser.uid
+    );
 
-console.log(voiceUrl);
+    await addDoc(
+        collection(db, "chats", chatId, "messages"),
+        {
+            uid: auth.currentUser.uid,
+            name: auth.currentUser.displayName || auth.currentUser.email,
+            voice: voiceUrl,
+            text: "",
+            createdAt: serverTimestamp(),
+            delivered: true,
+            read: false
+        }
+    );
 
-alert("✅ Voice uploaded!");
+    showToast("🎤 Voice message sent");
 
 };
