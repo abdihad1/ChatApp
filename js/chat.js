@@ -8,6 +8,7 @@ import { initMessageSearch } from "./search.js";
 import { createMessageElement } from "./messageRenderer.js";
 import { supabase } from "./supabase.js";
 import { uploadVoice } from "./voiceUpload.js";
+import { registerNotifications } from "./notifications.js";
 import {
     startRecording,
     stopRecording
@@ -37,6 +38,8 @@ import {
 protectPage();
 
 setOnlineStatus(true);
+
+registerNotifications();
 
 const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");

@@ -9,5 +9,5 @@ export function getCurrentChat() {
 }
 
 export function hasCurrentChat() {
-    return currentChatUser !== null;
+    return currentChat !== null;
 }
