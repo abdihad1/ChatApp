@@ -40,6 +40,19 @@ import {
 
 protectPage();
 
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker
+        .register("/service-worker.js")
+        .then(() => {
+
+            console.log("✅ Service Worker registered");
+
+        })
+        .catch(console.error);
+
+}
+
 setOnlineStatus(true);
 
 registerNotifications();
@@ -573,5 +586,15 @@ voiceBtn.onclick = async () => {
     );
 
     showToast("🎤 Voice message sent");
+
+};
+
+const backBtn = document.getElementById("backBtn");
+
+backBtn.onclick = () => {
+
+    document
+        .querySelector(".app")
+        .classList.remove("chat-open");
 
 };
