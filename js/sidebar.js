@@ -42,6 +42,14 @@ function displayUsers(users) {
 
             setCurrentChat(user);
 
+          if (window.innerWidth <= 768) {
+
+    document.querySelector(".sidebar").classList.add("hide");
+
+    document.querySelector(".chat").classList.add("active");
+
+}
+
             document.getElementById("chatName").textContent =
                 user.name || user.email;
 

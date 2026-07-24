@@ -67,6 +67,7 @@ const cancelDeleteBtn = document.getElementById("cancelDelete");
 const imageBtn = document.getElementById("imageBtn");
 const imageInput = document.getElementById("imageInput");
 const voiceBtn = document.getElementById("voiceBtn");
+const backBtn = document.getElementById("backBtn");
 let typingTimeout;
 
 messageInput.addEventListener("input", async () => {
@@ -596,5 +597,13 @@ backBtn.onclick = () => {
     document
         .querySelector(".app")
         .classList.remove("chat-open");
+
+};
+
+backBtn.onclick = () => {
+
+    document.querySelector(".chat").classList.remove("active");
+
+    document.querySelector(".sidebar").classList.remove("hide");
 
 };
