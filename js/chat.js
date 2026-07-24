@@ -590,16 +590,6 @@ voiceBtn.onclick = async () => {
 
 };
 
-const backBtn = document.getElementById("backBtn");
-
-backBtn.onclick = () => {
-
-    document
-        .querySelector(".app")
-        .classList.remove("chat-open");
-
-};
-
 backBtn.onclick = () => {
 
     document.querySelector(".chat").classList.remove("active");
