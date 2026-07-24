@@ -98,14 +98,7 @@ if (date.toDateString() === now.toDateString()) {
 
         };
 
-        if (window.innerWidth <= 768) {
-
-    document
-        .querySelector(".app")
-        .classList.add("chat-open");
-
-}
-
+        
         userList.appendChild(div);
 
     });
