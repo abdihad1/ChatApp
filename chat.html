@@ -2,12 +2,13 @@
 <html>
 <head>
     <title>Chativo • Messaging</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/style.css">
 
      <link rel="manifest" href="/manifest.json">
-     <meta name="theme-color" content="#00a884"> 
-
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+     <meta name="theme-color" content="#00a884">   
 
 </head>
 <body>
@@ -179,6 +180,34 @@ text-align:center;
             <button id="confirmDelete">Delete</button>
         </div>
     </div>
+</div>
+
+<div id="incomingCallModal" class="call-modal">
+
+    <div class="call-box">
+
+        <h2>📞 Incoming Call</h2>
+
+        <img id="callerPhoto" src="" alt="Caller">
+
+        <h3 id="callerName">Unknown</h3>
+
+        <p>is calling you...</p>
+
+        <div class="call-buttons">
+
+            <button id="acceptCallBtn">
+                ✅ Accept
+            </button>
+
+            <button id="rejectCallBtn">
+                ❌ Decline
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
 </body>
