@@ -1,4 +1,4 @@
-const CACHE_NAME = "chativo-v3";
+const CACHE_NAME = "chativo-v4";
 
 const FILES_TO_CACHE = [
     "/",
@@ -56,14 +56,21 @@ self.addEventListener("activate", (event) => {
 // Fetch
 self.addEventListener("fetch", (event) => {
 
+    const url = new URL(event.request.url);
+
+    // Never cache Firebase or Google requests
+    if (
+        url.hostname.includes("googleapis.com") ||
+        url.hostname.includes("gstatic.com") ||
+        url.hostname.includes("firebase")
+    ) {
+        return;
+    }
+
     event.respondWith(
-
         caches.match(event.request).then((response) => {
-
             return response || fetch(event.request);
-
         })
-
     );
 
 });
