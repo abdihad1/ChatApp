@@ -1,4 +1,4 @@
-const CACHE_NAME = "chativo-v2";
+const CACHE_NAME = "chativo-v3";
 
 const FILES_TO_CACHE = [
     "/",
@@ -9,7 +9,10 @@ const FILES_TO_CACHE = [
     "/manifest.json"
 ];
 
+// Install
 self.addEventListener("install", (event) => {
+
+    self.skipWaiting();
 
     event.waitUntil(
 
@@ -23,6 +26,34 @@ self.addEventListener("install", (event) => {
 
 });
 
+// Activate
+self.addEventListener("activate", (event) => {
+
+    event.waitUntil(
+
+        caches.keys().then((cacheNames) => {
+
+            return Promise.all(
+
+                cacheNames.map((cache) => {
+
+                    if (cache !== CACHE_NAME) {
+
+                        return caches.delete(cache);
+
+                    }
+
+                })
+
+            );
+
+        }).then(() => self.clients.claim())
+
+    );
+
+});
+
+// Fetch
 self.addEventListener("fetch", (event) => {
 
     event.respondWith(
