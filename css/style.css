@@ -840,7 +840,7 @@ body{
 
 .me,
 .other{
-    max-width:85%;
+     max-width:80%;
 }
 
 .chat-image{
@@ -1016,39 +1016,27 @@ body{
 /* Input */
 
 .chat-input{
-
+    display:flex;
+    align-items:center;
+    gap:4px;
     padding:8px;
-
-    gap:6px;
-
 }
-
-/* Text box */
 
 #message{
-
+    flex:1;
+    min-width:0;
     font-size:16px;
-
 }
-
-/* Buttons */
 
 #emojiBtn,
-
 #imageBtn,
-
 #voiceBtn,
-
 #sendBtn{
-
-    width:42px;
-
-    height:42px;
-
-    font-size:20px;
-
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    font-size:18px;
 }
-
 }
 
 /* ===========================
