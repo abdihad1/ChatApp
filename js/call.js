@@ -10,7 +10,9 @@ import {
 
 import {
     saveOffer,
-    listenCall
+    listenCall,
+    addCallerCandidate,
+    listenReceiverCandidates
 } from "./signaling.js";
 
 const callBtn = document.getElementById("callBtn");
@@ -45,11 +47,6 @@ await createPeer();
 await startMicrophone();
 
 const peer = getPeer();
-
-import {
-    addCallerCandidate,
-    listenReceiverCandidates
-} from "./signaling.js";
 
 peer.onicecandidate = async (event) => {
 

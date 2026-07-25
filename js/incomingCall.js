@@ -19,7 +19,9 @@ import {
 
 import {
     saveAnswer,
-    listenCall
+    listenCall,
+    addReceiverCandidate,
+    listenCallerCandidates
 } from "./signaling.js";
 
 const popup = document.getElementById("incomingCallModal");
@@ -81,11 +83,6 @@ acceptBtn.onclick = async () => {
     await startMicrophone();
 
     const peer = getPeer();
-
-    import {
-    addReceiverCandidate,
-    listenCallerCandidates
-} from "./signaling.js";
 
 peer.onicecandidate = async (event) => {
 
