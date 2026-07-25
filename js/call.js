@@ -2,6 +2,17 @@ import { auth } from "./firebase.js";
 import { getCurrentChat } from "./currentChat.js";
 import { createCall } from "./signaling.js";
 
+import {
+    createPeer,
+    startMicrophone,
+    getPeer
+} from "./webrtc.js";
+
+import {
+    saveOffer,
+    listenCall
+} from "./signaling.js";
+
 const callBtn = document.getElementById("callBtn");
 
 callBtn.addEventListener("click", async () => {
@@ -25,16 +36,63 @@ callBtn.addEventListener("click", async () => {
     try {
 
         const callId = await createCall(
+    auth.currentUser.uid,
+    chat.uid
+);
 
-            auth.currentUser.uid,
-            chat.uid
+await createPeer();
 
+await startMicrophone();
+
+const peer = getPeer();
+
+import {
+    addCallerCandidate,
+    listenReceiverCandidates
+} from "./signaling.js";
+
+peer.onicecandidate = async (event) => {
+
+    if (event.candidate) {
+
+        await addCallerCandidate(
+            callId,
+            event.candidate
         );
 
-        console.log("Call created:", callId);
+    }
 
-        alert("Calling " + (chat.name || chat.email));
+};
 
+listenReceiverCandidates(callId, async (candidate) => {
+
+    await peer.addIceCandidate(
+        new RTCIceCandidate(candidate)
+    );
+
+});
+
+const offer = await peer.createOffer();
+
+await peer.setLocalDescription(offer);
+
+await saveOffer(callId, offer);
+
+listenCall(callId, async (call) => {
+
+    if (call.answer && !peer.currentRemoteDescription) {
+
+        await peer.setRemoteDescription(
+            new RTCSessionDescription(call.answer)
+        );
+
+        console.log("Voice connection established.");
+
+    }
+
+});
+
+console.log("Offer sent.");
     } catch (err) {
 
         console.error(err);

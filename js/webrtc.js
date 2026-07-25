@@ -1,4 +1,5 @@
 let localStream = null;
+let remoteStream = null;
 let peerConnection = null;
 
 const servers = {
@@ -12,29 +13,65 @@ const servers = {
     ]
 };
 
-export async function getLocalStream() {
-
-    if (localStream) return localStream;
-
-    localStream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: false
-    });
-
-    return localStream;
-}
-
-export function createPeerConnection() {
+export async function createPeer() {
 
     peerConnection = new RTCPeerConnection(servers);
 
+    remoteStream = new MediaStream();
+
+    document
+        .getElementById("remoteVideo")
+        .srcObject = remoteStream;
+
+    peerConnection.ontrack = (event) => {
+
+        event.streams[0]
+            .getTracks()
+            .forEach(track => {
+
+                remoteStream.addTrack(track);
+
+            });
+
+    };
+
+    return peerConnection;
+
+}
+
+export async function startMicrophone() {
+
+    localStream =
+        await navigator.mediaDevices.getUserMedia({
+
+            audio: true,
+            video: false
+
+        });
+
+    document
+        .getElementById("localVideo")
+        .srcObject = localStream;
+
+    localStream
+        .getTracks()
+        .forEach(track => {
+
+            peerConnection.addTrack(
+                track,
+                localStream
+            );
+
+        });
+
+    return localStream;
+
+}
+
+export function getPeer() {
     return peerConnection;
 }
 
-export function getPeerConnection() {
-    return peerConnection;
-}
-
-export function getStream() {
+export function getLocalStream() {
     return localStream;
 }

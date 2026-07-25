@@ -119,7 +119,33 @@
 <script type="module" src="js/incomingCall.js"></script>
 <script type="module" src="js/emoji.js"></script>
 
-<div id="callScreen" style="
+<div id="incomingCallModal" class="call-modal">
+
+    <div class="call-box">
+
+        <h2>Incoming Call</h2>
+
+        <img id="incomingCallerPhoto" src="">
+
+        <h3 id="incomingCallerName">Unknown User</h3>
+
+        <div class="call-buttons">
+
+            <button id="acceptCallBtn">
+                ✅ Accept
+            </button>
+
+            <button id="rejectCallBtn">
+                ❌ Reject
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <div id="callScreen" style="
 display:none;
 position:fixed;
 top:0;
@@ -133,6 +159,31 @@ text-align:center;
 ">
 
     <h1 id="callTitle">Calling...</h1>
+
+    <video
+        id="localVideo"
+        autoplay
+        muted
+        playsinline
+        style="width:220px;border-radius:12px;">
+    </video>
+
+    <video
+        id="remoteVideo"
+        autoplay
+        playsinline
+        style="width:420px;border-radius:12px;">
+    </video>
+
+    <br><br>
+
+    <button id="muteBtn">🎤 Mute</button>
+
+    <button id="cameraBtn">📷 Camera</button>
+
+    <button id="endCallBtn">❌ End Call</button>
+
+</div>
 
     <video
         id="localVideo"

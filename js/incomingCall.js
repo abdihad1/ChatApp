@@ -1,4 +1,8 @@
 import { auth, db } from "./firebase.js";
+import {
+    acceptCall,
+    rejectCall
+} from "./signaling.js";
 
 import {
     collection,
@@ -7,8 +11,24 @@ import {
     where
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-const popup = document.getElementById("callScreen");
-const title = document.getElementById("callTitle");
+import {
+    createPeer,
+    startMicrophone,
+    getPeer
+} from "./webrtc.js";
+
+import {
+    saveAnswer,
+    listenCall
+} from "./signaling.js";
+
+const popup = document.getElementById("incomingCallModal");
+const callerName = document.getElementById("incomingCallerName");
+const callerPhoto = document.getElementById("incomingCallerPhoto");
+const acceptBtn = document.getElementById("acceptCallBtn");
+const rejectBtn = document.getElementById("rejectCallBtn");
+
+let currentCallId = null;
 
 let unsubscribe = null;
 
@@ -31,10 +51,16 @@ auth.onAuthStateChanged((user) => {
             if (change.type !== "added") return;
 
             const call = change.doc.data();
+ 
+            window.currentIncomingCall = call;
 
-            title.textContent = "📞 Incoming Call";
+            currentCallId = change.doc.id;
 
-            popup.style.display = "block";
+           callerName.textContent = "Incoming Call";
+callerPhoto.src =
+    "https://ui-avatars.com/api/?name=Caller&background=00a884&color=fff";
+
+popup.style.display = "flex";            
 
             console.log("Incoming call:", call);
 
@@ -43,3 +69,73 @@ auth.onAuthStateChanged((user) => {
     });
 
 });
+
+acceptBtn.onclick = async () => {
+
+    if (!currentCallId) return;
+
+    await acceptCall(currentCallId);
+
+    await createPeer();
+
+    await startMicrophone();
+
+    const peer = getPeer();
+
+    import {
+    addReceiverCandidate,
+    listenCallerCandidates
+} from "./signaling.js";
+
+peer.onicecandidate = async (event) => {
+
+    if (event.candidate) {
+
+        await addReceiverCandidate(
+            currentCallId,
+            event.candidate
+        );
+
+    }
+
+};
+
+listenCallerCandidates(currentCallId, async (candidate) => {
+
+    await peer.addIceCandidate(
+        new RTCIceCandidate(candidate)
+    );
+
+});
+
+    await peer.setRemoteDescription(
+        new RTCSessionDescription(
+            window.currentIncomingCall.offer
+        )
+    );
+
+    const answer = await peer.createAnswer();
+
+    await peer.setLocalDescription(answer);
+
+    await saveAnswer(currentCallId, answer);
+
+    document.getElementById("incomingCallModal").style.display = "none";
+
+    document.getElementById("callScreen").style.display = "block";
+
+    document.getElementById("callTitle").textContent = "Connecting...";
+
+    console.log("Answer sent.");
+
+};
+
+rejectBtn.onclick = async () => {
+
+    if (!currentCallId) return;
+
+    await rejectCall(currentCallId);
+
+    document.getElementById("incomingCallModal").style.display = "none";
+
+};
