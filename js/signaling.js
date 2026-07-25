@@ -7,14 +7,7 @@ import {
     updateDoc,
     serverTimestamp,
     onSnapshot,
-    setDoc,
     getDoc
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-import {
-    collection,
-    addDoc,
-    onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 export async function createCall(callerUid, receiverUid) {
