@@ -1,52 +1,40 @@
-let peerConnection = null;
 let localStream = null;
+let peerConnection = null;
 
-const configuration = {
+const servers = {
     iceServers: [
         {
-            urls: "stun:stun.l.google.com:19302"
+            urls: [
+                "stun:stun.l.google.com:19302",
+                "stun:stun1.l.google.com:19302"
+            ]
         }
     ]
 };
 
-export async function createPeerConnection() {
+export async function getLocalStream() {
 
-    peerConnection = new RTCPeerConnection(configuration);
+    if (localStream) return localStream;
 
     localStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: false
     });
 
-    localStream.getTracks().forEach(track => {
-        peerConnection.addTrack(track, localStream);
-    });
+    return localStream;
+}
+
+export function createPeerConnection() {
+
+    peerConnection = new RTCPeerConnection(servers);
 
     return peerConnection;
-
 }
 
 export function getPeerConnection() {
     return peerConnection;
 }
 
-export function getLocalStream() {
+export function getStream() {
     return localStream;
-}
-
-export function closeConnection() {
-
-    if (peerConnection) {
-        peerConnection.close();
-        peerConnection = null;
-    }
-
-    if (localStream) {
-
-        localStream.getTracks().forEach(track => track.stop());
-
-        localStream = null;
-
-    }
-
 }
