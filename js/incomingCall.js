@@ -107,13 +107,26 @@ listenCallerCandidates(currentCallId, async (candidate) => {
 
 });
 
-const latestCall = await getCall(currentCallId);
+let callData = null;
 
-const callData = latestCall.data();
+for (let i = 0; i < 10; i++) {
 
-if (!callData.offer) {
-    alert("Offer not received yet. Please wait 1 second and try again.");
+    const latestCall = await getCall(currentCallId);
+
+    callData = latestCall.data();
+
+    if (callData.offer) break;
+
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+}
+
+if (!callData || !callData.offer) {
+
+    alert("Failed to receive call offer.");
+
     return;
+
 }
 
 await peer.setRemoteDescription(

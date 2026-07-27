@@ -10,7 +10,7 @@ import {
     getDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-export async function createCall(callerUid, receiverUid) {
+export async function createCall(callerUid, receiverUid, offer) {
 
     const callRef = await addDoc(
         collection(db, "calls"),
@@ -18,7 +18,7 @@ export async function createCall(callerUid, receiverUid) {
             caller: callerUid,
             receiver: receiverUid,
             status: "calling",
-            offer: null,
+            offer: offer,
             answer: null,
             createdAt: serverTimestamp()
         }

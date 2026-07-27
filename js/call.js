@@ -40,16 +40,21 @@ callBtn.addEventListener("click", async () => {
 
     try {
 
-        currentCallId = await createCall(
-    auth.currentUser.uid,
-    chat.uid
-);
-
 await createPeer();
 
 await startMicrophone();
 
 const peer = getPeer();
+
+const offer = await peer.createOffer();
+
+await peer.setLocalDescription(offer);
+
+currentCallId = await createCall(
+    auth.currentUser.uid,
+    chat.uid,
+    offer
+);
 
 peer.onicecandidate = async (event) => {
 
@@ -71,10 +76,6 @@ listenReceiverCandidates(currentCallId, async (candidate) => {
     );
 
 });
-
-const offer = await peer.createOffer();
-
-await peer.setLocalDescription(offer);
 
 document.getElementById("callScreen").style.display = "block";
 document.getElementById("callTitle").textContent = "Calling...";
