@@ -19,7 +19,7 @@ import {
 
 import {
     saveAnswer,
-    listenCall,
+    getCall,
     addReceiverCandidate,
     listenCallerCandidates
 } from "./signaling.js";
@@ -105,11 +105,18 @@ listenCallerCandidates(currentCallId, async (candidate) => {
 
 });
 
-    await peer.setRemoteDescription(
-        new RTCSessionDescription(
-            window.currentIncomingCall.offer
-        )
-    );
+const latestCall = await getCall(currentCallId);
+
+const callData = latestCall.data();
+
+if (!callData.offer) {
+    alert("Offer not received yet. Please wait 1 second and try again.");
+    return;
+}
+
+await peer.setRemoteDescription(
+    new RTCSessionDescription(callData.offer)
+);
 
     const answer = await peer.createAnswer();
 
