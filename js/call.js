@@ -76,7 +76,8 @@ const offer = await peer.createOffer();
 
 await peer.setLocalDescription(offer);
 
-await saveOffer(currentCallId, offer);
+document.getElementById("callScreen").style.display = "block";
+document.getElementById("callTitle").textContent = "Calling...";
 
 listenCall(currentCallId, async (call) => {
 
