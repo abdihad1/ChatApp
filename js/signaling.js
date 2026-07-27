@@ -150,3 +150,14 @@ export function listenReceiverCandidates(callId, callback) {
     );
 
 }
+
+export async function endCall(callId) {
+
+    await updateDoc(
+        doc(db, "calls", callId),
+        {
+            status: "ended"
+        }
+    );
+
+}

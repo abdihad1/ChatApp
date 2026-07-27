@@ -45,7 +45,7 @@ export async function startMicrophone() {
         await navigator.mediaDevices.getUserMedia({
 
             audio: true,
-            video: false
+            video: true
 
         });
 
@@ -74,4 +74,52 @@ export function getPeer() {
 
 export function getLocalStream() {
     return localStream;
+}
+
+export function closePeer() {
+
+    if (peerConnection) {
+        peerConnection.close();
+        peerConnection = null;
+    }
+
+    if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+        localStream = null;
+    }
+
+    if (remoteStream) {
+        remoteStream.getTracks().forEach(track => track.stop());
+        remoteStream = null;
+    }
+
+    document.getElementById("localVideo").srcObject = null;
+    document.getElementById("remoteVideo").srcObject = null;
+
+}
+
+export function toggleMute() {
+
+    if (!localStream) return false;
+
+    const audioTrack = localStream.getAudioTracks()[0];
+
+    audioTrack.enabled = !audioTrack.enabled;
+
+    return audioTrack.enabled;
+
+}
+
+export function toggleCamera() {
+
+    if (!localStream) return false;
+
+    const videoTrack = localStream.getVideoTracks()[0];
+
+    if (!videoTrack) return false;
+
+    videoTrack.enabled = !videoTrack.enabled;
+
+    return videoTrack.enabled;
+
 }

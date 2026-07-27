@@ -14,14 +14,16 @@ import {
 import {
     createPeer,
     startMicrophone,
-    getPeer
+    getPeer,
+    closePeer
 } from "./webrtc.js";
 
 import {
     saveAnswer,
     getCall,
     addReceiverCandidate,
-    listenCallerCandidates
+    listenCallerCandidates,
+    listenCall
 } from "./signaling.js";
 
 const popup = document.getElementById("incomingCallModal");
@@ -30,7 +32,7 @@ const callerPhoto = document.getElementById("incomingCallerPhoto");
 const acceptBtn = document.getElementById("acceptCallBtn");
 const rejectBtn = document.getElementById("rejectCallBtn");
 
-let currentCallId = null;
+export let currentCallId = null;
 
 let unsubscribe = null;
 
@@ -123,6 +125,20 @@ await peer.setRemoteDescription(
     await peer.setLocalDescription(answer);
 
     await saveAnswer(currentCallId, answer);
+
+    listenCall(currentCallId, (call) => {
+
+    if (call.status === "ended") {
+
+        closePeer();
+
+        document.getElementById("callScreen").style.display = "none";
+
+        alert("Call ended.");
+
+    }
+
+});
 
     document.getElementById("incomingCallModal").style.display = "none";
 

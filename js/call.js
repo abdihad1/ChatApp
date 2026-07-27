@@ -5,7 +5,8 @@ import { createCall } from "./signaling.js";
 import {
     createPeer,
     startMicrophone,
-    getPeer
+    getPeer,
+    closePeer
 } from "./webrtc.js";
 
 import {
@@ -14,6 +15,8 @@ import {
     addCallerCandidate,
     listenReceiverCandidates
 } from "./signaling.js";
+
+export let currentCallId = null;
 
 const callBtn = document.getElementById("callBtn");
 
@@ -37,7 +40,7 @@ callBtn.addEventListener("click", async () => {
 
     try {
 
-        const callId = await createCall(
+        currentCallId = await createCall(
     auth.currentUser.uid,
     chat.uid
 );
@@ -53,7 +56,7 @@ peer.onicecandidate = async (event) => {
     if (event.candidate) {
 
         await addCallerCandidate(
-            callId,
+            currentCallId,
             event.candidate
         );
 
@@ -61,7 +64,7 @@ peer.onicecandidate = async (event) => {
 
 };
 
-listenReceiverCandidates(callId, async (candidate) => {
+listenReceiverCandidates(currentCallId, async (candidate) => {
 
     await peer.addIceCandidate(
         new RTCIceCandidate(candidate)
@@ -73,9 +76,9 @@ const offer = await peer.createOffer();
 
 await peer.setLocalDescription(offer);
 
-await saveOffer(callId, offer);
+await saveOffer(currentCallId, offer);
 
-listenCall(callId, async (call) => {
+listenCall(currentCallId, async (call) => {
 
     if (call.answer && !peer.currentRemoteDescription) {
 
@@ -84,6 +87,16 @@ listenCall(callId, async (call) => {
         );
 
         console.log("Voice connection established.");
+
+    }
+
+    if (call.status === "ended") {
+
+        closePeer();
+
+        document.getElementById("callScreen").style.display = "none";
+
+        alert("Call ended.");
 
     }
 
