@@ -2,29 +2,47 @@
 <html>
 <head>
     <title>Chativo - Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div class="login-box">
 
-<h1>Chativo</h1>
+    <h1>Chativo</h1>
 
-<input type="email" id="email" placeholder="Email">
+    <input
+        type="tel"
+        id="phoneNumber"
+        placeholder="+9779812345678"
+    >
 
-<input type="password" id="password" placeholder="Password">
+    <button id="sendOtpBtn">
+        Send OTP
+    </button>
 
-<button id="loginBtn">Login</button>
+    <br><br>
 
-<button id="googleBtn">Continue with Google</button>
+    <input
+        type="text"
+        id="otpCode"
+        placeholder="Enter OTP"
+        style="display:none;"
+    >
 
-<br><br>
+    <button
+        id="verifyOtpBtn"
+        style="display:none;"
+    >
+        Verify OTP
+    </button>
 
-<a href="signup.html">Create Account</a>
+    <div id="recaptcha-container"></div>
 
 </div>
 
-<!-- Firebase SDK -->
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/login.js"></script>
 

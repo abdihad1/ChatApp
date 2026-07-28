@@ -1,24 +1,49 @@
-import { auth, provider } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import { saveCurrentUser } from "./users.js";
 
 import {
-    signInWithEmailAndPassword,
-    signInWithPopup
+    RecaptchaVerifier,
+    signInWithPhoneNumber
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-// Email Login
-document.getElementById("loginBtn").onclick = async () => {
+import {
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+window.recaptchaVerifier = new RecaptchaVerifier(
+    auth,
+    "recaptcha-container",
+    {
+        size: "normal"
+    }
+);
+
+const sendOtpBtn = document.getElementById("sendOtpBtn");
+const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+
+let confirmationResult = null;
+
+sendOtpBtn.onclick = async () => {
+
+    const phoneNumber =
+        document.getElementById("phoneNumber").value.trim();
 
     try {
 
-        await signInWithEmailAndPassword(auth, email, password);
+        confirmationResult =
+            await signInWithPhoneNumber(
+                auth,
+                phoneNumber,
+                window.recaptchaVerifier
+            );
 
-        await saveCurrentUser();
+        alert("OTP sent.");
 
-        window.location.href = "chat.html";
+        document.getElementById("otpCode").style.display = "block";
+        verifyOtpBtn.style.display = "block";
 
     } catch (err) {
 
@@ -28,27 +53,44 @@ document.getElementById("loginBtn").onclick = async () => {
 
 };
 
-// Google Login
-const googleBtn = document.getElementById("googleBtn");
+verifyOtpBtn.onclick = async () => {
 
-if (googleBtn) {
+    const code =
+        document.getElementById("otpCode").value.trim();
 
-    googleBtn.onclick = async () => {
+    try {
 
-        try {
+        const result =
+            await confirmationResult.confirm(code);
 
-            await signInWithPopup(auth, provider);
+        const user = result.user;
 
-            await saveCurrentUser();
+        const userRef = doc(db, "users", user.uid);
 
-            window.location.href = "chat.html";
+        const snap = await getDoc(userRef);
 
-        } catch (err) {
+        if (!snap.exists()) {
 
-            alert(err.message);
+            await setDoc(userRef, {
+                uid: user.uid,
+                phone: user.phoneNumber,
+                name: user.phoneNumber,
+                photo: "",
+                bio: "",
+                online: true,
+                createdAt: serverTimestamp()
+            });
 
         }
 
-    };
+        await saveCurrentUser();
 
-}
+        window.location.href = "chat.html";
+
+    } catch (err) {
+
+        alert("Invalid OTP");
+
+    }
+
+};
