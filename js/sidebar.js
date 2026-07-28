@@ -1,4 +1,4 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import { getAllUsers } from "./users.js";
 import { setCurrentChat } from "./currentChat.js";
 
@@ -8,8 +8,7 @@ import {
     onSnapshot,
     getDoc,
     doc
-}
-import { db } from "./firebase.js";
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const userList = document.getElementById("userList");
 const searchInput = document.getElementById("searchUser");
