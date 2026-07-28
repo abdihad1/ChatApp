@@ -1,11 +1,15 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 import {
     createUserWithEmailAndPassword,
     updateProfile
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-import { saveCurrentUser } from "./users.js";
+import {
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 document.getElementById("signupBtn").onclick = async () => {
 
@@ -13,24 +17,41 @@ document.getElementById("signupBtn").onclick = async () => {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
+    if (!name || !email || !password) {
+        alert("Please fill all fields.");
+        return;
+    }
+
     try {
 
-        const result = await createUserWithEmailAndPassword(auth, email, password);
+        const result = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
-        await updateProfile(result.user, {
+        const user = result.user;
+
+        await updateProfile(user, {
             displayName: name
         });
 
-        await saveCurrentUser();
+        await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            name: name,
+            email: email,
+            photo: "",
+            bio: "",
+            online: true,
+            createdAt: serverTimestamp()
+        });
 
-        alert("Account Created!");
+        alert("Account created successfully!");
 
-        window.location.href = "chat.html";
+        window.location.href = "login.html";
 
     } catch (err) {
-
         alert(err.message);
-
     }
 
 };
