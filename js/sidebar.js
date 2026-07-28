@@ -107,6 +107,11 @@ if (date.toDateString() === now.toDateString()) {
 
 function loadUsers() {
 
+    if (!auth.currentUser) {
+        console.log("Waiting for authentication...");
+        return;
+    }
+
     const currentUid = auth.currentUser.uid;
 
     onSnapshot(collection(db, "chats"), async (snapshot) => {
