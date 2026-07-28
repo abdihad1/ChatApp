@@ -17,38 +17,92 @@
 
     <div class="sidebar">
 
-        <h2>Chats</h2>
+<div class="sidebar">
 
-      <input
-    type="text"
-    id="searchUser"
-    placeholder="Search users..."
->
+    <div class="sidebar-header">
 
-        <div id="userList">
-            No users yet
+        <div class="profile">
+
+            <img
+                id="myPhoto"
+                src="https://ui-avatars.com/api/?name=User&background=25D366&color=fff"
+                class="profile-photo"
+            >
+
+            <div>
+
+                <h3>Chativo</h3>
+
+                <small>Messages</small>
+
+            </div>
+
         </div>
 
-        <button id="themeBtn">🌙 Dark Mode</button>
-        <button id="logoutBtn">Logout</button><br>
-        <button id="settingsBtn">⚙️ Settings</button>
+        <div class="header-icons">
+
+            <button id="themeBtn" title="Theme">🌙</button>
+
+            <button id="settingsBtn" title="Settings">⚙️</button>
+
+            <button id="logoutBtn" title="Logout">🚪</button>
+
+        </div>
 
     </div>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchUser"
+            placeholder="Search users..."
+        >
+
+    </div>
+
+    <div id="userList"></div>
+
+    <button id="newChatBtn">
+        ＋ New Chat
+    </button>
+
+<div id="newChatModal" class="modal">
+    <div class="modal-content">
+
+        <h3>New Chat</h3>
+
+        <input
+            type="text"
+            id="newChatSearch"
+            placeholder="Search users..."
+        >
+
+        <div id="newChatUsers"></div>
+
+        <div class="modal-actions">
+            <button id="closeNewChat">Close</button>
+        </div>
+
+    </div>
+</div>
+
+</div>
 
     <div class="chat">
 <div class="chat-header">
 
     <div class="chat-header-left">
 
-      <button id="backBtn">←</button>
+        <button id="backBtn">←</button>
 
-        <img id="chatPhoto" src="">
+        <img id="chatPhoto" src="" alt="Profile">
 
         <div>
 
-            <h2 id="chatName">Select a User</h2>
+            <h2 id="chatName">Select a Chat</h2>
 
-            <small id="chatStatus">Offline</small><br>
+            <small id="chatStatus">Offline</small>
 
             <small id="typingStatus"></small>
 
@@ -56,15 +110,24 @@
 
     </div>
 
-<input
-    type="text"
-    id="searchMessage"
-    placeholder="Search messages..."
->
+    <div class="chat-header-right">
 
-    <button id="callBtn">📞</button>
+        <input
+            type="text"
+            id="searchMessage"
+            placeholder="Search..."
+        >
+
+        <button id="callBtn" title="Voice Call">📞</button>
+
+        <button id="videoCallBtn" title="Video Call">🎥</button>
+
+        <button id="moreBtn" title="More">⋮</button>
+
+    </div>
 
 </div>
+
 
         <div id="messages"></div>
 
@@ -92,16 +155,25 @@
 
          <div class="chat-input">
 
-    <button id="emojiBtn" title="Emoji">😊</button>
-    <input type="file" id="imageInput" accept="image/*" hidden>
+    <button id="emojiBtn" class="icon-btn" title="Emoji">😊</button>
 
-<button id="imageBtn">📷</button>
-<button id="voiceBtn" title="Voice Message">🎤</button>
+    <button id="imageBtn" class="icon-btn" title="Image">🖼️</button>
 
     <input
-        type="text"
+        type="file"
+        id="imageInput"
+        accept="image/*"
+        hidden
+    >
+
+    <input
         id="message"
-        placeholder="Type a message">
+        type="text"
+        placeholder="Type a message..."
+        autocomplete="off"
+    >
+
+    <button id="voiceBtn" class="icon-btn" title="Voice">🎤</button>
 
     <button id="sendBtn" title="Send">
         ➤

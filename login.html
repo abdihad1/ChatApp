@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chativo - Login</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
-<div class="login-box">
+<div class="background"></div>
+
+<div class="login-card">
+
+    <div class="logo">
+        💬
+    </div>
 
     <h1>Chativo</h1>
 
+    <p class="subtitle">
+        Connect with friends securely
+    </p>
+
     <input
-    type="email"
-    id="email"
-    placeholder="Email"
->
+        type="email"
+        id="email"
+        placeholder="Email Address"
+    >
 
-<input
-    type="password"
-    id="password"
-    placeholder="Password"
->
+    <div class="password-box">
 
-<button id="loginBtn">
-    Login
-</button>
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+        >
 
-<p class="signup-text">
-    Don't have an account?
-    <a href="signup.html">Create Account</a>
-</p>
+        <button id="togglePassword" type="button">
+            👁
+        </button>
+
+    </div>
+
+    <button id="loginBtn">
+        Login
+    </button>
+
+    <p class="signup-text">
+        Don't have an account?
+        <a href="signup.html">Create Account</a>
+    </p>
 
 </div>
+
+<script>
+const password=document.getElementById("password");
+const toggle=document.getElementById("togglePassword");
+
+toggle.onclick=()=>{
+    password.type=password.type==="password"?"text":"password";
+    toggle.textContent=password.type==="password"?"👁":"🙈";
+}
+</script>
 
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/login.js"></script>

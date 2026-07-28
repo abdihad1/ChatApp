@@ -1,0 +1,233 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0b141a;
+    overflow:hidden;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#25d36633,transparent 40%),
+    radial-gradient(circle at bottom right,#00a88433,transparent 40%),
+    #0b141a;
+}
+
+.login-card{
+
+    position:relative;
+
+    width:400px;
+
+    max-width:92%;
+
+    padding:40px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+
+    text-align:center;
+
+    animation:fade .5s;
+}
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:45px;
+
+    background:#25d366;
+
+    margin-bottom:20px;
+
+}
+
+h1{
+
+    color:white;
+
+    font-size:34px;
+
+}
+
+.subtitle{
+
+    color:#b5c2c8;
+
+    margin:10px 0 30px;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#202c33;
+
+    color:white;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+input:focus{
+
+    border:2px solid #25d366;
+
+}
+
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box button{
+
+    position:absolute;
+
+    right:10px;
+
+    top:8px;
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+#loginBtn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#25d366;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#loginBtn:hover{
+
+    background:#1fb857;
+
+    transform:translateY(-2px);
+
+}
+
+.signup-text{
+
+    color:#d1d7db;
+
+    margin-top:22px;
+
+}
+
+.signup-text a{
+
+    color:#25d366;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+.signup-text a:hover{
+
+    text-decoration:underline;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+@media(max-width:500px){
+
+.login-card{
+
+padding:30px 22px;
+
+}
+
+h1{
+
+font-size:28px;
+
+}
+
+}

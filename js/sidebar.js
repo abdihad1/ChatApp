@@ -5,9 +5,10 @@ import { setCurrentChat } from "./currentChat.js";
 import {
     collection,
     getDocs,
-    onSnapshot
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
+    onSnapshot,
+    getDoc,
+    doc
+}
 import { db } from "./firebase.js";
 
 const userList = document.getElementById("userList");
@@ -107,24 +108,41 @@ if (date.toDateString() === now.toDateString()) {
 
 function loadUsers() {
 
-    onSnapshot(collection(db, "users"), (snapshot) => {
+    const currentUid = auth.currentUser.uid;
+
+    onSnapshot(collection(db, "chats"), async (snapshot) => {
 
         allUsers = [];
 
-        snapshot.forEach((doc) => {
+        userList.innerHTML = "";
+
+        for (const chat of snapshot.docs) {
+
+            const data = chat.data();
+
+            if (!data.users) continue;
+
+            if (!data.users.includes(currentUid)) continue;
+
+            const otherUid =
+                data.users.find(uid => uid !== currentUid);
+
+            const userSnap = await getDoc(
+                doc(db,"users",otherUid)
+            );
+
+            if(!userSnap.exists()) continue;
 
             allUsers.push({
-                uid: doc.id,
-                ...doc.data()
+                uid:otherUid,
+                ...userSnap.data()
             });
 
-        });
+        }
 
         displayUsers(allUsers);
 
     });
-
-    displayGroups();
 
 }
 
