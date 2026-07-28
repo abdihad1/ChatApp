@@ -217,3 +217,15 @@ document
     window.location.href = "settings.html";
 
 };
+
+const settingsBtn = document.getElementById("settingsBtn");
+
+if(settingsBtn){
+
+    settingsBtn.onclick = () => {
+
+        window.location.href = "settings.html";
+
+    };
+
+}
