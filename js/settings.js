@@ -8,6 +8,10 @@ import {
     updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
+import {
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 const profilePreview = document.getElementById("profilePreview");
@@ -99,6 +103,11 @@ saveProfile.textContent = "Saving...";
             ...(photoUrl && { photo: photoUrl })
         }
     );
+
+await updateProfile(user, {
+    displayName: displayName.value.trim(),
+    photoURL: photoUrl || profilePreview.src
+});
 
     showToast("✅ Profile updated!");
 

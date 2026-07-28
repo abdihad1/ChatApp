@@ -247,11 +247,18 @@ sendBtn.onclick = async () => {
 
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 
+const userSnap = await getDoc(
+    doc(db, "users", auth.currentUser.uid)
+);
+
+const currentUser = userSnap.data();
+
 const messageRef = await addDoc(
     collection(db, "chats", chatId, "messages"),
     {
         uid: auth.currentUser.uid,
-        name: auth.currentUser.displayName || auth.currentUser.email,
+        name: currentUser.name,
+        photo: currentUser.photo || "",
         text: text,
         replyTo: replyingTo,
         createdAt: serverTimestamp(),
