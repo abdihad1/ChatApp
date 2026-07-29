@@ -1,4 +1,9 @@
 import { auth, db } from "./firebase.js";
+
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
 import { getAllUsers } from "./users.js";
 import { setCurrentChat } from "./currentChat.js";
 
@@ -166,7 +171,15 @@ searchInput.addEventListener("input", () => {
 
 });
 
-loadUsers();
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) return;
+
+    loadUsers();
+
+    displayGroups();
+
+});
 
 async function displayGroups() {
 
@@ -177,7 +190,9 @@ async function displayGroups() {
         const group = doc.data();
 
         // Show only groups where current user is a member
-        if (!group.members[auth.currentUser.uid]) return;
+        if (!auth.currentUser) return;
+
+if (!group.members[auth.currentUser.uid]) return;
 
         const div = document.createElement("div");
 
@@ -213,14 +228,6 @@ document.getElementById("chatStatus").textContent =
     });
 
 }
-
-document
-.getElementById("settingsBtn")
-.onclick = () => {
-
-    window.location.href = "settings.html";
-
-};
 
 const settingsBtn = document.getElementById("settingsBtn");
 
