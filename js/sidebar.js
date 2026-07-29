@@ -4,7 +4,6 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-import { getAllUsers } from "./users.js";
 import { setCurrentChat } from "./currentChat.js";
 
 import {
@@ -33,15 +32,73 @@ function displayUsers(users) {
         div.className = "user";
 
         div.innerHTML = `
-            <img src="${user.photo || "https://ui-avatars.com/api/?name=User&background=00a884&color=fff"}"
-     width="40"
-     height="40"
-     style="border-radius:50%;">
-            <div>
-    <strong>${user.name || "No Name"}</strong><br>
-    <small>${user.email}</small>
+
+<img src="${
+user.photo ||
+"https://ui-avatars.com/api/?name=User&background=00a884&color=fff"
+}">
+
+<div style="flex:1">
+
+<strong>
+${user.name || "No Name"}
+</strong>
+
+<br>
+
+<small class="last-message">
+${user.lastMessage || user.email}
+</small>
+
 </div>
-        `;
+
+
+<div>
+
+<div style="font-size:12px;color:#667781;text-align:right">
+
+${
+user.lastMessageTime
+?
+new Date(
+user.lastMessageTime.seconds * 1000
+).toLocaleTimeString([],{
+hour:"2-digit",
+minute:"2-digit"
+})
+:
+""
+}
+
+</div>
+
+
+${
+user.unread > 0
+?
+`
+<div class="unread-badge">
+${user.unread}
+</div>
+`
+:
+""
+}
+
+
+${
+user.online
+?
+`
+<span class="online-dot"></span>
+`
+:
+""
+}
+
+</div>
+
+`;
 
         div.onclick = () => {
 
@@ -127,6 +184,18 @@ function loadUsers() {
 
         for (const chat of snapshot.docs) {
 
+        allUsers.push({
+        uid: otherUid,
+        ...userSnap.data(),
+        lastMessage:data.lastMessage || "",
+        lastMessageTime:data.lastMessageTime,
+        unread:data.unread || 0
+    });
+
+}
+
+displayUsers(allUsers);
+
             const data = chat.data();
 
             if (!data.users) continue;
@@ -141,13 +210,6 @@ function loadUsers() {
             );
 
             if(!userSnap.exists()) continue;
-
-            allUsers.push({
-                uid:otherUid,
-                ...userSnap.data()
-            });
-
-        }
 
         displayUsers(allUsers);
 

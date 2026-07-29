@@ -15,6 +15,11 @@ import {
     startRecording,
     stopRecording
 } from "./voice.js";
+
+import {
+    getChatId
+} from "./chat/chatUtils.js";
+
 import {
     openMessageMenu,
     closeMessageMenu,
@@ -117,11 +122,6 @@ let unsubscribe = null;
 let replyingTo = null;
 let selectedMessageId = null;
 let selectedMessageText = null;
-
-// Create the same chat ID for both users
-function getChatId(uid1, uid2) {
-    return [uid1, uid2].sort().join("_");
-}
 
 // Open a private chat
 function openChat() {
