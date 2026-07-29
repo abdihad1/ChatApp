@@ -169,33 +169,68 @@ if (date.toDateString() === now.toDateString()) {
 
 function loadUsers() {
 
-    if (!auth.currentUser) {
-        console.log("Waiting for authentication...");
-        return;
-    }
+onSnapshot(
+collection(db,"chats"),
+async(snapshot)=>{
 
-    const currentUid = auth.currentUser.uid;
+allUsers=[];
 
-    onSnapshot(collection(db, "chats"), async (snapshot) => {
+for(const chat of snapshot.docs){
 
-        allUsers = [];
+const data = chat.data();
 
-        userList.innerHTML = "";
 
-        for (const chat of snapshot.docs) {
+if(!data.users) continue;
 
-        allUsers.push({
-        uid: otherUid,
-        ...userSnap.data(),
-        lastMessage:data.lastMessage || "",
-        lastMessageTime:data.lastMessageTime,
-        unread:data.unread || 0
-    });
+
+if(!data.users.includes(auth.currentUser.uid))
+continue;
+
+
+
+const otherUid =
+data.users.find(
+uid => uid !== auth.currentUser.uid
+);
+
+
+const userSnap =
+await getDoc(
+doc(db,"users",otherUid)
+);
+
+
+if(!userSnap.exists())
+continue;
+
+
+allUsers.push({
+
+uid:otherUid,
+
+...userSnap.data(),
+
+lastMessage:
+data.lastMessage || "Start chatting",
+
+lastMessageTime:
+data.lastMessageTime,
+
+unread:
+data.unread || 0
+
+});
+
 
 }
 
+
 displayUsers(allUsers);
 
+
+});
+
+}
             const data = chat.data();
 
             if (!data.users) continue;
