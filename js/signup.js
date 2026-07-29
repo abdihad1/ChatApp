@@ -11,7 +11,7 @@ import {
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-document.getElementById("signupBtn").onclick = async () => {
+document.getElementById("createAccountBtn").onclick = async () => {
 
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();

@@ -52,6 +52,10 @@ loginBtn.onclick = async () => {
 
 };
 
-document.getElementById("createAccountBtn").onclick = () => {
-    window.location.href = "signup.html";
-};
+const createAccountBtn = document.getElementById("createAccountBtn");
+
+if (createAccountBtn) {
+    createAccountBtn.onclick = () => {
+        window.location.href = "signup.html";
+    };
+}
