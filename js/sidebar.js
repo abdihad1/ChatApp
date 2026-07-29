@@ -231,6 +231,7 @@ displayUsers(allUsers);
 });
 
 }
+
             const data = chat.data();
 
             if (!data.users) continue;
