@@ -232,27 +232,6 @@ displayUsers(allUsers);
 
 }
 
-            const data = chat.data();
-
-            if (!data.users) continue;
-
-            if (!data.users.includes(currentUid)) continue;
-
-            const otherUid =
-                data.users.find(uid => uid !== currentUid);
-
-            const userSnap = await getDoc(
-                doc(db,"users",otherUid)
-            );
-
-            if(!userSnap.exists()) continue;
-
-        displayUsers(allUsers);
-
-    });
-
-}
-
 searchInput.addEventListener("input", () => {
 
     const text = searchInput.value.toLowerCase();
