@@ -95,6 +95,11 @@ user.unread>0
 
         div.onclick = () => {
 
+const welcome = document.getElementById("welcomeScreen");
+if (welcome) {
+    welcome.style.display = "none";
+}
+
             setCurrentChat(user);
 
           if (window.innerWidth <= 768) {
