@@ -202,9 +202,6 @@ const div = createMessageElement({
     currentUserId: auth.currentUser.uid
 });
 
-            div.style.padding = "8px";
-            div.style.margin = "5px";
-
             messagesDiv.appendChild(div);
 
 
