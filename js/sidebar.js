@@ -33,29 +33,26 @@ function displayUsers(users) {
 
         div.innerHTML = `
 
+<div class="avatar">
+
 <img src="${
 user.photo ||
 "https://ui-avatars.com/api/?name=User&background=00a884&color=fff"
 }">
 
-<div style="flex:1">
-
-<strong>
-${user.name || "No Name"}
-</strong>
-
-<br>
-
-<small class="last-message">
-${user.lastMessage || user.email}
-</small>
+${user.online ? `<span class="online"></span>` : ""}
 
 </div>
 
+<div class="info">
 
-<div>
+<div class="chat-top">
 
-<div style="font-size:12px;color:#667781;text-align:right">
+<span class="name">
+${user.name || "No Name"}
+</span>
+
+<span class="time">
 
 ${
 user.lastMessageTime
@@ -70,31 +67,27 @@ minute:"2-digit"
 ""
 }
 
+</span>
+
 </div>
 
+<div class="chat-bottom">
+
+<span class="last">
+
+${user.lastMessage || "Start chatting"}
+
+</span>
 
 ${
-user.unread > 0
+user.unread>0
 ?
-`
-<div class="unread-badge">
-${user.unread}
-</div>
-`
+`<span class="unread">${user.unread}</span>`
 :
 ""
 }
 
-
-${
-user.online
-?
-`
-<span class="online-dot"></span>
-`
-:
-""
-}
+</div>
 
 </div>
 
