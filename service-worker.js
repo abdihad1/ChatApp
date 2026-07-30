@@ -1,4 +1,4 @@
-const CACHE_NAME = "chativo-v5";
+const CACHE_NAME = "chativo-v6";
 
 const FILES_TO_CACHE = [
     "/",
@@ -6,6 +6,7 @@ const FILES_TO_CACHE = [
     "/login.html",
     "/signup.html",
     "/css/style.css",
+    "/css/modern.css",
     "/manifest.json"
 ];
 
