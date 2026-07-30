@@ -336,3 +336,42 @@ body{
         transform:translateY(0) scale(1);
     }
 }
+
+.login-box,
+.signup-card{
+    width:400px;
+    max-width:92%;
+    background:#fff;
+    padding:40px;
+    border-radius:22px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.password-box{
+    position:relative;
+    width:100%;
+    margin-bottom:15px;
+}
+
+.password-box input{
+    width:100%;
+    padding:15px;
+    padding-right:55px;
+}
+
+.password-box button{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    width:36px;
+    height:36px;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    font-size:20px;
+}
