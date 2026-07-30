@@ -1,0 +1,247 @@
+/* =====================================
+   CHATIVO AUTH UI (Glassmorphism)
+===================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+    --primary:#25D366;
+    --primary-dark:#128C7E;
+    --glass:rgba(255,255,255,.12);
+    --glass-border:rgba(255,255,255,.18);
+    --text:#ffffff;
+    --muted:#d8d8d8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    position:relative;
+}
+
+/* Animated background */
+
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    z-index:-1;
+}
+
+body::before{
+    width:320px;
+    height:320px;
+    background:#25D366;
+    top:-100px;
+    left:-80px;
+    opacity:.35;
+}
+
+body::after{
+    width:280px;
+    height:280px;
+    background:#00bcd4;
+    bottom:-80px;
+    right:-60px;
+    opacity:.30;
+}
+
+/* Floating background */
+
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.08),transparent 25%),
+    radial-gradient(circle at 80% 70%,rgba(255,255,255,.08),transparent 25%);
+    z-index:-2;
+}
+
+/* Login & Signup Card */
+
+.login-card,
+.signup-card,
+.login-box{
+    width:420px;
+    max-width:92%;
+    padding:40px;
+    border-radius:24px;
+    background:var(--glass);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--glass-border);
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    animation:fadeUp .6s ease;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    margin:auto;
+    margin-bottom:18px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:40px;
+    box-shadow:0 10px 25px rgba(37,211,102,.35);
+}
+
+h1{
+    color:#fff;
+    text-align:center;
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+.subtitle{
+    color:var(--muted);
+    text-align:center;
+    margin-bottom:28px;
+    font-size:15px;
+}
+
+/* Inputs */
+
+input{
+    width:100%;
+    height:52px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    padding:0 18px;
+    margin-bottom:16px;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    font-size:15px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.25s;
+}
+
+input::placeholder{
+    color:#ddd;
+}
+
+input:focus{
+    border-color:#25D366;
+    background:rgba(255,255,255,.16);
+    box-shadow:0 0 0 3px rgba(37,211,102,.18);
+}
+
+/* Password */
+
+.password-box{
+    position:relative;
+    margin-bottom:16px;
+}
+
+.password-box input{
+    margin-bottom:0;
+    padding-right:60px;
+}
+
+.password-box button{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    font-size:20px;
+}
+
+/* Button */
+
+button{
+    width:100%;
+    height:54px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(37,211,102,.35);
+}
+
+/* Footer links */
+
+.signup-text,
+.login-text{
+    margin-top:24px;
+    text-align:center;
+    color:#ddd;
+}
+
+.signup-text a,
+.login-text a{
+    color:#25D366;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.signup-text a:hover,
+.login-text a:hover{
+    text-decoration:underline;
+}
+
+/* Animation */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media (max-width:480px){
+
+    .login-card,
+    .signup-card,
+    .login-box{
+        padding:28px 22px;
+        border-radius:20px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .logo{
+        width:70px;
+        height:70px;
+        font-size:34px;
+    }
+}
