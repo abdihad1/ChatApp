@@ -18,18 +18,13 @@ export function createMessageElement(data) {
     const tick = data.read ? "✓✓" : "✓";
 
     div.innerHTML = `
-        <b>${data.name}</b><br>
+        ${data.type === "group" ? `<b class="sender-name">${data.name}</b>` : ""}
 
         ${data.replyTo ? `
-            <div style="
-                border-left:3px solid #25D366;
-                padding-left:8px;
-                margin:5px 0;
-                color:gray;
-                font-size:14px;">
-                ↩ ${data.replyTo}
-            </div>
-        ` : ""}
+    <div class="reply-box">
+        ↩ ${data.replyTo}
+    </div>
+` : ""}
 
 ${
     data.image
@@ -52,12 +47,12 @@ ${
 }
 
         ${data.reaction ? `
-            <div style="margin-top:5px;font-size:20px;">
-                ${data.reaction}
-            </div>
-        ` : ""}
+    <div class="message-reaction">
+        ${data.reaction}
+    </div>
+` : ""}
 
-        ${data.edited ? "<small>(edited)</small>" : ""}
+        ${data.edited ? '<small class="edited">(edited)</small>' : ""}
         <br>
 
         <small class="message-time">

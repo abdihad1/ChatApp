@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="css/modern.css">
 
      <link rel="manifest" href="/manifest.json">
-     <meta name="theme-color" content="#00a884">   
+     <meta name="theme-color" content="#00a884"> 
+
+     <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">  
 
 </head>
 <body>
@@ -40,11 +43,17 @@
 
         <div class="header-icons">
 
-            <button id="themeBtn" title="Theme">🌙</button>
+            <button id="themeBtn" title="Theme">
+    <i class="fa-solid fa-moon"></i>
+</button>
 
-            <button id="settingsBtn" title="Settings">⚙️</button>
+<button id="settingsBtn" title="Settings">
+    <i class="fa-solid fa-gear"></i>
+</button>
 
-            <button id="logoutBtn" title="Logout">🚪</button>
+<button id="logoutBtn" title="Logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+</button>
 
         </div>
 
@@ -63,8 +72,12 @@
     <div id="userList"></div>
 
     <button id="newChatBtn">
-        ＋ New Chat
-    </button>
+
+<i class="fa-solid fa-plus"></i>
+
+<span>New Chat</span>
+
+</button>
 
 <div id="newChatModal" class="modal">
     <div class="modal-content">
@@ -93,11 +106,11 @@
 
     <div class="chat-header-left">
 
-        <button id="backBtn">←</button>
+       <i class="fa-solid fa-arrow-left"></i>
 
         <img id="chatPhoto" src="" alt="Profile">
 
-        <div>
+        <div class="chat-info">
 
             <h2 id="chatName">Select a Chat</h2>
 
@@ -117,35 +130,47 @@
             placeholder="Search..."
         >
 
-        <button id="callBtn" title="Voice Call">📞</button>
+        <button id="callBtn">
+    <i class="fa-solid fa-phone"></i>
+</button>
 
-        <button id="videoCallBtn" title="Video Call">🎥</button>
+        <button id="videoCallBtn">
+    <i class="fa-solid fa-video"></i>
+</button>
 
-        <button id="moreBtn" title="More">⋮</button>
+        <button id="moreBtn">
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+</button>
 
     </div>
 
 </div>
 
-       <div id="messages">
+<div id="welcomeScreen" class="welcome-screen">
 
-<div id="welcomeScreen">
+    <div class="welcome-content">
 
-<div class="welcome-icon">💬</div>
+<i class="fa-solid fa-comments"></i>
 
-<h1>Welcome to Chativo</h1>
+        <h1>Welcome to Chativo</h1>
 
-<p>
-Send and receive messages securely with your friends and groups.
-</p>
+        <hr>
 
-<div class="welcome-line"></div>
+        <p>
+            Select a conversation from the sidebar to start chatting
+            securely with your friends.
+        </p>
 
-<small>🔒 End-to-end encrypted</small>
+        <div class="welcome-tip">
+            🔒 Your personal messages are end-to-end encrypted.
+        </div>
+
+    </div>
 
 </div>
 
-</div>
+<div id="messages"></div>
+
 
         <div id="emojiPicker" class="emoji-picker">
 
@@ -171,9 +196,13 @@ Send and receive messages securely with your friends and groups.
 
          <div class="chat-input">
 
-    <button id="emojiBtn" class="icon-btn" title="Emoji">😊</button>
+    <button id="emojiBtn">
+    <i class="fa-regular fa-face-smile"></i>
+</button>
 
-    <button id="imageBtn" class="icon-btn" title="Image">🖼️</button>
+    <button id="imageBtn">
+    <i class="fa-regular fa-image"></i>
+</button>
 
     <input
         type="file"
@@ -189,11 +218,13 @@ Send and receive messages securely with your friends and groups.
         autocomplete="off"
     >
 
-    <button id="voiceBtn" class="icon-btn" title="Voice">🎤</button>
+    <button id="voiceBtn">
+    <i class="fa-solid fa-microphone"></i>
+</button>
 
-    <button id="sendBtn" title="Send">
-        ➤
-    </button>
+    <button id="sendBtn">
+    <i class="fa-solid fa-paper-plane"></i>
+</button>
 
 </div>
 
@@ -221,13 +252,11 @@ Send and receive messages securely with your friends and groups.
 
         <div class="call-buttons">
 
-            <button id="acceptCallBtn">
-                ✅ Accept
-            </button>
+           <i class="fa-solid fa-phone"></i>
+           Accept
 
-            <button id="rejectCallBtn">
-                ❌ Reject
-            </button>
+            <i class="fa-solid fa-phone-slash"></i>
+            Reject
 
         </div>
 
@@ -235,18 +264,7 @@ Send and receive messages securely with your friends and groups.
 
 </div>
 
-    <div id="callScreen" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-color:white;
-z-index:9999;
-text-align:center;
-">
+    <div id="callScreen">
 
     <h1 id="callTitle">Calling...</h1>
 
@@ -254,8 +272,8 @@ text-align:center;
         id="localVideo"
         autoplay
         muted
-        playsinline
-        style="width:220px;border-radius:12px;">
+        playsinline>
+        
     </video>
 
     <video
@@ -267,23 +285,53 @@ text-align:center;
 
     <br><br>
 
-    <button id="muteBtn">🎤 Mute</button>
+    <div class="call-controls">
 
-    <button id="cameraBtn">📷 Camera</button>
+    <button id="muteBtn">
+        <i class="fa-solid fa-microphone"></i>
+        Mute
+    </button>
 
-    <button id="endCallBtn">❌ End Call</button>
+    <button id="cameraBtn">
+        <i class="fa-solid fa-video"></i>
+        Camera
+    </button>
+
+    <button id="endCallBtn">
+        <i class="fa-solid fa-phone-slash"></i>
+        End Call
+    </button>
 
 </div>
-
    
 <script type="module" src="js/theme.js"></script>
 
 <div id="messageMenu">
-    <button id="editMsg">✏️ Edit</button>
-    <button id="replyMsg">↩ Reply</button>
-    <button id="reactMsg">😊 React</button>
-    <button id="copyMsg">📋 Copy</button>
-    <button id="deleteMsg">🗑 Delete</button>
+   <button id="editMsg">
+    <i class="fa-solid fa-pen"></i>
+    Edit
+</button>
+
+<button id="replyMsg">
+    <i class="fa-solid fa-reply"></i>
+    Reply
+</button>
+
+<button id="reactMsg">
+    <i class="fa-regular fa-face-smile"></i>
+    React
+</button>
+
+<button id="copyMsg">
+    <i class="fa-regular fa-copy"></i>
+    Copy
+</button>
+
+<button id="deleteMsg">
+    <i class="fa-solid fa-trash"></i>
+    Delete
+</button>
+
 </div>
 
 <div id="toast"></div>
