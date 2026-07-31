@@ -1,313 +1,238 @@
-/* =====================================
-   Chativo Modern UI
-   modern.css
-===================================== */
+/* ==========================================
+   Chativo Modern WhatsApp UI
+   Clean Production Style
+========================================== */
 
 
-:root{
-
-    --primary:#00a884;
-    --primary-dark:#008f6f;
-
-    --glass:rgba(255,255,255,.75);
-
-    --blur:blur(15px);
-
-    --card-shadow:
-    0 10px 35px rgba(0,0,0,.12);
-
-    --radius:18px;
-
+:root {
+    --wa-green:#00a884;
+    --wa-dark:#075e54;
+    --wa-light:#d9fdd3;
+    --chat-bg:#efeae2;
+    --panel:#ffffff;
+    --border:#e9edef;
+    --text:#111b21;
+    --muted:#667781;
 }
 
 
+/* ---------- GLOBAL ---------- */
 
-/* GLOBAL MODERN EFFECT */
 
-*{
-    scrollbar-width:thin;
-    scrollbar-color:#aaa transparent;
+* {
+    -webkit-tap-highlight-color: transparent;
 }
 
 
-button{
-
-    transition:.25s ease;
-
+button {
+    cursor:pointer;
+    transition:.2s ease;
 }
 
 
-button:hover{
-
-    transform:translateY(-2px);
-
-}
-
-
-button:active{
-
-    transform:scale(.92);
-
+button:active {
+    transform:scale(.94);
 }
 
 
 
 
 
-/* APP WINDOW */
+/* ---------- APP ---------- */
 
 
-.app{
+.app {
 
-    max-width:1500px;
+    height:100vh;
 
-    margin:auto;
+    width:100%;
 
-    border-radius:25px;
+    display:flex;
 
-    overflow:hidden;
+    background:#d1d7db;
 
-    box-shadow:
+}
 
-    0 30px 80px rgba(0,0,0,.18);
+
+
+/* ---------- SIDEBAR ---------- */
+
+
+.sidebar {
+
+    background:#fff;
+
+    border-right:1px solid var(--border);
+
+}
+
+
+
+.sidebar-header {
+
+
+    background:var(--wa-green);
+
+    color:white;
+
+    height:70px;
+
+}
+
+
+
+.profile-photo {
+
+    width:48px!important;
+
+    height:48px!important;
+
+    object-fit:cover;
 
 }
 
 
 
 
-/* SIDEBAR */
+
+.header-icons button {
 
 
-.sidebar{
+    color:white;
+
+    font-size:18px;
+
+}
 
 
-    backdrop-filter:var(--blur);
+
+.header-icons button:hover {
+
+    opacity:.7;
+
+}
+
+
+
+
+
+/* Search */
+
+
+.search-box {
+
+    background:#f0f2f5;
+
+}
+
+
+
+.search-box input {
+
+    height:42px;
+
+    border-radius:10px!important;
+
+    background:white!important;
+
+}
+
+
+
+
+
+/* User list */
+
+
+#userList {
+
+    padding:8px 0;
+
+}
+
+
+
+#userList > * {
+
+    transition:.15s;
+
+}
+
+
+
+#userList > *:hover {
+
+
+    background:#f5f6f6;
+
+}
+
+
+
+
+/* ---------- CHAT ---------- */
+
+
+.chat {
 
     background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.95),
-        rgba(245,245,245,.85)
-    );
 
+    url("https://i.imgur.com/4Njz9QK.png");
+
+    background-size:400px;
 
 }
 
 
 
-.sidebar-header{
 
 
-    background:
-    linear-gradient(
-        135deg,
-        #00a884,
-        #00695c
-    );
+.chat-header {
 
 
-    padding:18px;
+    background:#f0f2f5;
 
+    border-bottom:1px solid var(--border);
 
 }
 
 
 
-.profile-photo{
+.chat-header-left i {
 
-
-    border:3px solid white;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.25);
-
+    display:none;
 
 }
 
 
 
-.header-icons button{
+#chatPhoto {
 
 
-    width:38px;
+    width:45px!important;
 
-    height:38px;
+    height:45px!important;
 
     border-radius:50%;
 
-    background:
-    rgba(255,255,255,.18);
-
-    backdrop-filter:blur(10px);
-
-
-}
-
-
-
-.header-icons button:hover{
-
-
-    background:white;
-
-    color:#008f6f;
-
-
 }
 
 
 
 
 
-/* SEARCH */
+.chat-info small {
 
-
-.search-box input,
-#newChatSearch{
-
-
-    background:#f1f3f4;
-
-
-    transition:.3s;
-
-
-}
-
-
-.search-box input:focus,
-#newChatSearch:focus{
-
-
-    background:white;
-
-    box-shadow:
-    0 0 0 3px rgba(0,168,132,.2);
-
+    color:var(--muted);
 
 }
 
 
 
+/* Header buttons */
 
 
-/* USER LIST */
-
-
-#userList > div{
-
-
-    margin:8px;
-
-    border-radius:15px;
-
-    transition:.25s;
-
-
-}
-
-
-#userList > div:hover{
-
-
-    background:#e8f8f3;
-
-    transform:translateX(5px);
-
-
-}
-
-
-
-
-
-/* NEW CHAT BUTTON */
-
-
-#newChatBtn{
-
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:50px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #00a884,
-        #00d68f
-    );
-
-
-    box-shadow:
-    0 8px 25px rgba(0,168,132,.35);
-
-
-}
-
-
-
-
-
-/* CHAT WINDOW */
-
-
-.chat{
-
-
-    background:
-
-    radial-gradient(
-        circle at top,
-        #ffffff,
-        #efeae2
-    );
-
-
-}
-
-
-
-
-
-/* CHAT HEADER */
-
-
-.chat-header{
-
-
-    backdrop-filter:blur(15px);
-
-    background:
-    rgba(255,255,255,.75);
-
-
-    border-bottom:
-    1px solid rgba(0,0,0,.08);
-
-
-}
-
-
-
-
-.chat-header-left img{
-
-
-    box-shadow:
-
-    0 5px 20px rgba(0,0,0,.15);
-
-
-}
-
-
-
-
-.chat-header-right button{
+.chat-header-right button {
 
 
     width:40px;
@@ -320,38 +245,10 @@ button:active{
 }
 
 
-.chat-header-right button:hover{
+.chat-header-right button:hover {
 
 
-    background:#e7f7f2;
-
-    color:var(--primary);
-
-
-}
-
-
-
-
-
-/* WELCOME SCREEN */
-
-
-.welcome-content{
-
-
-    animation:
-    fadeUp .6s ease;
-
-
-}
-
-
-.welcome-content i{
-
-
-    animation:
-    float 3s infinite;
+    background:#d8dbdf;
 
 
 }
@@ -359,227 +256,47 @@ button:active{
 
 
 
-@keyframes float{
+/* ---------- WELCOME ---------- */
 
 
-    50%{
-
-        transform:translateY(-12px);
-
-    }
-
-}
-
-
-
-@keyframes fadeUp{
-
-
-from{
-
-opacity:0;
-
-transform:translateY(30px);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-
-}
-
-
-
-
-
-/* MESSAGE AREA */
-
-
-#messages{
-
-
-    background-image:
-
-    radial-gradient(
-    rgba(0,0,0,.05) 1px,
-    transparent 1px
-    );
-
-
-    background-size:25px 25px;
-
-
-}
-
-
-
-
-
-/* CHAT BUBBLES */
-
-
-.message{
-
-
-    animation:
-
-    messageIn .25s ease;
-
-
-    border-radius:
-
-    18px 18px 18px 4px;
-
-
-    box-shadow:
-
-    0 4px 15px rgba(0,0,0,.08);
-
-
-}
-
-
-
-
-.message.sent{
-
-
-    border-radius:
-
-    18px 18px 4px 18px;
+.welcome-screen {
 
 
     background:
 
-    linear-gradient(
-    135deg,
-    #d9fdd3,
-    #bff5c4
-    );
+    rgba(239,234,226,.8);
+
+}
+
+
+
+.welcome-content {
+
+
+    max-width:450px;
+
+    animation:fade .3s ease;
 
 
 }
 
 
 
+.welcome-content i {
 
-@keyframes messageIn{
-
-
-from{
-
-opacity:0;
-
-transform:scale(.9);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-
-}
-
-
-
-
-
-
-/* INPUT BAR */
-
-
-.chat-input{
-
-
-    margin:10px;
-
-    border-radius:25px;
-
-    background:
-
-    rgba(255,255,255,.8);
-
-
-    backdrop-filter:blur(15px);
-
-
-    box-shadow:
-
-    0 5px 30px rgba(0,0,0,.1);
-
-
-}
-
-
-
-
-.chat-input button{
-
-
-    background:#eef8f5;
 
     color:#00a884;
 
-
-}
-
-
-
-#sendBtn{
-
-
-    background:#00a884;
-
-    color:white;
-
-
-    box-shadow:
-
-    0 8px 20px rgba(0,168,132,.4);
-
+    font-size:80px;
 
 }
 
 
 
 
+@keyframes fade {
 
-/* EMOJI PICKER */
-
-
-.emoji-picker{
-
-
-    border-radius:20px;
-
-    backdrop-filter:blur(20px);
-
-    animation:
-
-    popup .25s ease;
-
-
-}
-
-
-
-@keyframes popup{
-
-
-from{
+from {
 
 opacity:0;
 
@@ -587,13 +304,73 @@ transform:translateY(20px);
 
 }
 
-
-to{
+to {
 
 opacity:1;
 
 }
 
+}
+
+
+
+
+
+/* ---------- MESSAGES ---------- */
+
+
+#messages {
+
+
+    padding:20px;
+
+}
+
+
+
+.message {
+
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    background:white;
+
+    margin:5px 0;
+
+    max-width:70%;
+
+    box-shadow:0 1px 1px #ddd;
+
+    animation:message .15s;
+
+
+}
+
+
+
+.message.sent {
+
+
+    margin-left:auto;
+
+    background:var(--wa-light);
+
+
+}
+
+
+
+@keyframes message {
+
+from {
+
+transform:scale(.95);
+
+opacity:0;
+
+}
 
 }
 
@@ -601,30 +378,42 @@ opacity:1;
 
 
 
-
-/* MODALS */
-
-
-.modal-content,
-.call-box{
+/* ---------- INPUT ---------- */
 
 
-    border-radius:25px;
+.chat-input {
 
 
-    background:
+    background:#f0f2f5;
 
-    rgba(255,255,255,.9);
+    gap:10px;
 
-
-    backdrop-filter:
-
-    blur(20px);
+}
 
 
-    animation:
 
-    popup .3s ease;
+.chat-input button {
+
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+
+}
+
+
+
+.chat-input input {
+
+
+    height:45px;
+
+    border-radius:25px!important;
+
+    padding-left:20px!important;
 
 
 }
@@ -632,113 +421,135 @@ opacity:1;
 
 
 
+#sendBtn {
 
 
-/* MESSAGE MENU */
+    background:#00a884;
 
-
-#messageMenu{
-
-
-    border-radius:18px;
-
-    padding:8px;
-
-    backdrop-filter:blur(20px);
+    color:white;
 
 }
 
 
 
-#messageMenu button{
+
+
+/* ---------- EMOJI ---------- */
+
+
+.emoji-picker {
+
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 30px #0003;
+
+
+}
+
+
+.emoji-picker span:hover {
+
+
+    background:#eee;
+
+    border-radius:8px;
+
+}
+
+
+
+
+
+/* ---------- MODALS ---------- */
+
+
+.modal {
+
+
+    backdrop-filter:blur(5px);
+
+}
+
+
+
+.modal-content {
+
+
+    border-radius:18px!important;
+
+}
+
+
+
+.modal-actions button {
+
+
+    border-radius:20px!important;
+
+}
+
+
+
+
+
+/* ---------- MESSAGE MENU ---------- */
+
+
+#messageMenu {
 
 
     border-radius:12px;
 
+    overflow:hidden;
 
-}
-
-
-#messageMenu button:hover{
-
-
-    background:#e9f8f3;
+    box-shadow:0 5px 30px #0003;
 
 
 }
 
 
 
-
-/* CALL SCREEN */
-
-
-#callScreen{
+#messageMenu button {
 
 
-    background:
-
-    radial-gradient(
-    circle,
-    #1b1b1b,
-    #000
-    );
-
+    padding:12px 15px;
 
 }
 
 
 
-#localVideo,
-#remoteVideo{
+#messageMenu button:hover {
 
 
-    box-shadow:
-
-    0 20px 60px rgba(0,0,0,.5);
-
+    background:#f0f2f5;
 
 }
 
 
 
 
-/* DARK MODE */
+
+/* ---------- CALL UI ---------- */
 
 
-.dark .sidebar,
-.dark .chat-header,
-.dark .chat-input{
+#callScreen {
 
 
-    background:
-
-    rgba(25,35,40,.85);
-
-
-    color:white;
-
+    background:#111;
 
 }
 
 
 
-.dark .message{
+.call-controls button {
 
 
-    background:#202c33;
+    border-radius:50px;
 
-    color:white;
-
-
-}
-
-
-
-.dark .message.sent{
-
-
-    background:#005c4b;
+    padding:12px 20px;
 
 
 }
@@ -747,90 +558,72 @@ opacity:1;
 
 
 
-/* =====================
- MOBILE RESPONSIVE
-===================== */
+/* ===================================
+   MOBILE WHATSAPP STYLE
+=================================== */
 
 
 @media(max-width:768px){
 
 
-.app{
+body {
 
-    border-radius:0;
+    overflow:hidden;
+
+}
+
+
+.app {
+
+    height:100vh;
 
 }
 
 
 
-.sidebar{
+.sidebar {
+
 
     width:100%;
 
-}
-
-
-
-.chat{
-
-    width:100%;
+    height:100vh;
 
 }
 
 
 
-.chat-header{
+.chat {
 
 
-    height:65px;
+    position:fixed;
 
+    inset:0;
 
-}
-
-
-
-.chat-header-right{
-
-
-    gap:5px;
-
+    z-index:10;
 
 }
 
 
 
-.chat-header-right button{
+.chat-header-left i {
 
 
-    width:35px;
-
-    height:35px;
-
+    display:block;
 
 }
 
 
 
-#messages{
+.chat-header-right input {
 
 
-    padding:12px;
-
-
-}
-
-
-
-.chat-input{
-
-
-    margin:6px;
+    display:none;
 
 }
 
 
 
-.message{
+.message {
 
 
     max-width:85%;
@@ -840,27 +633,18 @@ opacity:1;
 
 
 
-.welcome-content h1{
+.chat-input {
 
 
-    font-size:25px;
-
-
-}
+    padding:8px;
 
 
 }
 
 
 
+.chat-input input {
 
-/* SMALL PHONES */
-
-
-@media(max-width:400px){
-
-
-.profile h3{
 
     font-size:16px;
 
@@ -868,19 +652,88 @@ opacity:1;
 
 
 
-.header-icons{
+.welcome-content h1 {
 
-    gap:5px;
+
+    font-size:25px;
+
+}
+
+
 
 }
 
 
 
-.chat-info h2{
+/* ---------- DARK MODE ---------- */
 
-    font-size:15px;
+
+.dark .sidebar {
+
+    background:#111b21;
 
 }
 
+
+.dark .chat-header,
+.dark .chat-input {
+
+
+    background:#202c33;
+
+}
+
+
+
+.dark .search-box {
+
+
+    background:#202c33;
+
+}
+
+
+
+.dark .search-box input {
+
+
+    background:#2a3942!important;
+
+    color:white;
+
+}
+
+
+
+.dark .message {
+
+
+    background:#202c33;
+
+    color:white;
+
+}
+
+
+.dark .message.sent {
+
+
+    background:#005c4b;
+
+}
+
+
+.dark .welcome-screen {
+
+
+    background:#111b21;
+
+}
+
+
+.dark .welcome-content {
+
+
+    color:#ddd;
 
 }
