@@ -1,4 +1,5 @@
 import { auth, db } from "./firebase.js";
+import { openChat as openMobileChat } from "./mobile.js";
 
 import {
     onAuthStateChanged
@@ -95,6 +96,25 @@ user.unread>0
 
         div.onclick = () => {
 
+ // Remove active from other chats
+    document
+    .querySelectorAll(".user")
+    .forEach(item => {
+        item.classList.remove("active");
+    });
+
+
+    // Add active to selected chat
+    div.classList.add("active");
+
+
+    // Save last opened chat
+    localStorage.setItem(
+        "chativo-last-chat",
+        user.uid
+    );
+
+
 const welcome = document.getElementById("welcomeScreen");
 if (welcome) {
     welcome.style.display = "none";
@@ -102,13 +122,7 @@ if (welcome) {
 
             setCurrentChat(user);
 
-          if (window.innerWidth <= 768) {
-
-    document.querySelector(".sidebar").classList.add("hide");
-
-    document.querySelector(".chat").classList.add("active");
-
-}
+             openMobileChat();
 
             document.getElementById("chatName").textContent =
                 user.name || user.email;
@@ -224,7 +238,7 @@ data.unread || 0
 
 
 displayUsers(allUsers);
-
+restoreLastChat();
 
 });
 
@@ -290,6 +304,8 @@ if (!group.members[auth.currentUser.uid]) return;
     type: "group"
 });
 
+openChat();
+
 document.getElementById("chatName").textContent =
     group.name;
 
@@ -315,3 +331,35 @@ if(settingsBtn){
     };
 
 }
+
+function restoreLastChat(){
+
+
+const last =
+localStorage.getItem(
+"chativo-last-chat"
+);
+
+
+if(!last) return;
+
+
+const saved =
+allUsers.find(
+user=>user.uid===last
+);
+
+
+if(saved){
+
+    setTimeout(()=>{
+
+        setCurrentChat(saved);
+
+    },500);
+
+}
+
+
+}
+

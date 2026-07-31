@@ -1,178 +1,416 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Chativo • Messaging</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/modern.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <link rel="manifest" href="/manifest.json">
-     <meta name="theme-color" content="#00a884"> 
+<title>Chativo • Messaging</title>
 
-     <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">  
+<meta name="theme-color" content="#00a884">
+
+<link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet" href="css/modern.css">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 
 </head>
+
+
 <body>
+
 
 <div class="app">
 
-<div class="sidebar">
 
-    <div class="sidebar-header">
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-        <div class="profile">
 
-            <img
-                id="myPhoto"
-                src="https://ui-avatars.com/api/?name=User&background=25D366&color=fff"
-                class="profile-photo"
-            >
+<aside class="sidebar">
 
-            <div>
 
-                <h3>💬 Chativo</h3>
+<header class="sidebar-header">
 
-                <small>Messages</small>
 
-            </div>
+<div class="profile">
 
-        </div>
 
-        <div class="header-icons">
+<img
+id="myPhoto"
+class="profile-photo"
+src="https://ui-avatars.com/api/?name=User&background=25D366&color=fff"
+alt="Profile">
 
-            <button id="themeBtn" title="Theme">
-    <i class="fa-solid fa-moon"></i>
+
+<div>
+
+<h3>
+💬 Chativo
+</h3>
+
+<small>
+Messages
+</small>
+
+</div>
+
+
+</div>
+
+
+
+<div class="header-icons">
+
+
+<button id="themeBtn"
+aria-label="Theme">
+
+<i class="fa-solid fa-moon"></i>
+
 </button>
 
-<button id="settingsBtn" title="Settings">
-    <i class="fa-solid fa-gear"></i>
+
+
+<button id="settingsBtn"
+aria-label="Settings">
+
+<i class="fa-solid fa-gear"></i>
+
 </button>
 
-<button id="logoutBtn" title="Logout">
-    <i class="fa-solid fa-right-from-bracket"></i>
+
+
+<button id="logoutBtn"
+aria-label="Logout">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
 </button>
 
-        </div>
 
-    </div>
+</div>
 
-    <div class="search-box">
 
-        <input
-            type="text"
-            id="searchUser"
-            placeholder="Search users..."
-        >
+</header>
 
-    </div>
 
-    <div id="userList"></div>
 
-    <button id="newChatBtn">
+
+<!-- Search -->
+
+<div class="search-box">
+
+
+<input
+
+id="searchUser"
+
+type="search"
+
+placeholder="Search chats..."
+
+autocomplete="off"
+
+/>
+
+
+</div>
+
+
+
+
+<!-- Users -->
+
+<div id="userList">
+
+<!-- Firebase users load here -->
+
+</div>
+
+
+
+
+
+<button id="newChatBtn">
+
 
 <i class="fa-solid fa-plus"></i>
 
-<span>New Chat</span>
+
+<span>
+
+New Chat
+
+</span>
+
 
 </button>
+
+
+
+
+</aside>
+
+
+
+
+<!-- =========================
+     NEW CHAT MODAL
+========================= -->
+
 
 <div id="newChatModal" class="modal">
-    <div class="modal-content">
 
-        <h3>New Chat</h3>
 
-        <input
-            type="text"
-            id="newChatSearch"
-            placeholder="Search users..."
-        >
+<div class="modal-content">
 
-        <div id="newChatUsers"></div>
 
-        <div class="modal-actions">
-            <button id="closeNewChat">Close</button>
-        </div>
+<h3>
 
-    </div>
-</div>
+New Chat
 
-</div>
+</h3>
 
-    <div class="chat">
-<div class="chat-header">
 
-    <div class="chat-header-left">
 
-       <i class="fa-solid fa-arrow-left"></i>
+<input
 
-        <img id="chatPhoto" src="" alt="Profile">
+id="newChatSearch"
 
-        <div class="chat-info">
+type="search"
 
-            <h2 id="chatName">Select a Chat</h2>
+placeholder="Search users..."
 
-            <small id="chatStatus">Offline</small>
+>
 
-            <small id="typingStatus"></small>
 
-        </div>
 
-    </div>
-
-    <div class="chat-header-right">
-
-        <input
-            type="text"
-            id="searchMessage"
-            placeholder="Search..."
-        >
-
-        <button id="callBtn">
-    <i class="fa-solid fa-phone"></i>
-</button>
-
-        <button id="videoCallBtn">
-    <i class="fa-solid fa-video"></i>
-</button>
-
-        <button id="moreBtn">
-    <i class="fa-solid fa-ellipsis-vertical"></i>
-</button>
-
-    </div>
+<div id="newChatUsers">
 
 </div>
 
-<div id="welcomeScreen" class="welcome-screen">
 
-    <div class="welcome-content">
+
+<div class="modal-actions">
+
+
+<button id="closeNewChat">
+
+Close
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+     CHAT AREA
+========================= -->
+
+
+<section class="chat">
+
+<!-- =========================
+     CHAT HEADER
+========================= -->
+
+<header class="chat-header">
+
+
+<div class="chat-header-left">
+
+
+<button class="mobile-back"
+id="backBtn"
+aria-label="Back">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+</button>
+
+
+
+<img
+id="chatPhoto"
+src="https://ui-avatars.com/api/?name=User&background=00a884&color=fff"
+alt="Chat profile">
+
+
+
+<div class="chat-info">
+
+
+<h2 id="chatName">
+
+Select a Chat
+
+</h2>
+
+
+<small id="chatStatus">
+
+Offline
+
+</small>
+
+
+<small id="typingStatus">
+
+</small>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="chat-header-right">
+
+
+<input
+
+id="searchMessage"
+
+type="search"
+
+placeholder="Search messages..."
+
+>
+
+
+
+<button id="callBtn"
+aria-label="Voice call">
+
+<i class="fa-solid fa-phone"></i>
+
+</button>
+
+
+
+<button id="videoCallBtn"
+aria-label="Video call">
+
+<i class="fa-solid fa-video"></i>
+
+</button>
+
+
+
+<button id="moreBtn"
+aria-label="More">
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</button>
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+<!-- =========================
+     WELCOME SCREEN
+========================= -->
+
+
+<div id="welcomeScreen"
+class="welcome-screen">
+
+
+<div class="welcome-content">
+
 
 <i class="fa-solid fa-comments"></i>
 
-        <h1>Welcome to Chativo</h1>
 
-        <hr>
+<h1>
 
-        <p>
-            Select a conversation from the sidebar to start chatting
-            securely with your friends.
-        </p>
+Welcome to Chativo
 
-        <div class="welcome-tip">
-            🔒 Your personal messages are end-to-end encrypted.
-        </div>
+</h1>
 
-    </div>
+
+<hr>
+
+
+
+<p>
+
+Select a conversation from the sidebar to start chatting securely with your friends.
+
+</p>
+
+
+
+<div class="welcome-tip">
+
+🔒 Your messages are private and secure.
 
 </div>
 
-<div id="messages"></div>
+
+</div>
 
 
-        <div id="emojiPicker" class="emoji-picker">
+</div>
+
+
+
+
+
+<!-- =========================
+     MESSAGES
+========================= -->
+
+
+<div id="messages">
+
+
+<!-- Messages generated by chat.js -->
+
+
+</div>
+
+
+
+
+
+<!-- =========================
+     EMOJI PICKER
+========================= -->
+
+
+<div id="emojiPicker"
+class="emoji-picker">
+
 
 <span>😀</span>
 <span>😁</span>
@@ -190,163 +428,427 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <span>🎉</span>
 <span>🔥</span>
 
-</div>
-
-      <div id="replyPreview" style="display:none;"></div>
-
-         <div class="chat-input">
-
-    <button id="emojiBtn">
-    <i class="fa-regular fa-face-smile"></i>
-</button>
-
-    <button id="imageBtn">
-    <i class="fa-regular fa-image"></i>
-</button>
-
-    <input
-        type="file"
-        id="imageInput"
-        accept="image/*"
-        hidden
-    >
-
-    <input
-        id="message"
-        type="text"
-        placeholder="Type a message..."
-        autocomplete="off"
-    >
-
-    <button id="voiceBtn">
-    <i class="fa-solid fa-microphone"></i>
-</button>
-
-    <button id="sendBtn">
-    <i class="fa-solid fa-paper-plane"></i>
-</button>
 
 </div>
 
-    </div>
+
+
+
+
+<!-- =========================
+     REPLY PREVIEW
+========================= -->
+
+
+<div id="replyPreview">
 
 </div>
 
-<script type="module" src="js/sidebar.js"></script>
-<script type="module" src="js/chat.js"></script>
-<script type="module" src="js/call.js"></script>
-<script type="module" src="js/incomingCall.js"></script>
-<script type="module" src="js/callUI.js"></script>
-<script type="module" src="js/emoji.js"></script>
 
+
+
+
+<!-- =========================
+     MESSAGE INPUT
+========================= -->
+
+
+<footer class="chat-input">
+
+
+<button id="emojiBtn"
+aria-label="Emoji">
+
+<i class="fa-regular fa-face-smile"></i>
+
+</button>
+
+
+
+
+<button id="imageBtn"
+aria-label="Image">
+
+<i class="fa-regular fa-image"></i>
+
+</button>
+
+
+
+
+<input
+
+type="file"
+
+id="imageInput"
+
+accept="image/*"
+
+hidden
+
+>
+
+
+
+
+<input
+
+id="message"
+
+type="text"
+
+placeholder="Type a message..."
+
+autocomplete="off"
+
+>
+
+
+
+
+<button id="voiceBtn"
+aria-label="Voice">
+
+<i class="fa-solid fa-microphone"></i>
+
+</button>
+
+
+
+<button id="sendBtn"
+aria-label="Send">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
+
+
+
+</footer>
+
+<!-- =========================
+     INCOMING CALL MODAL
+========================= -->
 
 <div id="incomingCallModal" class="call-modal">
 
-    <div class="call-box">
 
-        <h2>Incoming Call</h2>
+<div class="call-box">
 
-        <img id="incomingCallerPhoto" src="">
 
-        <h3 id="incomingCallerName">Unknown User</h3>
+<h2>
 
-        <div class="call-buttons">
+Incoming Call
 
-           <i class="fa-solid fa-phone"></i>
-           Accept
+</h2>
 
-            <i class="fa-solid fa-phone-slash"></i>
-            Reject
 
-        </div>
 
-    </div>
+<img
+
+id="incomingCallerPhoto"
+
+src="https://ui-avatars.com/api/?name=User&background=00a884&color=fff"
+
+alt="Caller">
+
+
+<h3 id="incomingCallerName">
+
+Unknown User
+
+</h3>
+
+
+
+<div class="call-buttons">
+
+
+<button id="acceptCall"
+class="accept-call"
+aria-label="Accept call">
+
+<i class="fa-solid fa-phone"></i>
+
+</button>
+
+
+
+<button id="rejectCall"
+class="reject-call"
+aria-label="Reject call">
+
+<i class="fa-solid fa-phone-slash"></i>
+
+</button>
+
+
+</div>
+
 
 </div>
 
-    <div id="callScreen">
-
-    <h1 id="callTitle">Calling...</h1>
-
-    <video
-        id="localVideo"
-        autoplay
-        muted
-        playsinline>
-        
-    </video>
-
-    <video
-        id="remoteVideo"
-        autoplay
-        playsinline
-        style="width:420px;border-radius:12px;">
-    </video>
-
-    <br><br>
-
-    <div class="call-controls">
-
-    <button id="muteBtn">
-        <i class="fa-solid fa-microphone"></i>
-        Mute
-    </button>
-
-    <button id="cameraBtn">
-        <i class="fa-solid fa-video"></i>
-        Camera
-    </button>
-
-    <button id="endCallBtn">
-        <i class="fa-solid fa-phone-slash"></i>
-        End Call
-    </button>
 
 </div>
-   
-<script type="module" src="js/theme.js"></script>
+
+
+
+
+
+<!-- =========================
+     VIDEO CALL SCREEN
+========================= -->
+
+
+<div id="callScreen">
+
+
+<h1 id="callTitle">
+
+Calling...
+
+</h1>
+
+
+
+<video
+
+id="remoteVideo"
+
+autoplay
+
+playsinline>
+
+</video>
+
+
+
+<video
+
+id="localVideo"
+
+autoplay
+
+muted
+
+playsinline>
+
+</video>
+
+
+
+
+
+<div class="call-controls">
+
+
+<button id="muteBtn">
+
+<i class="fa-solid fa-microphone"></i>
+
+</button>
+
+
+
+<button id="cameraBtn">
+
+<i class="fa-solid fa-video"></i>
+
+</button>
+
+
+
+<button id="endCallBtn">
+
+<i class="fa-solid fa-phone-slash"></i>
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+ MESSAGE CONTEXT MENU
+========================= -->
+
 
 <div id="messageMenu">
-   <button id="editMsg">
-    <i class="fa-solid fa-pen"></i>
-    Edit
+
+
+<button id="editMsg">
+
+<i class="fa-solid fa-pen"></i>
+
+Edit
+
 </button>
+
+
 
 <button id="replyMsg">
-    <i class="fa-solid fa-reply"></i>
-    Reply
+
+<i class="fa-solid fa-reply"></i>
+
+Reply
+
 </button>
+
+
 
 <button id="reactMsg">
-    <i class="fa-regular fa-face-smile"></i>
-    React
+
+<i class="fa-regular fa-face-smile"></i>
+
+React
+
 </button>
+
+
 
 <button id="copyMsg">
-    <i class="fa-regular fa-copy"></i>
-    Copy
+
+<i class="fa-regular fa-copy"></i>
+
+Copy
+
 </button>
+
+
 
 <button id="deleteMsg">
-    <i class="fa-solid fa-trash"></i>
-    Delete
+
+<i class="fa-solid fa-trash"></i>
+
+Delete
+
 </button>
 
+
 </div>
 
-<div id="toast"></div>
 
-<div id="confirmModal" class="modal">
-    <div class="modal-content">
-        <h3>Delete Message?</h3>
-        <p>This action cannot be undone.</p>
 
-        <div class="modal-actions">
-            <button id="cancelDelete">Cancel</button>
-            <button id="confirmDelete">Delete</button>
-        </div>
-    </div>
+
+
+
+
+<!-- =========================
+ DELETE CONFIRM MODAL
+========================= -->
+
+
+<div id="confirmModal"
+class="modal">
+
+
+<div class="modal-content">
+
+
+<h3>
+
+Delete Message?
+
+</h3>
+
+
+
+<p>
+
+This action cannot be undone.
+
+</p>
+
+
+
+<div class="modal-actions">
+
+
+<button id="cancelDelete">
+
+Cancel
+
+</button>
+
+
+
+<button id="confirmDelete">
+
+Delete
+
+</button>
+
+
+
 </div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+ TOAST
+========================= -->
+
+
+<div id="toast">
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+ SCRIPTS
+========================= -->
+
+
+<script type="module" src="js/sidebar.js"></script>
+
+<script type="module" src="js/chat.js"></script>
+
+<script type="module" src="js/call.js"></script>
+
+<script type="module" src="js/incomingCall.js"></script>
+
+<script type="module" src="js/callUI.js"></script>
+
+<script type="module" src="js/emoji.js"></script>
+
+<script type="module" src="js/theme.js"></script>
+
+<script type="module" src="js/mobile.js"></script>
+
+
+
+</section>
+
+
+</div>
+
 
 </body>
+
 </html>

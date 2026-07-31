@@ -156,9 +156,13 @@ onSnapshot(chatRef, (snap) => {
 
         typingStatus.textContent = "typing...";
 
+typingStatus.classList.add("typing-active");
+
     } else {
 
-        typingStatus.textContent = "";
+      typingStatus.textContent = "";
+
+typingStatus.classList.remove("typing-active");
 
     }
 
@@ -202,7 +206,15 @@ const div = createMessageElement({
     currentUserId: auth.currentUser.uid
 });
 
-            messagesDiv.appendChild(div);
+            div.classList.add("message-enter");
+
+messagesDiv.appendChild(div);
+
+setTimeout(()=>{
+
+    div.classList.add("show");
+
+},20);
 
 
 if (data.uid === auth.currentUser.uid) {
@@ -220,7 +232,17 @@ div.addEventListener("contextmenu", (e) => {
 
 }
 
-         messagesDiv.scrollTop = messagesDiv.scrollHeight;
+         setTimeout(()=>{
+
+    messagesDiv.scrollTo({
+
+        top:messagesDiv.scrollHeight,
+
+        behavior:"smooth"
+
+    });
+
+},100);
 
         });
 
@@ -373,11 +395,32 @@ setInterval(() => {
 
 emojiBtn.onclick = () => {
 
-    messageInput.value += "😊";
+const picker =
+document.getElementById("emojiPicker");
 
-    messageInput.focus();
+
+picker.classList.toggle("active");
 
 };
+
+document
+.querySelectorAll("#emojiPicker span")
+.forEach(emoji=>{
+
+
+emoji.onclick=()=>{
+
+
+messageInput.value += emoji.textContent;
+
+
+messageInput.focus();
+
+
+};
+
+
+});
 
 imageBtn.onclick = () => {
     imageInput.click();
