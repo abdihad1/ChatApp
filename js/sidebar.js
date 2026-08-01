@@ -120,6 +120,12 @@ if (welcome) {
     welcome.style.display = "none";
 }
 
+const messages = document.getElementById("messages");
+
+if (messages) {
+    messages.style.display = "flex";
+}
+
             setCurrentChat(user);
 
              openMobileChat();
