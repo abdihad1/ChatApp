@@ -5,8 +5,8 @@ export function createMessageElement(data) {
     const mine = data.uid === data.currentUserId;
 
     div.className = mine
-        ? "message sent"
-        : "message received";
+    ? "message me"
+    : "message other";
 
     const time = data.createdAt
         ? new Date(data.createdAt.seconds * 1000)
@@ -20,21 +20,21 @@ export function createMessageElement(data) {
         ? (data.read ? "✓✓" : "✓")
         : "";
 
-    div.innerHTML = `
+div.innerHTML = `
+
+<div class="message-content">
 
 ${data.type === "group"
 ? `<div class="sender-name">${data.name}</div>`
 : ""}
 
-
 ${data.replyTo
 ? `
 <div class="reply-box">
-    ↩ ${data.replyTo}
+↩ ${data.replyTo}
 </div>
 `
 : ""}
-
 
 ${
 data.image
@@ -49,33 +49,27 @@ alt="Image">
 data.voice
 ?
 `
-<audio
-controls
-class="voice-message">
-
-<source
-src="${data.voice}"
-type="audio/webm">
-
+<audio controls class="voice-message">
+<source src="${data.voice}" type="audio/webm">
 </audio>
 `
 :
-`<p>${data.text || ""}</p>`
+`
+<div class="message-text">
+${data.text || ""}
+</div>
+`
 }
-
 
 ${data.reaction
 ?
 `
 <div class="message-reaction">
-
 ${data.reaction}
-
 </div>
 `
 :
 ""}
-
 
 <div class="message-footer">
 
@@ -86,9 +80,7 @@ ${data.edited
 ""}
 
 <span class="message-time">
-
 ${time}
-
 </span>
 
 ${tick
@@ -99,8 +91,6 @@ ${tick
 
 </div>
 
+</div>
+
 `;
-
-    return div;
-
-}

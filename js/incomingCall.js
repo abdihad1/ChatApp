@@ -29,8 +29,8 @@ import {
 const popup = document.getElementById("incomingCallModal");
 const callerName = document.getElementById("incomingCallerName");
 const callerPhoto = document.getElementById("incomingCallerPhoto");
-const acceptBtn = document.getElementById("acceptCallBtn");
-const rejectBtn = document.getElementById("rejectCallBtn");
+const acceptBtn = document.getElementById("acceptCall");
+const rejectBtn = document.getElementById("rejectCall");
 
 export let currentCallId = null;
 
@@ -60,8 +60,11 @@ auth.onAuthStateChanged((user) => {
 
             currentCallId = change.doc.id;
 
-           callerName.textContent = "Incoming Call";
+           callerName.textContent =
+    call.callerName || "Incoming Call";
+
 callerPhoto.src =
+    call.callerPhoto ||
     "https://ui-avatars.com/api/?name=Caller&background=00a884&color=fff";
 
 popup.style.display = "flex";            
