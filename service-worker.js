@@ -1,4 +1,4 @@
-const CACHE_NAME = "chativo-v11";
+const CACHE_NAME = "chativo-v12";
 
 const FILES_TO_CACHE = [
     "/",
