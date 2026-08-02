@@ -29,8 +29,8 @@ import {
 const popup = document.getElementById("incomingCallModal");
 const callerName = document.getElementById("incomingCallerName");
 const callerPhoto = document.getElementById("incomingCallerPhoto");
-const acceptBtn = document.getElementById("acceptCall");
-const rejectBtn = document.getElementById("rejectCall");
+const acceptBtn = document.getElementById("acceptCallBtn");
+const rejectBtn = document.getElementById("rejectCallBtn");
 
 export let currentCallId = null;
 
