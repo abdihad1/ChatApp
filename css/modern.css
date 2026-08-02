@@ -2414,3 +2414,15 @@ button,
     }
 
 }
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    #welcomeScreen{
+
+        display:none !important;
+
+    }
+
+}
