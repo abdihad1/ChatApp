@@ -29,8 +29,16 @@ import {
 const popup = document.getElementById("incomingCallModal");
 const callerName = document.getElementById("incomingCallerName");
 const callerPhoto = document.getElementById("incomingCallerPhoto");
-const acceptBtn = document.getElementById("acceptCallBtn");
-const rejectBtn = document.getElementById("rejectCallBtn");
+
+
+if (!popup || !callerName || !callerPhoto) {
+
+    console.error("Incoming call HTML elements missing");
+
+}
+
+const acceptBtn = document.getElementById("acceptCall");
+const rejectBtn = document.getElementById("rejectCall");
 
 export let currentCallId = null;
 
@@ -76,6 +84,8 @@ popup.style.display = "flex";
     });
 
 });
+
+if (acceptBtn) {
 
 acceptBtn.onclick = async () => {
 
@@ -160,11 +170,16 @@ await peer.setRemoteDescription(
 
     document.getElementById("callScreen").style.display = "block";
 
-    document.getElementById("callTitle").textContent = "Connecting...";
+document.getElementById("callTitle").textContent = "Connecting...";
 
-    console.log("Answer sent.");
+console.log("Answer sent.");
 
 };
+
+} // closes if(acceptBtn)
+
+
+if (rejectBtn) {
 
 rejectBtn.onclick = async () => {
 
@@ -174,4 +189,8 @@ rejectBtn.onclick = async () => {
 
     document.getElementById("incomingCallModal").style.display = "none";
 
+    console.log("Call rejected.");
+
 };
+
+} // closes if(rejectBtn)

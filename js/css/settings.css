@@ -1,0 +1,597 @@
+/* =====================================
+   CHATIVO V8 SETTINGS UI
+   iOS + WhatsApp + Telegram Inspired
+===================================== */
+
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+    background:#eef2f7;
+
+    color:#111827;
+
+}
+
+
+
+.settings-app{
+
+    min-height:100vh;
+
+}
+
+
+
+.settings-header{
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 20px;
+
+    background:white;
+
+    border-bottom:1px solid #e5e7eb;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:10;
+
+}
+
+
+
+.settings-header h2{
+
+    font-size:20px;
+
+}
+
+
+
+.icon-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#f1f5f9;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#475569;
+
+}
+
+
+
+
+
+.settings-container{
+
+    max-width:650px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+
+
+
+
+
+
+/* Profile */
+
+
+.profile-card{
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #00a884,
+    #06b6d4
+    );
+
+    color:white;
+
+    border-radius:28px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    box-shadow:
+    0 15px 40px #0002;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.profile-image-box{
+
+    position:relative;
+
+    width:120px;
+
+    margin:auto;
+
+}
+
+
+
+.profile-image-box img{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid white;
+
+}
+
+
+
+.camera-btn{
+
+    position:absolute;
+
+    right:0;
+
+    bottom:5px;
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#00a884;
+
+}
+
+
+
+
+
+
+.preview-animation{
+
+    animation:
+    pop .3s ease;
+
+}
+
+
+@keyframes pop{
+
+    from{
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+/* Sections */
+
+
+.settings-section{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 5px 20px #00000010;
+
+}
+
+
+
+.settings-section h3{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+    font-size:17px;
+
+}
+
+
+
+
+
+
+
+.input-card{
+
+    background:#f8fafc;
+
+    border-radius:16px;
+
+    padding:12px 15px;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.input-card label{
+
+    display:block;
+
+    font-size:13px;
+
+    color:#64748b;
+
+}
+
+
+
+.input-card input,
+.input-card textarea,
+.input-card select{
+
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:16px;
+
+    margin-top:5px;
+
+
+}
+
+
+
+.input-card textarea{
+
+    resize:none;
+
+    height:70px;
+
+}
+
+
+
+#bioCount{
+
+    display:block;
+
+    text-align:right;
+
+    font-size:12px;
+
+    color:#64748b;
+
+}
+
+
+
+
+
+
+
+/* Toggle */
+
+
+.setting-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:1px solid #f1f5f9;
+
+}
+
+
+.setting-row:last-child{
+
+    border:none;
+
+}
+
+
+
+.setting-row p{
+
+    margin:5px 0 0;
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+
+
+
+.switch input{
+
+    display:none;
+
+}
+
+
+
+.switch span{
+
+    display:block;
+
+    width:50px;
+
+    height:28px;
+
+    background:#cbd5e1;
+
+    border-radius:30px;
+
+    position:relative;
+
+    transition:.3s;
+
+}
+
+
+
+.switch span:before{
+
+    content:"";
+
+    position:absolute;
+
+    width:22px;
+
+    height:22px;
+
+    background:white;
+
+    border-radius:50%;
+
+    top:3px;
+
+    left:3px;
+
+    transition:.3s;
+
+}
+
+
+
+.switch input:checked + span{
+
+    background:#00a884;
+
+}
+
+
+
+.switch input:checked + span:before{
+
+    transform:translateX(22px);
+
+}
+
+
+
+
+
+
+
+/* Save */
+
+
+.save-btn{
+
+    width:100%;
+
+    height:55px;
+
+    border-radius:18px;
+
+    background:#00a884;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    margin:10px 0 20px;
+
+}
+
+
+
+.save-btn:hover{
+
+    opacity:.9;
+
+}
+
+
+
+
+
+
+
+/* Logout */
+
+
+.logout-btn{
+
+    width:100%;
+
+    height:50px;
+
+    border-radius:15px;
+
+    background:#fee2e2;
+
+    color:#ef4444;
+
+    font-size:16px;
+
+}
+
+
+
+
+
+.app-info{
+
+    text-align:center;
+
+    color:#64748b;
+
+    padding:20px;
+
+}
+
+
+
+
+
+/* Dark mode */
+
+
+body.dark{
+
+    background:#0b141a;
+
+    color:white;
+
+}
+
+
+
+body.dark .settings-header,
+body.dark .settings-section{
+
+    background:#111b21;
+
+    color:white;
+
+}
+
+
+
+body.dark .input-card{
+
+    background:#202c33;
+
+}
+
+
+
+body.dark input,
+body.dark textarea,
+body.dark select{
+
+    color:white;
+
+}
+
+
+
+
+
+
+/* Mobile */
+
+
+@media(max-width:600px){
+
+
+.settings-container{
+
+    padding:12px;
+
+}
+
+
+.profile-card{
+
+    border-radius:22px;
+
+}
+
+
+
+}

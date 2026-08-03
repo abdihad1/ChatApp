@@ -10,63 +10,106 @@ import {
     updateDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-import {
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-
 
 const messaging = getMessaging();
 
 
+
 export async function registerNotifications() {
 
-    onAuthStateChanged(auth, async (user) => {
 
-        if (!user) {
-            console.log("No user logged in yet.");
-            return;
-        }
+    const user = auth.currentUser;
 
 
-        const permission = await Notification.requestPermission();
+    if (!user) {
+
+        console.log("No user logged in.");
+
+        return;
+
+    }
 
 
-        if (permission !== "granted") {
 
-            console.log("Notification permission denied.");
-
-            return;
-
-        }
+    try {
 
 
-        const token = await getToken(messaging, {
-
-            vapidKey: "BGzmph-FX3MzgIZN-S2WzyaXLxr-bZhdOSUjLJSTO9OMn6WxUQjm-_YsJkcdNStMWgOF2N4cVShw4KJwYbdFUTY"
-
-        });
+        const permission =
+        await Notification.requestPermission();
 
 
-        if (!token) {
 
-            console.log("No FCM token.");
+        if(permission !== "granted") {
+
+            console.log(
+            "Notification permission denied"
+            );
 
             return;
 
         }
 
 
-        console.log("FCM Token:", token);
 
-
-        await updateDoc(
-            doc(db, "users", user.uid),
+        const token = await getToken(
+            messaging,
             {
-                fcmToken: token
+
+            vapidKey:
+            "BGzmph-FX3MzgIZN-S2WzyaXLxr-bZhdOSUjLJSTO9OMn6WxUQjm-_YsJkcdNStMWgOF2N4cVShw4KJwYbdFUTY"
+
             }
         );
 
 
-    });
+
+        if(!token){
+
+            console.log(
+            "No FCM token"
+            );
+
+            return;
+
+        }
+
+
+
+        console.log(
+        "FCM Token:",
+        token
+        );
+
+
+
+        await updateDoc(
+
+            doc(
+            db,
+            "users",
+            user.uid
+            ),
+
+            {
+
+            fcmToken:token
+
+            }
+
+        );
+
+
+
+    }
+
+    catch(error){
+
+        console.error(
+        "Notification error:",
+        error
+        );
+
+    }
+
 
 }

@@ -689,3 +689,18 @@ window.addEventListener("load", () => {
         }, 300);
     }
 });
+
+const settingsBtn = document.getElementById("settingsBtn");
+
+if (settingsBtn) {
+
+    settingsBtn.addEventListener(
+        "click",
+        async () => {
+
+            await registerNotifications();
+
+        }
+    );
+
+}
