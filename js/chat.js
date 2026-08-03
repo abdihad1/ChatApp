@@ -644,3 +644,15 @@ backBtn.onclick = () => {
     document.querySelector(".sidebar").classList.remove("hide");
 
 };
+
+window.addEventListener("load", () => {
+    const loading = document.getElementById("loadingScreen");
+
+    if (loading) {
+        loading.style.opacity = "0";
+
+        setTimeout(() => {
+            loading.style.display = "none";
+        }, 300);
+    }
+});
