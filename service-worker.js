@@ -1,77 +1,268 @@
-const CACHE_NAME = "chativo-v20";
+/* =====================================
+   CHATIVO V5 SERVICE WORKER
+   WhatsApp + Telegram PWA Style
+===================================== */
 
-const FILES_TO_CACHE = [
+
+const CACHE_NAME = "chativo-v22";
+
+
+const APP_FILES = [
+
     "/",
+
     "/chat.html",
+
     "/login.html",
+
     "/signup.html",
+
     "/css/style.css",
+
     "/css/modern.css",
+
+    "/js/chat.js",
+
+    "/js/sidebar.js",
+
+    "/js/messageRenderer.js",
+
     "/manifest.json"
+
 ];
 
-// Install
-self.addEventListener("install", (event) => {
+
+
+
+
+// INSTALL
+
+self.addEventListener(
+"install",
+event=>{
+
 
     self.skipWaiting();
 
-    event.waitUntil(
-
-        caches.open(CACHE_NAME).then((cache) => {
-
-            return cache.addAll(FILES_TO_CACHE);
-
-        })
-
-    );
-
-});
-
-// Activate
-self.addEventListener("activate", (event) => {
 
     event.waitUntil(
 
-        caches.keys().then((cacheNames) => {
+        caches.open(
+            CACHE_NAME
+        )
+        .then(cache=>{
 
-            return Promise.all(
-
-                cacheNames.map((cache) => {
-
-                    if (cache !== CACHE_NAME) {
-
-                        return caches.delete(cache);
-
-                    }
-
-                })
-
+            return cache.addAll(
+                APP_FILES
             );
 
-        }).then(() => self.clients.claim())
+        })
 
     );
+
 
 });
 
-// Fetch
-self.addEventListener("fetch", (event) => {
 
-    const url = new URL(event.request.url);
 
-    // Never cache Firebase or Google requests
-    if (
-        url.hostname.includes("googleapis.com") ||
-        url.hostname.includes("gstatic.com") ||
-        url.hostname.includes("firebase")
-    ) {
-        return;
-    }
 
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
-        })
-    );
+
+
+
+
+// ACTIVATE
+
+self.addEventListener(
+"activate",
+event=>{
+
+
+event.waitUntil(
+
+
+    caches.keys()
+
+    .then(keys=>{
+
+
+        return Promise.all(
+
+            keys.map(key=>{
+
+
+                if(
+                    key !== CACHE_NAME
+                ){
+
+                    return caches.delete(
+                        key
+                    );
+
+                }
+
+
+            })
+
+        );
+
+
+    })
+
+
+    .then(()=>{
+
+
+        return self.clients.claim();
+
+
+    })
+
+
+);
+
+
+});
+
+
+
+
+
+
+
+
+
+// FETCH
+
+
+self.addEventListener(
+"fetch",
+event=>{
+
+
+const request =
+event.request;
+
+
+const url =
+new URL(
+request.url
+);
+
+
+
+
+// Ignore Firebase
+
+if(
+
+url.hostname.includes(
+"firebase"
+)
+
+||
+
+url.hostname.includes(
+"googleapis"
+)
+
+||
+
+url.hostname.includes(
+"gstatic"
+)
+
+){
+
+return;
+
+}
+
+
+
+
+
+// HTML NETWORK FIRST
+
+if(
+request.mode === "navigate"
+){
+
+
+event.respondWith(
+
+
+fetch(request)
+
+.then(response=>{
+
+
+const clone =
+response.clone();
+
+
+caches.open(
+CACHE_NAME
+)
+.then(cache=>{
+
+cache.put(
+request,
+clone
+);
+
+
+});
+
+
+return response;
+
+
+})
+
+
+.catch(()=>{
+
+
+return caches.match(
+"/chat.html"
+);
+
+
+})
+
+
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+// STATIC CACHE FIRST
+
+event.respondWith(
+
+
+caches.match(request)
+
+.then(cached=>{
+
+
+return cached || fetch(request);
+
+
+})
+
+
+);
+
+
 
 });

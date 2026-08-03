@@ -1,122 +1,227 @@
+//
 // =====================================
-// Chativo Theme Manager
+// Chativo V5 Theme Manager
+// iOS + Telegram + WhatsApp Style
 // =====================================
 
 
-const themeBtn = document.getElementById("themeBtn");
+const themeBtn =
+document.getElementById("themeBtn");
 
-const body = document.body;
+
+const body =
+document.body;
 
 
-// Load saved theme
+
+function applyTheme(theme){
+
+
+if(theme === "dark"){
+
+
+    body.classList.add("dark");
+
+
+    document.documentElement
+    .setAttribute(
+        "data-theme",
+        "dark"
+    );
+
+
+    updateIcon(true);
+
+
+}
+
+else{
+
+
+    body.classList.remove("dark");
+
+
+    document.documentElement
+    .setAttribute(
+        "data-theme",
+        "light"
+    );
+
+
+    updateIcon(false);
+
+
+}
+
+
+}
+
+
+
+
 function loadTheme(){
 
-    const saved =
-        localStorage.getItem("chativo-theme");
+
+const saved =
+localStorage.getItem(
+"chativo-theme"
+);
 
 
-    if(saved === "dark"){
 
-        body.classList.add("dark");
-
-        updateIcon(true);
-
-    }
-
-    else if(saved === "light"){
-
-        body.classList.remove("dark");
-
-        updateIcon(false);
-
-    }
-
-    else {
+if(saved){
 
 
-        // Follow device theme
+    applyTheme(saved);
 
-        if(
-        window.matchMedia &&
-        window.matchMedia(
-        "(prefers-color-scheme: dark)"
-        ).matches
-        ){
 
-            body.classList.add("dark");
+    return;
 
-            updateIcon(true);
-
-        }
-
-    }
 
 }
 
 
 
-// Toggle theme
+const systemDark =
+window.matchMedia &&
+window.matchMedia(
+"(prefers-color-scheme: dark)"
+).matches;
+
+
+
+applyTheme(
+systemDark
+?
+"dark"
+:
+"light"
+);
+
+
+
+}
+
+
+
+
+
 function toggleTheme(){
 
-    const dark =
-    body.classList.toggle("dark");
+
+const dark =
+body.classList.contains(
+"dark"
+);
 
 
-    localStorage.setItem(
-        "chativo-theme",
-        dark ? "dark" : "light"
-    );
+
+const newTheme =
+dark
+?
+"light"
+:
+"dark";
 
 
-    updateIcon(dark);
+
+localStorage.setItem(
+"chativo-theme",
+newTheme
+);
+
+
+
+applyTheme(
+newTheme
+);
+
+
 
 }
 
 
 
-// Update moon/sun icon
+
+
 function updateIcon(dark){
 
-    if(!themeBtn) return;
+
+if(!themeBtn)
+return;
 
 
-    const icon =
-    themeBtn.querySelector("i");
+
+const icon =
+themeBtn.querySelector("i");
 
 
-    if(!icon) return;
+
+if(!icon)
+return;
 
 
-    if(dark){
 
-        icon.className =
-        "fa-solid fa-sun";
+icon.className =
+dark
+?
+"fa-solid fa-sun"
+:
+"fa-solid fa-moon";
 
-    }
 
-    else{
-
-        icon.className =
-        "fa-solid fa-moon";
-
-    }
 
 }
 
 
 
-// Button click
+
+
 if(themeBtn){
 
-    themeBtn.addEventListener(
-    "click",
-    toggleTheme
-    );
+
+themeBtn.onclick =
+toggleTheme;
+
 
 }
 
 
 
-// Initialize
+
+// React to system changes
+
+window
+.matchMedia(
+"(prefers-color-scheme: dark)"
+)
+.addEventListener(
+"change",
+(e)=>{
+
+
+if(
+!localStorage.getItem(
+"chativo-theme"
+)
+){
+
+
+applyTheme(
+e.matches
+?
+"dark"
+:
+"light"
+);
+
+
+}
+
+
+});
+
+
+
 
 loadTheme();

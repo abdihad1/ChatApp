@@ -1,21 +1,39 @@
 {
   "name": "Chativo",
   "short_name": "Chativo",
+
   "start_url": "/chat.html",
+
   "display": "standalone",
-  "background_color": "#111b21",
-  "theme_color": "#00a884",
-  "description": "Real-time messaging with Chativo.",
+
+  "orientation": "portrait",
+
+  "background_color": "#EEF2F7",
+
+  "theme_color": "#0A84FF",
+
+  "description": "Chativo - Modern real-time messaging with WhatsApp, Telegram and iOS inspired design.",
+
+  "categories": [
+    "communication",
+    "social"
+  ],
+
   "icons": [
+
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
+
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
+
   ]
 }

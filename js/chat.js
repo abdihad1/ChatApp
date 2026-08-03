@@ -154,13 +154,19 @@ onSnapshot(chatRef, (snap) => {
 
     if (data.typing && data.typing !== auth.currentUser.uid) {
 
-        typingStatus.textContent = "typing...";
+    typingStatus.textContent = "typing...";
+
+    document.getElementById("typingAnimation")
+    .style.display="flex";
 
 typingStatus.classList.add("typing-active");
 
     } else {
 
       typingStatus.textContent = "";
+
+document.getElementById("typingAnimation")
+.style.display="none";
 
 typingStatus.classList.remove("typing-active");
 
@@ -206,16 +212,9 @@ const div = createMessageElement({
     currentUserId: auth.currentUser.uid
 });
 
-            div.classList.add("message-enter");
+            div.classList.add("message");
 
 messagesDiv.appendChild(div);
-
-setTimeout(()=>{
-
-    div.classList.add("show");
-
-},20);
-
 
 if (data.uid === auth.currentUser.uid) {
 
@@ -355,6 +354,14 @@ await updateDoc(
 
     messageInput.value = "";
 
+messagesDiv.scrollTo({
+
+top:messagesDiv.scrollHeight,
+
+behavior:"smooth"
+
+});
+
   replyingTo = null;
 messageInput.placeholder = "Type a message";
 
@@ -457,6 +464,14 @@ await addDoc(
         delivered: true,
         read: false
     }
+);
+
+await updateDoc(
+doc(db,"chats",chatId),
+{
+lastMessage:"📷 Image",
+lastMessageTime:serverTimestamp()
+}
 );
 
 console.log(imageUrl);
@@ -632,6 +647,14 @@ voiceBtn.onclick = async () => {
             read: false
         }
     );
+
+await updateDoc(
+doc(db,"chats",chatId),
+{
+lastMessage:"🎤 Voice message",
+lastMessageTime:serverTimestamp()
+}
+);
 
     showToast("🎤 Voice message sent");
 

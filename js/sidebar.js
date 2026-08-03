@@ -16,7 +16,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 const userList = document.getElementById("userList");
-const searchInput = document.getElementById("searchUser");
+const searchInput = document.getElementById("userSearch");
 
 let allUsers = [];
 
@@ -30,37 +30,58 @@ function displayUsers(users) {
 
         const div = document.createElement("div");
 
-        div.className = "user";
+        div.className = "user-card";
 
-        div.innerHTML = `
+div.innerHTML = `
 
-<div class="avatar">
+<div class="user-avatar-wrapper">
 
-<img src="${
+<img 
+class="user-avatar"
+src="${
 user.photo ||
-"https://ui-avatars.com/api/?name=User&background=00a884&color=fff"
+"https://ui-avatars.com/api/?name=User"
 }">
 
-${user.online ? `<span class="online"></span>` : ""}
+${
+user.online
+?
+`<span class="online-dot"></span>`
+:
+""
+}
 
 </div>
 
-<div class="info">
 
-<div class="chat-top">
+<div class="user-info">
 
-<span class="name">
+<div class="user-name">
+
 ${user.name || "No Name"}
-</span>
 
-<span class="time">
+</div>
+
+
+<div class="user-last">
+
+${user.lastMessage || "Start chatting"}
+
+</div>
+
+
+</div>
+
+
+<div class="user-time">
 
 ${
 user.lastMessageTime
 ?
 new Date(
 user.lastMessageTime.seconds * 1000
-).toLocaleTimeString([],{
+)
+.toLocaleTimeString([],{
 hour:"2-digit",
 minute:"2-digit"
 })
@@ -68,27 +89,17 @@ minute:"2-digit"
 ""
 }
 
-</span>
-
-</div>
-
-<div class="chat-bottom">
-
-<span class="last">
-
-${user.lastMessage || "Start chatting"}
-
-</span>
-
 ${
 user.unread>0
 ?
-`<span class="unread">${user.unread}</span>`
+`
+<span class="unread">
+${user.unread}
+</span>
+`
 :
 ""
 }
-
-</div>
 
 </div>
 
@@ -97,8 +108,8 @@ user.unread>0
         div.onclick = () => {
 
  // Remove active from other chats
-    document
-    .querySelectorAll(".user")
+   document
+.querySelectorAll(".user-card")
     .forEach(item => {
         item.classList.remove("active");
     });
@@ -291,35 +302,37 @@ if (!group.members[auth.currentUser.uid]) return;
 
         const div = document.createElement("div");
 
-        div.className = "user";
+        div.className = "user-card";
 
         div.innerHTML = `
-            <div style="font-size:40px">👥</div>
 
-            <div>
-                <strong>${group.name}</strong><br>
-                <small>Group Chat</small>
-            </div>
-        `;
+<div class="user-avatar-wrapper">
 
-        div.onclick = () => {
+<div class="user-avatar group-avatar">
+👥
+</div>
 
-            setCurrentChat({
-    ...group,
-    id: doc.id,
-    type: "group"
-});
+</div>
 
-openChat();
 
-document.getElementById("chatName").textContent =
-    group.name;
+<div class="user-info">
 
-document.getElementById("chatStatus").textContent =
-    "👥 Group";
+<div class="user-name">
 
-        };
+${group.name}
 
+</div>
+
+
+<div class="user-last">
+
+Group Chat
+
+</div>
+
+</div>
+
+`;
         userList.appendChild(div);
 
     });

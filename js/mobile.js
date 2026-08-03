@@ -1,81 +1,163 @@
 // =====================================
-// Chativo Mobile Navigation
-// WhatsApp Style
+// Chativo Mobile Navigation V5
+// WhatsApp + Telegram + iOS Style
 // =====================================
 
 
 const sidebar = document.querySelector(".sidebar");
+
 const chat = document.querySelector(".chat");
 
 const backBtn = document.getElementById("backBtn");
 
 
-// Open chat on mobile
+
+function isMobile(){
+
+    return window.innerWidth <= 900;
+
+}
+
+
+
+// Open selected chat
+
 export function openChat(){
 
-    if(window.innerWidth <= 768){
 
-        sidebar.classList.add("hide");
+    if(!isMobile()) return;
 
-        chat.classList.add("active");
 
-    }
+    sidebar.classList.add("hide");
+
+
+    chat.classList.add("active");
+
+
+    document.body.classList.add(
+        "chat-open"
+    );
+
 
 }
 
 
 
-// Go back to sidebar
+
+// Close chat and return sidebar
+
 export function closeChat(){
 
-    if(window.innerWidth <= 768){
 
-        sidebar.classList.remove("hide");
+    if(!isMobile()) return;
 
-        chat.classList.remove("active");
 
-    }
+    sidebar.classList.remove("hide");
+
+
+    chat.classList.remove("active");
+
+
+    document.body.classList.remove(
+        "chat-open"
+    );
+
 
 }
+
+
 
 
 
 // Back button
+
 if(backBtn){
 
-    backBtn.addEventListener("click",()=>{
+
+    backBtn.onclick = ()=>{
+
 
         closeChat();
 
-    });
+
+    };
+
 
 }
 
 
 
-// When selecting user from sidebar
+
+
+// Listen chat selection event
+
 document.addEventListener(
 "chatSelected",
 ()=>{
 
+
     openChat();
+
 
 });
 
 
 
 
-// Reset when resizing
+
+
+
+// Handle browser resize
+
 window.addEventListener(
 "resize",
 ()=>{
 
 
-if(window.innerWidth > 768){
+if(window.innerWidth > 900){
 
-    sidebar.classList.remove("hide");
 
-    chat.classList.remove("active");
+    sidebar.classList.remove(
+        "hide"
+    );
+
+
+    chat.classList.remove(
+        "active"
+    );
+
+
+    document.body.classList.remove(
+        "chat-open"
+    );
+
+
+}
+
+
+
+});
+
+
+
+
+
+// Android back button support
+
+window.addEventListener(
+"popstate",
+()=>{
+
+
+if(
+document.body.classList.contains(
+"chat-open"
+)
+){
+
+
+    closeChat();
+
 
 }
 
