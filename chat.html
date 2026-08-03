@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/chat-effects.css">
 <link rel="stylesheet" href="css/ios-ui.css">
 <link rel="stylesheet" href="css/premium.css">
+<link rel="stylesheet" href="css/fix.css">
 
     <link rel="manifest" href="/manifest.json">
 
@@ -76,6 +77,8 @@
 
         </div>
 
+       </div>
+
     </aside>
 
 
@@ -103,25 +106,24 @@
 
         <div class="chat-info">
 
-            <h3 id="chatName">
+    <h3 id="chatName">
+        Select a chat
+    </h3>
 
-                Select a chat
+    <div class="status-area">
 
-            </h3>
+        <span id="chatStatus">
+            Offline
+        </span>
 
-            <div class="status-area">
+        <span id="typingStatus"></span>
 
-    <span id="chatStatus">
-        Offline
-    </span>
-
-    <span id="typingStatus"></span>
+    </div>
 
 </div>
 
 
-        <div class="chat-actions">
-
+<div class="chat-actions">
 
 <button
 id="callBtn"
