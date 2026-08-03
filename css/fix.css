@@ -333,3 +333,103 @@
     z-index:9999;
 
 }
+
+/* =====================================
+   CHATIVO FINAL UI FIXES
+   ===================================== */
+
+
+/* ---------- Hide Emoji Picker Initially ---------- */
+
+#emojiPicker {
+
+    display:none;
+
+}
+
+
+#emojiPicker.show {
+
+    display:flex;
+
+}
+
+
+
+/* ---------- Hide Composer On Welcome ---------- */
+
+.chat-composer {
+
+    display:none;
+
+}
+
+
+
+.chat.active .chat-composer {
+
+    display:flex;
+
+}
+
+
+
+/* ---------- Hide Message Area On Welcome ---------- */
+
+body:not(.chat-selected) #messages,
+body:not(.chat-selected) .chat-composer {
+
+    visibility:hidden;
+
+}
+
+
+
+/* ---------- Mobile Back Button Only ---------- */
+
+
+.mobile-only {
+
+    display:none !important;
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .mobile-only {
+
+        display:flex !important;
+
+    }
+
+
+}
+
+
+
+/* ---------- Welcome Screen Full Center ---------- */
+
+
+#welcomeScreen {
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+}
+
+
+
+#welcomeScreen.hidden {
+
+
+    display:none;
+
+}
