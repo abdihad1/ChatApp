@@ -1,80 +1,516 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Chativo • Settings</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/modern.css">
-    <link rel="stylesheet" href="css/settings.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chativo Settings</title>
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="settings.css">
+
 
 </head>
 
+
 <body>
 
-<div class="settings-page">
 
-    <h1>Profile Settings</h1>
+<div class="settings-app">
 
-    <div class="profile-card">
 
-<div class="profile-photo-container">
 
-    <img
-        id="profilePreview"
-        src="https://placehold.co/150x150"
-        class="profile-photo">
+<!-- Header -->
 
-    <button
-        id="changePhotoBtn"
-        class="change-photo-btn">
+<header class="settings-header">
 
-        📷
 
-    </button>
+<button class="icon-btn"
+onclick="location.href='chat.html'">
 
-</div>
+<i class="fa-solid fa-arrow-left"></i>
+
+</button>
+
+
+<h2>
+Settings
+</h2>
+
+
+<button id="themeBtn"
+class="icon-btn">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+
+</header>
+
+
+
+
+
+<main class="settings-container">
+
+
+
+
+
+<!-- Profile Card -->
+
+
+<section class="profile-card">
+
+
+<div class="profile-image-box">
+
+
+<img id="profilePreview"
+src="https://ui-avatars.com/api/?name=User"
+alt="Profile">
+
+
+<button id="changePhotoBtn"
+class="camera-btn">
+
+<i class="fa-solid fa-camera"></i>
+
+</button>
+
 
 <input
-    type="file"
-    id="profileImage"
-    accept="image/*"
-    hidden>
+id="profileImage"
+type="file"
+accept="image/*"
+hidden>
 
-        <br><br>
-
-        <input
-            id="displayName"
-            placeholder="Display name">
-
-        <br><br>
-
-        <textarea
-            id="bio"
-            placeholder="About yourself"></textarea>
-
-        <br><br>
-
-        <input
-            id="email"
-            disabled>
-
-        <br><br>
-
-        <button id="saveProfile">
-
-            Save Changes
-
-        </button>
-
-    </div>
 
 </div>
 
-<div id="toast"></div>
 
-<script type="module" src="js/settings.js"></script>
+
+
+<h2>
+Your Profile
+</h2>
+
+
+<p>
+Manage your Chativo identity
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- Account -->
+
+<section class="settings-section">
+
+
+<h3>
+<i class="fa-solid fa-user"></i>
+Account
+</h3>
+
+
+
+<div class="input-card">
+
+
+<label>
+Name
+</label>
+
+
+<input
+id="displayName"
+placeholder="Your name">
+
+
+</div>
+
+
+
+
+<div class="input-card">
+
+
+<label>
+Username
+</label>
+
+
+<input
+id="username"
+placeholder="@username">
+
+
+</div>
+
+
+
+
+
+<div class="input-card">
+
+
+<label>
+Bio
+</label>
+
+
+<textarea
+id="bio"
+maxlength="120"
+placeholder="Write something about yourself"></textarea>
+
+
+<span id="bioCount">
+0/120
+</span>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- Privacy -->
+
+<section class="settings-section">
+
+
+<h3>
+
+<i class="fa-solid fa-lock"></i>
+
+Privacy
+
+</h3>
+
+
+
+<div class="setting-row">
+
+
+<div>
+
+<strong>
+Online Status
+</strong>
+
+<p>
+Show when you are online
+</p>
+
+</div>
+
+
+<label class="switch">
+
+
+<input
+id="onlineToggle"
+type="checkbox">
+
+
+<span></span>
+
+
+</label>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="setting-row">
+
+
+<div>
+
+<strong>
+Read Receipts
+</strong>
+
+
+<p>
+Show message read status
+</p>
+
+
+</div>
+
+
+
+<label class="switch">
+
+
+<input
+id="readToggle"
+type="checkbox">
+
+
+<span></span>
+
+
+</label>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- Notifications -->
+
+<section class="settings-section">
+
+
+<h3>
+
+<i class="fa-solid fa-bell"></i>
+
+Notifications
+
+</h3>
+
+
+
+
+<div class="setting-row">
+
+
+<div>
+
+<strong>
+Push Notifications
+</strong>
+
+
+<p>
+Receive new message alerts
+</p>
+
+
+</div>
+
+
+
+<label class="switch">
+
+
+<input
+id="notifyToggle"
+type="checkbox">
+
+
+<span></span>
+
+
+</label>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- Appearance -->
+
+<section class="settings-section">
+
+
+<h3>
+
+<i class="fa-solid fa-palette"></i>
+
+Appearance
+
+</h3>
+
+
+
+<div class="input-card">
+
+
+<label>
+Chat Wallpaper
+</label>
+
+
+<select id="wallpaper">
+
+
+<option value="default">
+Default
+</option>
+
+
+<option value="dark">
+Dark Mode
+</option>
+
+
+<option value="glass">
+Glass Effect
+</option>
+
+
+<option value="gradient">
+Gradient
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- Save -->
+
+<button id="saveProfile"
+class="save-btn">
+
+
+<i class="fa-solid fa-check"></i>
+
+Save Changes
+
+
+</button>
+
+
+
+
+
+
+
+
+<!-- Danger Zone -->
+
+<section class="settings-section danger-zone">
+
+
+<h3>
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+Account
+
+</h3>
+
+
+
+
+<button id="logoutBtn"
+class="logout-btn">
+
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+
+<footer class="app-info">
+
+
+<h4>
+Chativo V8
+</h4>
+
+
+<p>
+Modern messaging experience
+</p>
+
+
+</footer>
+
+
+
+
+</main>
+
+
+
+<script type="module" src="settings.js"></script>
+
+<script type="module" src="theme.js"></script>
+
 
 </body>
 

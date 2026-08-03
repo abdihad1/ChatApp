@@ -118,6 +118,16 @@ messageInput.addEventListener("keypress", (e) => {
 });
 const messagesDiv = document.getElementById("messages");
 
+const welcomeScreen =
+document.getElementById("welcomeScreen");
+
+
+if(welcomeScreen){
+
+welcomeScreen.style.display="flex";
+
+}
+
 let unsubscribe = null;
 let replyingTo = null;
 let selectedMessageId = null;
