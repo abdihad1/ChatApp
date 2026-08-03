@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
 <meta charset="UTF-8">
@@ -14,9 +13,8 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="settings.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/modern.css">
 
 
 </head>
@@ -25,17 +23,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <body>
 
 
-<div class="settings-app">
+<div class="settings-page">
 
-
-
-<!-- Header -->
 
 <header class="settings-header">
 
 
 <button class="icon-btn"
-onclick="location.href='chat.html'">
+onclick="history.back()">
 
 <i class="fa-solid fa-arrow-left"></i>
 
@@ -43,8 +38,109 @@ onclick="location.href='chat.html'">
 
 
 <h2>
+<i class="fa-solid fa-gear"></i>
 Settings
 </h2>
+
+
+</header>
+
+
+
+<section class="profile-card">
+
+
+<div class="profile-image-box">
+
+
+<img
+id="profilePreview"
+src="https://ui-avatars.com/api/?name=User"
+>
+
+
+<button id="changePhotoBtn">
+
+<i class="fa-solid fa-camera"></i>
+
+</button>
+
+
+<input
+type="file"
+id="profileImage"
+accept="image/*"
+hidden
+>
+
+
+</div>
+
+
+
+<div class="profile-fields">
+
+
+<label>
+Name
+</label>
+
+
+<input
+id="displayName"
+placeholder="Your name"
+>
+
+
+
+<label>
+Email
+</label>
+
+
+<input
+id="email"
+readonly
+>
+
+
+
+<label>
+Bio
+</label>
+
+
+<textarea
+id="bio"
+placeholder="About you">
+</textarea>
+
+
+<button id="saveProfile"
+class="save-btn">
+
+Save Changes
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+<section class="settings-menu">
+
+
+<div class="setting-item">
+
+<i class="fa-solid fa-moon"></i>
+
+<span>
+Dark Mode
+</span>
 
 
 <button id="themeBtn"
@@ -55,301 +151,45 @@ class="icon-btn">
 </button>
 
 
-</header>
-
-
-
-
-
-<main class="settings-container">
-
-
-
-
-
-<!-- Profile Card -->
-
-
-<section class="profile-card">
-
-
-<div class="profile-image-box">
-
-
-<img id="profilePreview"
-src="https://ui-avatars.com/api/?name=User"
-alt="Profile">
-
-
-<button id="changePhotoBtn"
-class="camera-btn">
-
-<i class="fa-solid fa-camera"></i>
-
-</button>
-
-
-<input
-id="profileImage"
-type="file"
-accept="image/*"
-hidden>
-
-
 </div>
 
 
 
+<div class="setting-item">
 
-<h2>
-Your Profile
-</h2>
+<i class="fa-solid fa-shield-halved"></i>
 
-
-<p>
-Manage your Chativo identity
-</p>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- Account -->
-
-<section class="settings-section">
-
-
-<h3>
-<i class="fa-solid fa-user"></i>
-Account
-</h3>
-
-
-
-<div class="input-card">
-
-
-<label>
-Name
-</label>
-
-
-<input
-id="displayName"
-placeholder="Your name">
-
-
-</div>
-
-
-
-
-<div class="input-card">
-
-
-<label>
-Username
-</label>
-
-
-<input
-id="username"
-placeholder="@username">
-
-
-</div>
-
-
-
-
-
-<div class="input-card">
-
-
-<label>
-Bio
-</label>
-
-
-<textarea
-id="bio"
-maxlength="120"
-placeholder="Write something about yourself"></textarea>
-
-
-<span id="bioCount">
-0/120
+<span>
+Privacy
 </span>
 
+<i class="fa-solid fa-chevron-right"></i>
 
 </div>
 
 
 
-</section>
-
-
-
-
-
-
-
-
-
-<!-- Privacy -->
-
-<section class="settings-section">
-
-
-<h3>
-
-<i class="fa-solid fa-lock"></i>
-
-Privacy
-
-</h3>
-
-
-
-<div class="setting-row">
-
-
-<div>
-
-<strong>
-Online Status
-</strong>
-
-<p>
-Show when you are online
-</p>
-
-</div>
-
-
-<label class="switch">
-
-
-<input
-id="onlineToggle"
-type="checkbox">
-
-
-<span></span>
-
-
-</label>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="setting-row">
-
-
-<div>
-
-<strong>
-Read Receipts
-</strong>
-
-
-<p>
-Show message read status
-</p>
-
-
-</div>
-
-
-
-<label class="switch">
-
-
-<input
-id="readToggle"
-type="checkbox">
-
-
-<span></span>
-
-
-</label>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- Notifications -->
-
-<section class="settings-section">
-
-
-<h3>
+<div class="setting-item">
 
 <i class="fa-solid fa-bell"></i>
 
+<span>
 Notifications
+</span>
 
-</h3>
-
-
-
-
-<div class="setting-row">
-
-
-<div>
-
-<strong>
-Push Notifications
-</strong>
-
-
-<p>
-Receive new message alerts
-</p>
-
+<i class="fa-solid fa-chevron-right"></i>
 
 </div>
 
 
 
-<label class="switch">
+<div class="setting-item">
 
+<i class="fa-solid fa-circle-info"></i>
 
-<input
-id="notifyToggle"
-type="checkbox">
-
-
-<span></span>
-
-
-</label>
-
+<span>
+About Chativo
+</span>
 
 </div>
 
@@ -358,160 +198,13 @@ type="checkbox">
 </section>
 
 
-
-
-
-
-
-
-
-<!-- Appearance -->
-
-<section class="settings-section">
-
-
-<h3>
-
-<i class="fa-solid fa-palette"></i>
-
-Appearance
-
-</h3>
-
-
-
-<div class="input-card">
-
-
-<label>
-Chat Wallpaper
-</label>
-
-
-<select id="wallpaper">
-
-
-<option value="default">
-Default
-</option>
-
-
-<option value="dark">
-Dark Mode
-</option>
-
-
-<option value="glass">
-Glass Effect
-</option>
-
-
-<option value="gradient">
-Gradient
-</option>
-
-
-</select>
-
-
 </div>
 
 
 
-</section>
-
-
-
-
-
-
-
-
-
-<!-- Save -->
-
-<button id="saveProfile"
-class="save-btn">
-
-
-<i class="fa-solid fa-check"></i>
-
-Save Changes
-
-
-</button>
-
-
-
-
-
-
-
-
-<!-- Danger Zone -->
-
-<section class="settings-section danger-zone">
-
-
-<h3>
-
-<i class="fa-solid fa-triangle-exclamation"></i>
-
-Account
-
-</h3>
-
-
-
-
-<button id="logoutBtn"
-class="logout-btn">
-
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-Logout
-
-
-</button>
-
-
-
-</section>
-
-
-
-
-
-
-
-<footer class="app-info">
-
-
-<h4>
-Chativo V8
-</h4>
-
-
-<p>
-Modern messaging experience
-</p>
-
-
-</footer>
-
-
-
-
-</main>
-
-
-
-<script type="module" src="settings.js"></script>
-
-<script type="module" src="theme.js"></script>
+<script type="module" src="js/settings.js"></script>
+<script type="module" src="js/theme.js"></script>
 
 
 </body>
-
 </html>

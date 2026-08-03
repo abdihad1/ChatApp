@@ -2220,3 +2220,275 @@ transform:rotate(360deg);
 
 
 }
+
+/* =========================
+   CHATIVO V8 SETTINGS
+========================= */
+
+
+.settings-page{
+
+height:100vh;
+
+background:#f1f5f9;
+
+}
+
+
+
+.settings-header{
+
+height:70px;
+
+background:white;
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+padding:0 25px;
+
+box-shadow:0 5px 20px #0001;
+
+}
+
+
+
+.settings-header h2{
+
+font-size:22px;
+
+display:flex;
+
+gap:10px;
+
+align-items:center;
+
+}
+
+
+
+.profile-card{
+
+max-width:600px;
+
+margin:30px auto;
+
+background:white;
+
+border-radius:25px;
+
+padding:30px;
+
+box-shadow:
+0 20px 40px rgba(0,0,0,.08);
+
+}
+
+
+
+.profile-image-box{
+
+position:relative;
+
+width:130px;
+
+margin:auto;
+
+}
+
+
+
+.profile-image-box img{
+
+width:130px;
+
+height:130px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+
+
+.profile-image-box button{
+
+position:absolute;
+
+bottom:5px;
+
+right:5px;
+
+width:40px;
+
+height:40px;
+
+border-radius:50%;
+
+background:#00a884;
+
+color:white;
+
+}
+
+
+
+.profile-fields{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+margin-top:25px;
+
+}
+
+
+
+.profile-fields input,
+.profile-fields textarea{
+
+padding:14px;
+
+border-radius:15px;
+
+border:1px solid #ddd;
+
+font-size:15px;
+
+}
+
+
+
+.profile-fields textarea{
+
+height:100px;
+
+resize:none;
+
+}
+
+
+
+.save-btn{
+
+margin-top:15px;
+
+height:50px;
+
+border-radius:20px;
+
+background:#00a884;
+
+color:white;
+
+font-size:16px;
+
+}
+
+
+
+.settings-menu{
+
+max-width:600px;
+
+margin:auto;
+
+background:white;
+
+border-radius:25px;
+
+overflow:hidden;
+
+}
+
+
+
+.setting-item{
+
+height:65px;
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+padding:0 25px;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+
+.setting-item span{
+
+flex:1;
+
+font-size:16px;
+
+}
+
+
+
+.setting-item i:first-child{
+
+font-size:20px;
+
+color:#00a884;
+
+}
+
+
+
+body.dark .settings-page{
+
+background:#111827;
+
+}
+
+
+body.dark .settings-header,
+body.dark .profile-card,
+body.dark .settings-menu{
+
+background:#111b21;
+
+color:white;
+
+}
+
+
+
+body.dark input,
+body.dark textarea{
+
+background:#202c33;
+
+color:white;
+
+border:none;
+
+}
+
+
+
+@media(max-width:700px){
+
+
+.profile-card,
+.settings-menu{
+
+margin:15px;
+
+}
+
+
+}
