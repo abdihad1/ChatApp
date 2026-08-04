@@ -137,7 +137,7 @@ const welcome = document.getElementById("welcomeScreen");
 
 if (welcome) {
 
-    welcome.style.display = "none";
+    welcome.classList.add("hidden");
 
 }
 

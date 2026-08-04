@@ -161,6 +161,8 @@ document.querySelector(".chat-composer").style.display="flex";
         unsubscribe();
     }
 
+window.openChat = openChat;
+
     const q = query(
         collection(db, "chats", chatId, "messages"),
         orderBy("createdAt")
@@ -201,6 +203,13 @@ typingStatus.classList.remove("typing-active");
     unsubscribe = onSnapshot(q, (snapshot) => {
 
         messagesDiv.innerHTML = "";
+
+  const welcome = document.getElementById("welcomeScreen");
+if (welcome) welcome.style.display = "none";
+
+messagesDiv.style.display = "flex";
+
+document.querySelector(".chat-composer").style.display = "flex";
 
         snapshot.forEach(async (messageDoc) => {
 
