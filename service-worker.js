@@ -4,7 +4,7 @@
 ===================================== */
 
 
-const CACHE_NAME = "chativo-v38";
+const CACHE_NAME = "chativo-v39";
 
 
 const APP_FILES = [

@@ -1,3 +1,6 @@
+<DOCTYPE! HTML>
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,31 +30,37 @@
 
 <div class="app">
 
-    <!-- ================= Sidebar ================= -->
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
 
     <aside class="sidebar" id="sidebar">
 
-       <div class="sidebar-header">
+        <div class="sidebar-header">
 
-    <div class="logo">
-        <i class="fa-solid fa-comments"></i>
-        <span>Chativo</span>
-    </div>
+            <div class="logo">
 
-    <div class="header-actions">
+                <i class="fa-solid fa-comments"></i>
 
-        <button id="settingsBtn" class="icon-btn">
-            <i class="fa-solid fa-gear"></i>
-        </button>
+                <span>Chativo</span>
 
-        <button id="logoutBtn" class="icon-btn">
-            <i class="fa-solid fa-right-from-bracket"></i>
-        </button>
+            </div>
 
-   
-            <button id="themeBtn" class="icon-btn">
-    <i class="fa-solid fa-moon"></i>
-</button>
+            <div class="header-actions">
+
+                <button id="themeBtn" class="icon-btn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <button id="settingsBtn" class="icon-btn">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+
+                <button id="logoutBtn" class="icon-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+
+            </div>
 
         </div>
 
@@ -60,260 +69,302 @@
             <i class="fa-solid fa-magnifying-glass"></i>
 
             <input
-                type="text"
                 id="userSearch"
-                placeholder="Search users..."
-            >
+                type="text"
+                placeholder="Search conversations">
 
         </div>
 
-        <div id="userList" class="user-list">
-
-            <!-- Users loaded by sidebar.js -->
+        <div
+            id="userList"
+            class="user-list">
 
         </div>
-
-       </div>
 
     </aside>
 
+    <!-- ========================= -->
+    <!-- CHAT -->
+    <!-- ========================= -->
 
+    <main
+        class="chat"
+        id="chatContainer">
 
-    <!-- ================= Chat ================= -->
+        <header class="chat-header">
 
-    <main class="chat" id="chatContainer">
+            <button
+                id="backBtn"
+                class="icon-btn mobile-only">
 
-    <!-- Chat Header -->
+                <i class="fa-solid fa-arrow-left"></i>
 
-    <header class="chat-header">
+            </button>
 
-        <button id="backBtn" class="icon-btn mobile-only">
+            <img
+                id="chatPhoto"
+                class="chat-avatar"
+                src="https://ui-avatars.com/api/?name=User">
 
-            <i class="fa-solid fa-arrow-left"></i>
+            <div class="chat-info">
 
-        </button>
+                <h3 id="chatName">
 
-        <img
-            id="chatPhoto"
-            class="chat-avatar"
-            src="https://ui-avatars.com/api/?name=User"
-            alt=""
-        >
+                    Select a conversation
 
-<div class="chat-info">
+                </h3>
 
-    <h3 id="chatName"></h3>
+                <div class="status-area">
 
-    <div class="status-area">
-        <span id="chatStatus"></span>
-        <span id="typingStatus"></span>
-    </div>
+                    <span id="chatStatus">
 
-</div>
+                        Offline
 
-<div class="chat-actions">
+                    </span>
 
-    <button id="callBtn" class="icon-btn">
-        <i class="fa-solid fa-phone"></i>
-    </button>
+                    <span id="typingStatus"></span>
 
-    <button id="videoBtn" class="icon-btn">
-        <i class="fa-solid fa-video"></i>
-    </button>
+                </div>
 
-</div>
+            </div>
 
-    </header>
+            <div class="chat-actions">
 
+                <button
+                    id="callBtn"
+                    class="icon-btn">
 
-<div class="chat-search">
+                    <i class="fa-solid fa-phone"></i>
 
-    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
 
-    <input
-        id="searchMessage"
-        type="text"
-        placeholder="Search messages..."
-    >
+                <button
+                    id="videoBtn"
+                    class="icon-btn">
 
-</div>
+                    <i class="fa-solid fa-video"></i>
 
-<!-- Chativo V8 Welcome Screen -->
+                </button>
 
-<div id="welcomeScreen" class="welcome-screen">
+            </div>
 
-    <div class="welcome-icon">
+        </header>
 
-        <i class="fa-solid fa-comments"></i>
+        <div class="chat-search">
 
-    </div>
+            <i class="fa-solid fa-magnifying-glass"></i>
 
+            <input
+                id="searchMessage"
+                placeholder="Search messages...">
 
-    <h1>
-        Welcome to Chativo
-    </h1>
-
-
-    <p>
-        Select a conversation and start messaging.
-    </p>
-
-
-    <div class="welcome-features">
-
-        <div>
-            <i class="fa-solid fa-lock"></i>
-            <span>Private</span>
         </div>
 
+        <div
+            id="welcomeScreen"
+            class="welcome-screen">
 
-        <div>
-            <i class="fa-solid fa-bolt"></i>
-            <span>Fast</span>
+            <div class="welcome-icon">
+
+                <i class="fa-solid fa-comments"></i>
+
+            </div>
+
+            <h1>
+
+                Welcome to Chativo
+
+            </h1>
+
+            <p>
+
+                Choose a conversation to start chatting.
+
+            </p>
+
         </div>
 
+<!-- ========================= -->
+<!-- MESSAGES -->
+<!-- ========================= -->
 
-        <div>
-            <i class="fa-solid fa-cloud"></i>
-            <span>Realtime</span>
-        </div>
+<section
+    id="messages"
+    class="messages">
 
-    </div>
+</section>
 
+<div
+    id="typingAnimation"
+    class="typing-animation">
+
+    <span></span>
+    <span></span>
+    <span></span>
 
 </div>
 
+<!-- ========================= -->
+<!-- COMPOSER -->
+<!-- ========================= -->
 
-    <!-- Messages -->
+<footer
+    class="chat-composer">
 
-    <section
-        id="messages"
-        class="messages"
-    >
+    <button
+        id="emojiBtn"
+        class="icon-btn">
 
-    </section>
-
-
-
-    <!-- Typing Indicator -->
-
-    <div
-        id="typingAnimation"
-        class="typing-animation"
-    >
-
-        <span></span>
-
-        <span></span>
-
-        <span></span>
-
-    </div>
-
-
-
-    <footer class="chat-composer">
-
-    <button id="emojiBtn" class="icon-btn">
         <i class="fa-regular fa-face-smile"></i>
+
     </button>
 
-    <button id="imageBtn" class="icon-btn">
+    <button
+        id="imageBtn"
+        class="icon-btn">
+
         <i class="fa-regular fa-image"></i>
+
     </button>
 
     <input
-        type="file"
         id="imageInput"
+        type="file"
         accept="image/*"
-        hidden
-    >
+        hidden>
 
     <div class="message-box">
 
         <input
             id="message"
             type="text"
-            placeholder="Type a message..."
             autocomplete="off"
-        >
+            placeholder="Type a message">
 
     </div>
 
-    <button id="voiceBtn" class="icon-btn">
+    <button
+        id="voiceBtn"
+        class="icon-btn">
+
         <i class="fa-solid fa-microphone"></i>
+
     </button>
 
-    <button id="sendBtn" class="send-btn">
+    <button
+        id="sendBtn"
+        class="send-btn">
+
         <i class="fa-solid fa-paper-plane"></i>
+
     </button>
 
 </footer>
 
-<!-- Emoji Picker -->
+<!-- ========================= -->
+<!-- EMOJI PICKER -->
+<!-- ========================= -->
 
-<div id="emojiPicker" class="emoji-picker">
+<div
+    id="emojiPicker"
+    class="emoji-picker">
 
     <span>😀</span>
     <span>😁</span>
     <span>😂</span>
+    <span>🤣</span>
     <span>😍</span>
     <span>😊</span>
+    <span>😎</span>
     <span>🥳</span>
+    <span>🤩</span>
+    <span>😢</span>
+    <span>😭</span>
+    <span>😡</span>
     <span>👍</span>
+    <span>👏</span>
+    <span>🙏</span>
     <span>❤️</span>
     <span>🔥</span>
-    <span>👏</span>
     <span>🎉</span>
-    <span>😎</span>
 
 </div>
 
-<div id="messageMenu" class="message-menu">
+<!-- ========================= -->
+<!-- MESSAGE MENU -->
+<!-- ========================= -->
+
+<div
+    id="messageMenu"
+    class="message-menu">
 
     <button id="copyMsg">
         <i class="fa-solid fa-copy"></i>
-        Copy
+        <span>Copy</span>
     </button>
 
     <button id="replyMsg">
         <i class="fa-solid fa-reply"></i>
-        Reply
+        <span>Reply</span>
     </button>
 
     <button id="editMsg">
         <i class="fa-solid fa-pen"></i>
-        Edit
+        <span>Edit</span>
     </button>
 
     <button id="reactMsg">
-        <i class="fa-solid fa-face-smile"></i>
-        React
+        <i class="fa-regular fa-face-smile"></i>
+        <span>React</span>
     </button>
 
-    <button id="deleteMsg" class="danger">
+    <button
+        id="deleteMsg"
+        class="danger">
+
         <i class="fa-solid fa-trash"></i>
-        Delete
+        <span>Delete</span>
+
     </button>
 
 </div>
 
-<div id="confirmModal" class="modal">
+<!-- ========================= -->
+<!-- DELETE MODAL -->
+<!-- ========================= -->
+
+<div
+    id="confirmModal"
+    class="modal">
 
     <div class="modal-box">
 
-        <h3>Delete message?</h3>
+        <h2>
 
-        <p>This cannot be undone.</p>
+            Delete Message?
+
+        </h2>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
 
         <div class="modal-buttons">
 
             <button id="cancelDelete">
+
                 Cancel
+
             </button>
 
-            <button id="confirmDelete" class="danger">
+            <button
+                id="confirmDelete"
+                class="danger">
+
                 Delete
+
             </button>
 
         </div>
@@ -322,49 +373,79 @@
 
 </div>
 
-<div id="incomingCallModal" class="call-popup">
+<!-- ========================= -->
+<!-- INCOMING CALL -->
+<!-- ========================= -->
+
+<div
+    id="incomingCallModal"
+    class="call-popup">
 
     <img
         id="incomingCallerPhoto"
-        src="https://ui-avatars.com/api/?name=User"
-    >
+        src="https://ui-avatars.com/api/?name=User">
 
     <h2 id="incomingCallerName">
+
         Incoming Call
+
     </h2>
 
     <div class="call-buttons">
 
-        <button id="acceptCall" class="accept">
+        <button
+            id="acceptCall"
+            class="accept">
+
             <i class="fa-solid fa-phone"></i>
+
         </button>
 
-        <button id="rejectCall" class="reject">
+        <button
+            id="rejectCall"
+            class="reject">
+
             <i class="fa-solid fa-phone-slash"></i>
+
         </button>
 
     </div>
 
 </div>
 
-<div id="callScreen" class="call-screen">
+<!-- ========================= -->
+<!-- CALL SCREEN -->
+<!-- ========================= -->
+
+<div
+    id="callScreen"
+    class="call-screen">
 
     <img
         id="callAvatar"
-        src="https://ui-avatars.com/api/?name=User"
-    >
+        src="https://ui-avatars.com/api/?name=User">
 
     <h2 id="callName">
+
         User
+
     </h2>
 
     <p id="callTitle">
+
         Connecting...
+
     </p>
 
-    <audio id="remoteAudio" autoplay></audio>
+    <audio
+        id="remoteAudio"
+        autoplay>
 
-    <button id="endCallBtn" class="end-call">
+    </audio>
+
+    <button
+        id="endCallBtn"
+        class="end-call">
 
         <i class="fa-solid fa-phone-slash"></i>
 
@@ -377,9 +458,10 @@
 </div>
 
 <script type="module" src="js/chat.js"></script>
-<script type="module" src="js/incomingCall.js"></script>
-<script type="module" src="js/call.js"></script>
 <script type="module" src="js/sidebar.js"></script>
+<script type="module" src="js/call.js"></script>
+<script type="module" src="js/incomingCall.js"></script>
 <script type="module" src="js/theme.js"></script>
 
 </body>
+</html>
