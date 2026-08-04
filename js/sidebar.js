@@ -126,18 +126,46 @@ ${user.unread}
     );
 
 
+// Activate chat mode
+document.body.classList.add("chat-selected");
+
+
+// Hide welcome screen
 const welcome = document.getElementById("welcomeScreen");
+
 if (welcome) {
+
     welcome.style.display = "none";
+
 }
 
+
+// Show messages
 const messages = document.getElementById("messages");
 
 if (messages) {
+
     messages.style.display = "flex";
+
+}
+
+
+// Show message input
+const composer = document.querySelector(".chat-composer");
+
+if (composer) {
+
+    composer.style.display = "flex";
+
 }
 
             setCurrentChat(user);
+
+   if(window.loadMessages){
+
+    window.loadMessages(user.uid);
+
+}
 
              openMobileChat();
 
@@ -368,17 +396,29 @@ allUsers.find(
 user=>user.uid===last
 );
 
-
 if(saved){
 
     setTimeout(()=>{
 
         setCurrentChat(saved);
 
+        document.body.classList.add("chat-selected");
+
+        const welcome =
+        document.getElementById("welcomeScreen");
+
+        if(welcome)
+            welcome.style.display="none";
+
+
+        const composer =
+        document.querySelector(".chat-composer");
+
+        if(composer)
+            composer.style.display="flex";
+
+
     },500);
-
-}
-
 
 }
 

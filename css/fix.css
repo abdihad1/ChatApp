@@ -433,3 +433,43 @@ body:not(.chat-selected) .chat-composer {
     display:none;
 
 }
+
+/* =================================
+   SHOW CHAT AFTER USER SELECTED
+   ================================= */
+
+
+body.chat-selected #welcomeScreen {
+
+    display:none !important;
+
+}
+
+
+body.chat-selected .chat-composer {
+
+    display:flex !important;
+
+}
+
+
+body.chat-selected #messages {
+
+    visibility:visible !important;
+
+}
+
+
+
+body:not(.chat-selected) .chat-composer {
+
+    display:none;
+
+}
+
+
+body:not(.chat-selected) #messages {
+
+    visibility:hidden;
+
+}
