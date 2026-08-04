@@ -461,3 +461,199 @@ transform:none;
 }
 
 }
+
+.emoji-picker{
+    display:none;
+    position:absolute;
+    bottom:90px;
+    left:20px;
+    width:320px;
+    background:#fff;
+    border-radius:16px;
+    padding:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    flex-wrap:wrap;
+    gap:10px;
+    z-index:1000;
+}
+
+.emoji-picker.active{
+    display:flex;
+}
+
+.emoji-picker span{
+    cursor:pointer;
+    font-size:24px;
+}
+
+.message-menu{
+    display:none;
+    position:fixed;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    padding:8px;
+    z-index:3000;
+    min-width:180px;
+}
+
+.message-menu button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 14px;
+    border:none;
+    background:none;
+    cursor:pointer;
+}
+
+.message-menu button:hover{
+    background:#f4f4f4;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    justify-content:center;
+    align-items:center;
+    z-index:4000;
+}
+
+.modal-box{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    width:360px;
+}
+
+.call-popup{
+    display:none;
+}
+
+.call-screen{
+    display:none;
+}
+
+#typingAnimation{
+display:none;
+}
+
+#welcomeScreen{
+display:flex;
+}
+
+body.chat-selected #welcomeScreen{
+display:none;
+}
+
+body.chat-selected #messages{
+display:flex;
+}
+
+body.chat-selected .chat-composer{
+display:flex;
+}
+
+#messageMenu{
+display:none;
+position:fixed;
+z-index:1000;
+}
+
+#messageMenu.active{
+display:flex;
+flex-direction:column;
+}
+
+#confirmModal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.4);
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+#confirmModal.active{
+display:flex;
+}
+
+#incomingCallModal{
+display:none;
+}
+
+#incomingCallModal.active{
+display:flex;
+}
+
+#callScreen{
+display:none;
+}
+
+#callScreen.active{
+display:flex;
+}
+
+#emojiPicker{
+display:none;
+}
+
+#emojiPicker.active{
+display:flex;
+}
+
+.user-list{
+overflow-y:auto;
+height:calc(100vh - 170px);
+}
+
+/* Hide overlays */
+
+#messageMenu{
+    display:none;
+    position:fixed;
+    z-index:9999;
+}
+
+#confirmModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+}
+
+#incomingCallModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    z-index:10001;
+}
+
+#callScreen{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:10002;
+}
+
+#emojiPicker{
+    display:none;
+    position:absolute;
+    bottom:75px;
+    left:20px;
+    z-index:999;
+}
+
+#emojiPicker.active{
+    display:flex;
+}

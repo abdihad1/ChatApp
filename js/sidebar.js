@@ -30,6 +30,8 @@ function displayUsers(users) {
 
         const div = document.createElement("div");
 
+    div.dataset.uid = user.uid;
+
         div.className = "user-card";
 
 div.innerHTML = `
@@ -161,10 +163,8 @@ if (composer) {
 
             setCurrentChat(user);
 
-   if(window.loadMessages){
-
-    window.loadMessages(user.uid);
-
+   if(window.openChat){
+    window.openChat();
 }
 
              openMobileChat();
@@ -379,47 +379,24 @@ if(settingsBtn){
 
 }
 
-function restoreLastChat(){
+function restoreLastChat() {
 
+    const last = localStorage.getItem("chativo-last-chat");
 
-const last =
-localStorage.getItem(
-"chativo-last-chat"
-);
+    if (!last) return;
 
+    setTimeout(() => {
 
-if(!last) return;
+        const card = document.querySelector(
+            `.user-card[data-uid="${last}"]`
+        );
 
+        if (card) {
 
-const saved =
-allUsers.find(
-user=>user.uid===last
-);
+            card.click();
 
-if(saved){
+        }
 
-    setTimeout(()=>{
-
-        setCurrentChat(saved);
-
-        document.body.classList.add("chat-selected");
-
-        const welcome =
-        document.getElementById("welcomeScreen");
-
-        if(welcome)
-            welcome.style.display="none";
-
-
-        const composer =
-        document.querySelector(".chat-composer");
-
-        if(composer)
-            composer.style.display="flex";
-
-
-    },500);
-
-    }
+    }, 300);
 
 }

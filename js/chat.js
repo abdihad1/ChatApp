@@ -141,6 +141,8 @@ let selectedMessageText = null;
 
 // Open a private chat
 function openChat() {
+  
+window.openChat = openChat;
 
     const otherUser = getCurrentChat();
 
