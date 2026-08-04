@@ -60,8 +60,6 @@ if ("serviceWorker" in navigator) {
 
 setOnlineStatus(true);
 
-registerNotifications();
-
 const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");
 const searchInput = document.getElementById("searchMessage");
@@ -121,12 +119,20 @@ const messagesDiv = document.getElementById("messages");
 const welcomeScreen =
 document.getElementById("welcomeScreen");
 
+const composer =
+document.querySelector(".chat-composer");
 
-if(welcomeScreen){
+const messages =
+document.getElementById("messages");
 
+if(welcomeScreen)
 welcomeScreen.style.display="flex";
 
-}
+if(messages)
+messages.style.display="none";
+
+if(composer)
+composer.style.display="none";
 
 let unsubscribe = null;
 let replyingTo = null;
@@ -139,6 +145,12 @@ function openChat() {
     const otherUser = getCurrentChat();
 
     if (!otherUser) return;
+ 
+document.getElementById("welcomeScreen").style.display="none";
+
+document.getElementById("messages").style.display="flex";
+
+document.querySelector(".chat-composer").style.display="flex";
 
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 

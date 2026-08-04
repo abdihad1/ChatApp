@@ -876,3 +876,152 @@ input{
     }
 
 }
+
+/* ==============================
+   MESSAGE RENDERER FIX
+============================== */
+
+.message{
+
+    display:flex;
+    flex-direction:column;
+
+    max-width:72%;
+
+    padding:12px 16px;
+
+    margin:8px;
+
+    border-radius:20px;
+
+    position:relative;
+
+    word-break:break-word;
+
+    animation:messageIn .2s ease;
+
+}
+
+.message.sent{
+
+    align-self:flex-end;
+
+    background:linear-gradient(135deg,#0A84FF,#007AFF);
+
+    color:#fff;
+
+    border-bottom-right-radius:6px;
+
+}
+
+.message.received{
+
+    align-self:flex-start;
+
+    background:#fff;
+
+    color:#222;
+
+    border-bottom-left-radius:6px;
+
+}
+
+.message-text{
+
+    font-size:15px;
+
+    line-height:1.55;
+
+}
+
+.message-time{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin-top:8px;
+
+    font-size:11px;
+
+    opacity:.75;
+
+}
+
+.read-status{
+
+    color:#6cf;
+
+    font-weight:bold;
+
+}
+
+.chat-image{
+
+    max-width:240px;
+
+    border-radius:14px;
+
+}
+
+.voice-message{
+
+    width:240px;
+
+}
+
+.reply-box{
+
+    background:rgba(255,255,255,.18);
+
+    border-left:4px solid rgba(255,255,255,.5);
+
+    padding:8px;
+
+    margin-bottom:10px;
+
+    border-radius:10px;
+
+}
+
+.message.received .reply-box{
+
+    background:#edf2ff;
+
+    border-left-color:#0A84FF;
+
+}
+
+@media (min-width:769px){
+
+.mobile-only{
+
+display:none !important;
+
+}
+
+}
+
+.emoji-picker{
+
+position:absolute;
+
+bottom:90px;
+
+left:20px;
+
+z-index:99999;
+
+display:none;
+
+}
+
+.emoji-picker.active{
+
+display:grid;
+
+}
