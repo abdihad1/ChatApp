@@ -1,91 +1,265 @@
-/* ===========================================
-   CHATIVO V2
-   WhatsApp + Telegram + iOS
-=========================================== */
-
-:root{
-
---primary:#0A84FF;
---primary-dark:#0070E8;
-
---bg:#f5f7fb;
---sidebar:#ffffff;
---card:#ffffff;
-
---text:#111827;
---text-light:#6b7280;
-
---border:#e5e7eb;
-
---shadow:
-0 10px 30px rgba(0,0,0,.08);
-
---radius:20px;
-
-}
-
-*{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
-}
-
-html,
-body{
-
-width:100%;
-height:100%;
-
-font-family:
-
-Inter,
-SF Pro Display,
-Segoe UI,
-sans-serif;
-
-background:var(--bg);
-
-overflow:hidden;
-
-color:var(--text);
-
-}
-
-button{
-
-border:none;
-outline:none;
-background:none;
-cursor:pointer;
-
-}
-
-input{
-
-outline:none;
-border:none;
-background:none;
-
-font:inherit;
-
-}
-
-img{
-
-display:block;
-max-width:100%;
-
-}
+/* ===========================
+   APP LAYOUT
+=========================== */
 
 .app{
+    display:flex;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    background:#f4f5f7;
+}
 
-display:flex;
+/* ===========================
+   SIDEBAR
+=========================== */
 
-width:100vw;
-height:100vh;
+.sidebar{
+    width:360px;
+    min-width:360px;
+    background:#fff;
+    border-right:1px solid #e5e7eb;
+    display:flex;
+    flex-direction:column;
+}
 
-overflow:hidden;
+/* Header */
 
+.sidebar-header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:700;
+    color:#0A84FF;
+}
+
+.logo i{
+    font-size:26px;
+}
+
+.header-actions{
+    display:flex;
+    gap:10px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    background:#f5f7fb;
+    border-radius:12px;
+    cursor:pointer;
+    transition:.25s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.icon-btn:hover{
+    background:#e9eef7;
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+
+.sidebar-search{
+    padding:15px;
+    position:relative;
+}
+
+.sidebar-search i{
+    position:absolute;
+    left:28px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#999;
+}
+
+.sidebar-search input{
+    width:100%;
+    height:46px;
+    border-radius:14px;
+    background:#f4f5f7;
+    border:none;
+    padding-left:45px;
+    font-size:15px;
+}
+
+/* ===========================
+   USER LIST
+=========================== */
+
+.user-list{
+    flex:1;
+    overflow-y:auto;
+}
+
+.user-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 18px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.user-card:hover{
+    background:#f7f9fb;
+}
+
+.user-card.active{
+    background:#eaf4ff;
+}
+
+.user-avatar-wrapper{
+    position:relative;
+}
+
+.user-avatar{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.online-dot{
+    position:absolute;
+    right:2px;
+    bottom:2px;
+    width:12px;
+    height:12px;
+    background:#22c55e;
+    border-radius:50%;
+    border:2px solid white;
+}
+
+.user-info{
+    flex:1;
+    overflow:hidden;
+}
+
+.user-name{
+    font-size:16px;
+    font-weight:600;
+    color:#222;
+}
+
+.user-last{
+    color:#777;
+    font-size:14px;
+    margin-top:4px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.user-time{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+    font-size:12px;
+    color:#888;
+}
+
+.unread{
+    min-width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#0A84FF;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:600;
+}
+
+/* ===========================
+   CHAT
+=========================== */
+
+.chat{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    background:#eef2f6;
+    position:relative;
+}
+
+/* Header */
+
+.chat-header{
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    gap:15px;
+}
+
+.chat-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.chat-info{
+    flex:1;
+}
+
+.chat-info h3{
+    font-size:17px;
+    font-weight:600;
+}
+
+.status-area{
+    color:#888;
+    font-size:13px;
+    margin-top:3px;
+}
+
+.chat-actions{
+    display:flex;
+    gap:10px;
+}
+
+/* Search Messages */
+
+.chat-search{
+    background:#fff;
+    padding:12px 20px;
+    border-bottom:1px solid #ececec;
+    position:relative;
+}
+
+.chat-search i{
+    position:absolute;
+    left:35px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#999;
+}
+
+.chat-search input{
+    width:100%;
+    height:42px;
+    border:none;
+    background:#f5f7fb;
+    border-radius:12px;
+    padding-left:42px;
+    font-size:14px;
 }

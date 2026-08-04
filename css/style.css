@@ -1,201 +1,64 @@
-/* =====================================
-   CHATIVO V5
-   BASE RESET
-   WhatsApp + Telegram + iOS
-===================================== */
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+:root{
 
-/* Global Reset */
-
-*{
-
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+--primary:#0A84FF;
+--green:#25D366;
+--bg:#f5f7fb;
+--surface:#ffffff;
+--border:#e5e7eb;
+--text:#1f2937;
+--sub:#6b7280;
 
 }
 
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
 
 html,
 body{
 
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
-    font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-    background:#EEF2F7;
-
-    color:#111827;
-
-    -webkit-font-smoothing:antialiased;
+width:100%;
+height:100%;
+font-family:Inter,sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow:hidden;
 
 }
-
-
-
-/* App Container */
-
-.app{
-
-    width:100vw;
-    height:100vh;
-
-    display:flex;
-
-    overflow:hidden;
-
-}
-
-
-
-/* Images */
-
-img{
-
-    max-width:100%;
-
-    display:block;
-
-}
-
-
-
-/* Buttons */
 
 button{
 
-    font-family:inherit;
-
-    border:none;
-
-    cursor:pointer;
+font-family:inherit;
+border:none;
+background:none;
+cursor:pointer;
 
 }
-
-
-
-/* Inputs */
 
 input{
 
-    font-family:inherit;
-
-    outline:none;
+font-family:inherit;
+outline:none;
+border:none;
 
 }
 
+img{
 
+display:block;
+max-width:100%;
 
-/* Links */
+}
 
 a{
 
-    text-decoration:none;
-
-    color:inherit;
-
-}
-
-
-
-/* Hidden Elements */
-
-.hidden{
-
-    display:none!important;
-
-}
-
-
-
-/* Modals */
-
-.modal,
-.call-modal{
-
-    display:none;
-
-}
-
-
-
-/* Emoji */
-
-.emoji-picker{
-
-    display:none;
-
-}
-
-
-
-.emoji-picker.active{
-
-    display:grid;
-
-}
-
-
-
-/* Toast */
-
-#toast{
-
-    display:none;
-
-}
-
-
-#toast.show{
-
-    display:block;
-
-}
-
-
-
-/* Prevent text selection on app UI */
-
-.sidebar,
-.chat-header,
-.chat-composer,
-button{
-
-    user-select:none;
-
-}
-
-
-
-/* Smooth scrolling */
-
-.messages,
-.user-list{
-
-    scroll-behavior:smooth;
-
-}
-
-
-
-/* Mobile fix */
-
-@media(max-width:900px){
-
-    .app{
-
-        position:relative;
-
-    }
+text-decoration:none;
 
 }
