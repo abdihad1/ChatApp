@@ -8,7 +8,8 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<link rel="stylesheet" href="css/ultimate.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/chativo-ui.css">
 
     <link rel="manifest" href="/manifest.json">
 
@@ -99,44 +100,26 @@
             alt=""
         >
 
-        <div class="chat-info">
+<div class="chat-info">
 
-    <h3 id="chatName">
-        Select a chat
-    </h3>
+    <h3 id="chatName"></h3>
 
     <div class="status-area">
-
-        <span id="chatStatus">
-            Offline
-        </span>
-
+        <span id="chatStatus"></span>
         <span id="typingStatus"></span>
-
     </div>
 
 </div>
 
-
 <div class="chat-actions">
 
-<button
-id="callBtn"
-class="icon-btn">
+    <button id="callBtn" class="icon-btn">
+        <i class="fa-solid fa-phone"></i>
+    </button>
 
-<i class="fa-solid fa-phone"></i>
-
-</button>
-
-
-<button
-id="videoBtn"
-class="icon-btn">
-
-<i class="fa-solid fa-video"></i>
-
-</button>
-
+    <button id="videoBtn" class="icon-btn">
+        <i class="fa-solid fa-video"></i>
+    </button>
 
 </div>
 
