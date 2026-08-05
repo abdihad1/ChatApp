@@ -60,9 +60,6 @@ if ("serviceWorker" in navigator) {
 
 setOnlineStatus(true);
 
-const sendBtn = document.getElementById("sendBtn");
-const messageInput = document.getElementById("message");
-
 messageInput.addEventListener("input", () => {
 
     messageInput.style.height = "auto";
@@ -92,6 +89,8 @@ messageInput.addEventListener("input", updateComposerButtons);
 
 updateComposerButtons();
 
+const sendBtn = document.getElementById("sendBtn");
+const messageInput = document.getElementById("message");
 const searchInput = document.getElementById("searchMessage");
 const messageMenu = document.getElementById("messageMenu");
 const confirmModal = document.getElementById("confirmModal");
