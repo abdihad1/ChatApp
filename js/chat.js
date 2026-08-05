@@ -62,6 +62,36 @@ setOnlineStatus(true);
 
 const sendBtn = document.getElementById("sendBtn");
 const messageInput = document.getElementById("message");
+
+messageInput.addEventListener("input", () => {
+
+    messageInput.style.height = "auto";
+
+    messageInput.style.height =
+        Math.min(messageInput.scrollHeight, 140) + "px";
+
+});
+
+function updateComposerButtons() {
+
+    if (messageInput.value.trim() === "") {
+
+        voiceBtn.style.display = "flex";
+        sendBtn.style.display = "none";
+
+    } else {
+
+        voiceBtn.style.display = "none";
+        sendBtn.style.display = "flex";
+
+    }
+
+}
+
+messageInput.addEventListener("input", updateComposerButtons);
+
+updateComposerButtons();
+
 const searchInput = document.getElementById("searchMessage");
 const messageMenu = document.getElementById("messageMenu");
 const confirmModal = document.getElementById("confirmModal");
@@ -70,6 +100,9 @@ const cancelDeleteBtn = document.getElementById("cancelDelete");
 const imageBtn = document.getElementById("imageBtn");
 const imageInput = document.getElementById("imageInput");
 const voiceBtn = document.getElementById("voiceBtn");
+const replyPreview = document.getElementById("replyPreview");
+const replyPreviewText = document.getElementById("replyPreviewText");
+const cancelReplyBtn = document.getElementById("cancelReplyBtn");
 const backBtn = document.getElementById("backBtn");
 let typingTimeout;
 
@@ -105,16 +138,22 @@ messageInput.addEventListener("input", async () => {
     }, 1500);
 
 });
-messageInput.addEventListener("keypress", (e) => {
+messageInput.addEventListener("keydown", (e) => {
 
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !e.shiftKey) {
+
+        e.preventDefault();
 
         sendBtn.click();
 
     }
 
 });
+
 const messagesDiv = document.getElementById("messages");
+
+const scrollBottomBtn =
+document.getElementById("scrollBottomBtn");
 
 const welcomeScreen =
 document.getElementById("welcomeScreen");
@@ -124,6 +163,26 @@ document.querySelector(".chat-composer");
 
 const messages =
 document.getElementById("messages");
+
+// Auto Grow Textarea
+
+messageInput.addEventListener("input", () => {
+
+    messageInput.style.height = "48px";
+
+    messageInput.style.height = messageInput.scrollHeight + "px";
+
+    if (messageInput.scrollHeight > 140) {
+
+        messageInput.style.overflowY = "auto";
+
+    } else {
+
+        messageInput.style.overflowY = "hidden";
+
+    }
+
+});
 
 if(welcomeScreen)
 welcomeScreen.style.display="flex";
@@ -147,6 +206,45 @@ window.openChat = openChat;
     const otherUser = getCurrentChat();
 
     if (!otherUser) return;
+
+const onlineDot = document.getElementById("onlineDot");
+const lastSeen = document.getElementById("lastSeen");
+
+onSnapshot(doc(db, "users", otherUser.uid), (snap) => {
+
+    if (!snap.exists()) return;
+
+    const user = snap.data();
+
+    if (user.online) {
+
+        onlineDot.style.display = "block";
+        lastSeen.textContent = "Online";
+
+    } else {
+
+        onlineDot.style.display = "none";
+
+        if (user.lastSeen) {
+
+            const date = user.lastSeen.toDate();
+
+            lastSeen.textContent =
+                "Last seen " +
+                date.toLocaleString([], {
+                    dateStyle: "short",
+                    timeStyle: "short"
+                });
+
+        } else {
+
+            lastSeen.textContent = "Offline";
+
+        }
+
+    }
+
+});
  
 document.getElementById("welcomeScreen").style.display="none";
 
@@ -178,31 +276,35 @@ onSnapshot(chatRef, (snap) => {
 
     const typingStatus = document.getElementById("typingStatus");
 
-    if (data.typing && data.typing !== auth.currentUser.uid) {
+   if (
+    data.typing &&
+    data.typing !== auth.currentUser.uid
+) {
 
-    typingStatus.textContent = "typing...";
+    typingStatus.innerHTML =
+        "<span class='typing-live'>Typing...</span>";
 
-    document.getElementById("typingAnimation")
-    .style.display="flex";
+    document.getElementById("typingAnimation").style.display = "flex";
 
-typingStatus.classList.add("typing-active");
+    typingStatus.classList.add("typing-active");
 
-    } else {
+} else {
 
-      typingStatus.textContent = "";
+    typingStatus.innerHTML = "";
 
-document.getElementById("typingAnimation")
-.style.display="none";
+    document.getElementById("typingAnimation").style.display = "none";
 
-typingStatus.classList.remove("typing-active");
+    typingStatus.classList.remove("typing-active");
 
-    }
+}
 
-});
+}); 
 
     unsubscribe = onSnapshot(q, (snapshot) => {
 
         messagesDiv.innerHTML = "";
+
+        messagesDiv.classList.add("loading-chat");
 
   const welcome = document.getElementById("welcomeScreen");
 if (welcome) welcome.style.display = "none";
@@ -210,6 +312,19 @@ if (welcome) welcome.style.display = "none";
 messagesDiv.style.display = "flex";
 
 document.querySelector(".chat-composer").style.display = "flex";
+
+if (snapshot.empty) {
+
+    messagesDiv.innerHTML = `
+        <div class="empty-chat">
+            <i class="fa-solid fa-comments"></i>
+            <h2>No messages yet</h2>
+            <p>Start the conversation.</p>
+        </div>
+    `;
+
+    return;
+}
 
         snapshot.forEach(async (messageDoc) => {
 
@@ -235,15 +350,49 @@ document.querySelector(".chat-composer").style.display = "flex";
 
 });
 
-        snapshot.forEach((messageDoc) => {
+        let lastDate = "";
 
-            const data = messageDoc.data();
-            const messageId = messageDoc.id;
+snapshot.forEach((messageDoc) => {
+
+    const data = messageDoc.data();
+
+    if (data.createdAt) {
+
+        const date = data.createdAt.toDate();
+
+        const currentDate = date.toDateString();
+
+        if (currentDate !== lastDate) {
+
+            lastDate = currentDate;
+
+            const divider = document.createElement("div");
+
+            divider.className = "date-divider";
+
+            divider.textContent =
+                new Intl.DateTimeFormat([], {
+                    dateStyle: "full"
+                }).format(date);
+
+            messagesDiv.appendChild(divider);
+        }
+    }  
 
 const div = createMessageElement({
     ...data,
     currentUserId: auth.currentUser.uid
 });
+
+if (
+    data.uid === auth.currentUser.uid &&
+    data.read
+) {
+
+    div.classList.add("seen-animation");
+
+}
+
 
             div.classList.add("message");
 
@@ -273,6 +422,11 @@ div.addEventListener("contextmenu", (e) => {
         behavior:"smooth"
 
     });
+
+setTimeout(() => {
+    messagesDiv.classList.remove("loading-chat");
+}, 300);
+
 
 },100);
 
@@ -317,6 +471,10 @@ const messageRef = await addDoc(
         read: false
     }
 );
+
+messageInput.value = "";
+
+messageInput.style.height = "48px";
 
 // Send push notification
 
@@ -384,8 +542,6 @@ await updateDoc(
     );
 
 });
-
-    messageInput.value = "";
 
 messagesDiv.scrollTo({
 
@@ -619,10 +775,20 @@ const replyMenuBtn = document.getElementById("replyMsg");
 
 replyMenuBtn.onclick = () => {
 
-    replyingTo = replyToMessage(
-        selectedMessageText,
-        messageInput
-    );
+    replyingTo = selectedMessageText;
+
+replyPreview.style.display = "flex";
+replyPreviewText.textContent = selectedMessageText;
+
+messageInput.focus();
+
+cancelReplyBtn.onclick = () => {
+
+    replyingTo = null;
+
+    replyPreview.style.display = "none";
+
+};
 
     closeMessageMenu(messageMenu);
 
@@ -727,3 +893,54 @@ if (settingsBtn) {
     );
 
 }
+
+const chatMenuBtn = document.getElementById("chatMenuBtn");
+const chatMenu = document.getElementById("chatMenu");
+
+if (chatMenuBtn && chatMenu) {
+
+    chatMenuBtn.onclick = (e) => {
+
+        e.stopPropagation();
+
+        chatMenu.classList.toggle("active");
+
+    };
+
+    document.addEventListener("click", () => {
+
+        chatMenu.classList.remove("active");
+
+    });
+
+    chatMenu.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+    });
+
+}
+
+messagesDiv.addEventListener("scroll",()=>{
+
+const distance =
+messagesDiv.scrollHeight -
+messagesDiv.scrollTop -
+messagesDiv.clientHeight;
+
+scrollBottomBtn.style.display =
+distance>400 ? "flex":"none";
+
+});
+
+scrollBottomBtn.onclick=()=>{
+
+messagesDiv.scrollTo({
+
+top:messagesDiv.scrollHeight,
+
+behavior:"smooth"
+
+});
+
+};

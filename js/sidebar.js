@@ -38,7 +38,7 @@ div.innerHTML = `
 
 <div class="user-avatar-wrapper">
 
-<img 
+<img
 class="user-avatar"
 src="${
 user.photo ||
@@ -48,32 +48,22 @@ user.photo ||
 ${
 user.online
 ?
-`<span class="online-dot"></span>`
+'<span class="online-dot"></span>'
 :
-""
+''
 }
 
 </div>
 
+<div class="user-content">
 
-<div class="user-info">
+<div class="user-top">
 
 <div class="user-name">
 
-${user.name || "No Name"}
+${user.name || "Unknown"}
 
 </div>
-
-
-<div class="user-last">
-
-${user.lastMessage || "Start chatting"}
-
-</div>
-
-
-</div>
-
 
 <div class="user-time">
 
@@ -81,9 +71,8 @@ ${
 user.lastMessageTime
 ?
 new Date(
-user.lastMessageTime.seconds * 1000
-)
-.toLocaleTimeString([],{
+user.lastMessageTime.seconds*1000
+).toLocaleTimeString([],{
 hour:"2-digit",
 minute:"2-digit"
 })
@@ -91,17 +80,33 @@ minute:"2-digit"
 ""
 }
 
+</div>
+
+</div>
+
+<div class="user-bottom">
+
+<div class="user-last">
+
+${user.lastMessage || "Start chatting"}
+
+</div>
+
 ${
 user.unread>0
 ?
 `
-<span class="unread">
+<div class="badge">
+
 ${user.unread}
-</span>
+
+</div>
 `
 :
 ""
 }
+
+</div>
 
 </div>
 

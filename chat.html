@@ -12,7 +12,6 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/chativo-ui.css">
 
     <link rel="manifest" href="/manifest.json">
 
@@ -75,11 +74,39 @@
 
         </div>
 
+<div class="chat-filters">
+
+    <button class="filter active" data-filter="all">
+        All
+    </button>
+
+    <button class="filter" data-filter="unread">
+        Unread
+    </button>
+
+    <button class="filter" data-filter="groups">
+        Groups
+    </button>
+
+    <button class="filter" data-filter="favorites">
+        ⭐
+    </button>
+
+</div>
+
         <div
             id="userList"
             class="user-list">
 
         </div>
+
+<button
+    id="newChatBtn"
+    class="floating-chat-btn">
+
+    <i class="fa-solid fa-pen"></i>
+
+</button>
 
     </aside>
 
@@ -108,25 +135,33 @@
 
             <div class="chat-info">
 
-                <h3 id="chatName">
+    <h3 id="chatName">
+        Select a conversation
+    </h3>
 
-                    Select a conversation
+    <div class="status-area">
 
-                </h3>
+        <span id="chatStatus">
+            Offline
+        </span>
 
-                <div class="status-area">
+        <span id="typingStatus"></span>
 
-                    <span id="chatStatus">
+    </div>
 
-                        Offline
+    <div class="chat-badges">
 
-                    </span>
+        <span class="badge encrypted">
 
-                    <span id="typingStatus"></span>
+            <i class="fa-solid fa-lock"></i>
 
-                </div>
+            End-to-End Encrypted
 
-            </div>
+        </span>
+
+    </div>
+
+</div>
 
             <div class="chat-actions">
 
@@ -138,6 +173,10 @@
 
                 </button>
 
+        <button id="themeBtn" class="icon-btn" title="Toggle Theme">
+    <i class="fa-solid fa-moon"></i>
+</button>
+
                 <button
                     id="videoBtn"
                     class="icon-btn">
@@ -145,6 +184,14 @@
                     <i class="fa-solid fa-video"></i>
 
                 </button>
+
+<button
+    id="chatMenuBtn"
+    class="icon-btn">
+
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+
+</button>
 
             </div>
 
@@ -172,26 +219,37 @@
 
             <h1>
 
-                Welcome to Chativo
+Welcome to Chativo
 
-            </h1>
+</h1>
 
-            <p>
+<p>
 
-                Choose a conversation to start chatting.
+Fast • Secure • Beautiful Messaging
 
-            </p>
+</p>
+
+<button
+class="start-chat-btn">
+
+Start New Conversation
+
+</button>
 
         </div>
 
 <!-- ========================= -->
 <!-- MESSAGES -->
 <!-- ========================= -->
+<div class="date-divider">
+
+    <span>Today</span>
+
+</div>
 
 <section
     id="messages"
     class="messages">
-
 </section>
 
 <div
@@ -211,6 +269,24 @@
 <footer
     class="chat-composer">
 
+<div id="replyPreview" class="reply-preview">
+
+    <div class="reply-preview-content">
+
+        <span class="reply-label">Replying to</span>
+
+        <div id="replyPreviewText"></div>
+
+    </div>
+
+    <button id="cancelReplyBtn" class="icon-btn">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+</div>
+
     <button
         id="emojiBtn"
         class="icon-btn">
@@ -219,13 +295,21 @@
 
     </button>
 
-    <button
-        id="imageBtn"
-        class="icon-btn">
+   <button
+    id="attachBtn"
+    class="icon-btn">
 
-        <i class="fa-regular fa-image"></i>
+    <i class="fa-solid fa-paperclip"></i>
 
-    </button>
+</button>
+
+<button
+    id="imageBtn"
+    class="icon-btn">
+
+    <i class="fa-regular fa-image"></i>
+
+</button>
 
     <input
         id="imageInput"
@@ -235,11 +319,13 @@
 
     <div class="message-box">
 
-        <input
-            id="message"
-            type="text"
-            autocomplete="off"
-            placeholder="Type a message">
+        <textarea
+    id="message"
+    rows="1"
+    placeholder="Message"
+    autocomplete="off"></textarea>
+
+ <div id="typingPreview"></div>
 
     </div>
 
@@ -260,6 +346,12 @@
     </button>
 
 </footer>
+
+<button id="scrollBottomBtn" class="scroll-bottom">
+
+<i class="fa-solid fa-arrow-down"></i>
+
+</button>
 
 <!-- ========================= -->
 <!-- EMOJI PICKER -->
@@ -454,6 +546,31 @@
 </div>
 
 </main>
+
+</div>
+
+
+<div id="chatMenu" class="chat-menu">
+
+    <button id="viewProfileBtn">
+        <i class="fa-regular fa-user"></i>
+        View Profile
+    </button>
+
+    <button id="clearChatBtn">
+        <i class="fa-solid fa-broom"></i>
+        Clear Chat
+    </button>
+
+    <button id="muteChatBtn">
+        <i class="fa-solid fa-bell-slash"></i>
+        Mute Notifications
+    </button>
+
+    <button id="blockUserBtn">
+        <i class="fa-solid fa-ban"></i>
+        Block User
+    </button>
 
 </div>
 
