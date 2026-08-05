@@ -207,6 +207,16 @@ window.openChat = openChat;
 
     if (!otherUser) return;
 
+// Hide welcome screen
+const welcome = document.getElementById("welcomeScreen");
+if (welcome) welcome.style.display = "none";
+
+// Show chat area
+messagesDiv.style.display = "flex";
+
+const composer = document.querySelector(".chat-composer");
+if (composer) composer.style.display = "flex";
+
 const onlineDot = document.getElementById("onlineDot");
 const lastSeen = document.getElementById("lastSeen");
 
@@ -245,12 +255,6 @@ onSnapshot(doc(db, "users", otherUser.uid), (snap) => {
     }
 
 });
- 
-document.getElementById("welcomeScreen").style.display="none";
-
-document.getElementById("messages").style.display="flex";
-
-document.querySelector(".chat-composer").style.display="flex";
 
     const chatId = getChatId(auth.currentUser.uid, otherUser.uid);
 
@@ -296,9 +300,9 @@ onSnapshot(chatRef, (snap) => {
 
     typingStatus.classList.remove("typing-active");
 
-}
+  }
 
-}); 
+ }); 
 
     unsubscribe = onSnapshot(q, (snapshot) => {
 
@@ -355,6 +359,7 @@ if (snapshot.empty) {
 snapshot.forEach((messageDoc) => {
 
     const data = messageDoc.data();
+    const messageId = messageDoc.id;
 
     if (data.createdAt) {
 

@@ -17,17 +17,18 @@ export async function saveCurrentUser() {
 
     if (!user) return;
 
-    await setDoc(
-        doc(db, "users", user.uid),
-        {
-            uid: user.uid,
-            name: user.displayName || "",
-            email: user.email || "",
-            photo: user.photoURL || "",
-            lastSeen: serverTimestamp()
-        },
-        { merge: true }
-    );
+await setDoc(
+    doc(db, "users", user.uid),
+    {
+        uid: user.uid,
+        name: user.displayName || "",
+        email: user.email || "",
+        photo: user.photoURL || "",
+        online: false,
+        lastSeen: serverTimestamp()
+    },
+    { merge: true }
+);
 
 }
 
