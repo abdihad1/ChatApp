@@ -1700,3 +1700,17 @@ color:#6b7280;
 color:#0A84FF;
 font-weight:600;
 }
+
+.status-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.online-dot{
+    width:10px;
+    height:10px;
+    background:#2ecc71;
+    border-radius:50%;
+    display:none;
+}

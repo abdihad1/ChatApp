@@ -219,6 +219,11 @@ if (composer) composer.style.display = "flex";
 const onlineDot = document.getElementById("onlineDot");
 const lastSeen = document.getElementById("lastSeen");
 
+if (!onlineDot || !lastSeen) {
+    console.error("onlineDot or lastSeen not found");
+    return;
+}
+
 onSnapshot(doc(db, "users", otherUser.uid), (snap) => {
 
     if (!snap.exists()) return;
