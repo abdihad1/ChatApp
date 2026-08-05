@@ -60,6 +60,22 @@ if ("serviceWorker" in navigator) {
 
 setOnlineStatus(true);
 
+const sendBtn = document.getElementById("sendBtn");
+const messageInput = document.getElementById("message");
+const searchInput = document.getElementById("searchMessage");
+const messageMenu = document.getElementById("messageMenu");
+const confirmModal = document.getElementById("confirmModal");
+const confirmDeleteBtn = document.getElementById("confirmDelete");
+const cancelDeleteBtn = document.getElementById("cancelDelete");
+const imageBtn = document.getElementById("imageBtn");
+const imageInput = document.getElementById("imageInput");
+const voiceBtn = document.getElementById("voiceBtn");
+const replyPreview = document.getElementById("replyPreview");
+const replyPreviewText = document.getElementById("replyPreviewText");
+const cancelReplyBtn = document.getElementById("cancelReplyBtn");
+const backBtn = document.getElementById("backBtn");
+let typingTimeout;
+
 messageInput.addEventListener("input", () => {
 
     messageInput.style.height = "auto";
@@ -88,22 +104,6 @@ function updateComposerButtons() {
 messageInput.addEventListener("input", updateComposerButtons);
 
 updateComposerButtons();
-
-const sendBtn = document.getElementById("sendBtn");
-const messageInput = document.getElementById("message");
-const searchInput = document.getElementById("searchMessage");
-const messageMenu = document.getElementById("messageMenu");
-const confirmModal = document.getElementById("confirmModal");
-const confirmDeleteBtn = document.getElementById("confirmDelete");
-const cancelDeleteBtn = document.getElementById("cancelDelete");
-const imageBtn = document.getElementById("imageBtn");
-const imageInput = document.getElementById("imageInput");
-const voiceBtn = document.getElementById("voiceBtn");
-const replyPreview = document.getElementById("replyPreview");
-const replyPreviewText = document.getElementById("replyPreviewText");
-const cancelReplyBtn = document.getElementById("cancelReplyBtn");
-const backBtn = document.getElementById("backBtn");
-let typingTimeout;
 
 messageInput.addEventListener("input", async () => {
 
