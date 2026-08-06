@@ -179,8 +179,8 @@ if (composer) {
 
             if (user.online) {
 
-    document.getElementById("chatStatus").textContent =
-        "🟢 Online";
+    document.getElementById("lastSeen").textContent =
+    "Online";
 
 } else {
 
@@ -213,7 +213,7 @@ if (date.toDateString() === now.toDateString()) {
 
     }
 
-    document.getElementById("chatStatus").textContent = text;
+    document.getElementById("lastSeen").textContent = text;
 
 }
 
